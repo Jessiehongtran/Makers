@@ -12,22 +12,22 @@ export const IdeaData = [
         HR: "Software engineers, product manager, designers, visualizers"
     },
     {
-        idea: "",
-        target: "",
-        impact: "",
-        HR: ""
+        idea: "Bravebook (~Facebook)",
+        target: "People who are striving for something",
+        impact: "Inspire people through tough journeys that lead to success",
+        HR: "Software engineers, data engineers, product manager, designers"
     },
     {
-        idea: "",
-        target: "",
-        impact: "",
-        HR: ""
+        idea: "Sharee (~Craiglist)",
+        target: "residents, entrepreneurs",
+        impact: "Connect people who have resources with others who are in need, relocate resources in society",
+        HR: "Software engineers, product manager"
     },
     {
-        idea: "",
-        target: "",
-        impact: "",
-        HR: ""
+        idea: "Kitube (Youtude for kid)",
+        target: "kids, parents",
+        impact: "Give kids proper options for youtube",
+        HR:  "Software engineers, DevOps, product manager"
     }
 ]
 

@@ -10,13 +10,18 @@ class Idea extends React.Component {
 
     render(){
         console.log('props in idea', this.props)
+        var titleRandomColor = Math.floor(Math.random()*16777215).toString(16);
+        
+
         return (
             <div className="idea">
-                <p>Idea: {this.props.idea.idea}</p>
-                <p>Target users: {this.props.idea.target}</p>
-                <p>Impact: {this.props.idea.impact}</p>
-                <p>Human Resources: {this.props.idea.HR}</p>
-                <button>Join</button>
+                <div className="project-info">
+                <p><span className="title" >Project:</span><span style={{color: `#${titleRandomColor}`, fontWeight: 'bold', fontSize: '20px'}}> {this.props.idea.idea}</span></p>
+                <p><span className="title">Target users:</span>  <span className="text">{this.props.idea.target}</span></p>
+                <p><span className="title">Impact:</span> <span className="text">{this.props.idea.impact}</span></p>
+                <p><span className="title">Human Resources: </span> <span className="text">{this.props.idea.HR}</span></p>
+                </div>
+                <button className="join-btn">Join</button>
             </div>
         )
     }

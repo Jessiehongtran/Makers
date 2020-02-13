@@ -1,11 +1,55 @@
 .ideas {
     display: flex;
     flex-wrap: wrap;
+    // flex-direction: column;
     justify-content: center;
     align-items: center;
 
     .idea {
+        width: 40%;
+        height: 250px;
+        margin: 10px;
         border: 1px solid #CECAC8;
         border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 0px 10px 0px 20px;
+
+
+        .project-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+
+        p {
+            margin: 8px;
+           
+
+            .title {
+                font-weight: bold;
+            }
+
+            .text {
+                color: #6A6564;
+                font-size: 14px;
+            }
+        }
+        }
+
+        .join-btn {
+            margin: 10px 0 0 0;
+            width: 12%;
+            padding: 5px;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #2D2E2E  ;
+            color: white;
+        }
+
+
     }
 }
