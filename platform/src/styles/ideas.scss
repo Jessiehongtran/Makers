@@ -1,0 +1,11 @@
+.ideas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    .idea {
+        border: 1px solid #CECAC8;
+        border-radius: 4px;
+    }
+}
