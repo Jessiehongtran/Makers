@@ -1,3 +1,7 @@
+body {
+  background-color: #D9DEDF;
+}
+
 .App {
   /* text-align: center; */
   display: flex;
@@ -11,5 +15,9 @@
   font-style: italic;
 }
 
+.note {
+  color: #4A4C4C ;
+  font-size: 12px;
+}
 
 

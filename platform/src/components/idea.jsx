@@ -19,7 +19,7 @@ class Idea extends React.Component {
                 <p><span className="title" >Project:</span><span style={{color: `#${titleRandomColor}`, fontWeight: 'bold', fontSize: '20px'}}> {this.props.idea.idea}</span></p>
                 <p><span className="title">Target users:</span>  <span className="text">{this.props.idea.target}</span></p>
                 <p><span className="title">Impact:</span> <span className="text">{this.props.idea.impact}</span></p>
-                <p><span className="title">Human Resources: </span> <span className="text">{this.props.idea.HR}</span></p>
+                <p><span className="title">Team: </span> <span className="text">{this.props.idea.HR}</span></p>
                 </div>
                 <button className="join-btn">Join</button>
             </div>

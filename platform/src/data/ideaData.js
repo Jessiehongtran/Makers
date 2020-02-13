@@ -1,6 +1,6 @@
 export const IdeaData = [
     {
-        idea: "Taste the local platform",
+        idea: "Local",
         target: "local and tourists",
         impact: "Empower locals to be tourguides and deliver most unique experiences",
         HR: "Software engineers, product manager, designers, tour agent experience, travelers"
@@ -27,6 +27,12 @@ export const IdeaData = [
         idea: "Kitube (Youtude for kid)",
         target: "kids, parents",
         impact: "Give kids proper options for youtube",
+        HR:  "Software engineers, DevOps, product manager"
+    },
+    {
+        idea: "SpEak",
+        target: "students who are practice English speaking skill",
+        impact: "Connect beginners with advancers and natives for them to practice speaking",
         HR:  "Software engineers, DevOps, product manager"
     }
 ]
