@@ -1,11 +1,12 @@
 form {
     display: flex;
     flex-direction: column;
-    width: 100%;
-
+    align-items: center;
+    
     input {
         height: 30px;
         margin: 5px;
+        width: 100%;
     }
 
     .more-details{
@@ -14,6 +15,17 @@ form {
     }
 
     button {
-        width: 30%
-    }
+        margin-top: 10px;
+        width: 30%;
+        padding: 5px;
+        border-radius: 4px;
+        font-size: 14px;
+        background-color:#F8DB68 ;
+        color: black;
+
+        @media( max-width: 500px ) {
+            font-size: 10px;
+            width: 20%;
+        }
+        }
 }
