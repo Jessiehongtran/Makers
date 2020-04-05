@@ -21,8 +21,14 @@ class Idea extends React.Component {
                 <p><span className="title">Target users:</span>  <span className="text">{this.props.idea.target}</span></p>
                 <p><span className="title">Impact:</span> <span className="text">{this.props.idea.impact}</span></p>
                 <p><span className="title">Team: </span> <span className="text">{this.props.idea.HR}</span></p>
+                <p><span className="title">Joined members: </span> <span className="text">{this.props.idea.join_count}</span></p>
                 </div>
-                <button className="join-btn">Join</button>
+                <button className="join-btn" onClick={() => {
+                    this.props.history.push('/join')
+                    localStorage.setItem('ideaId', this.props.idea.id)
+                    }}>
+                        Join
+                </button>
             </div>
         )
     }

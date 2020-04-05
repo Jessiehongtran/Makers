@@ -1,79 +1,113 @@
-.ideas {
-    display: flex;
-    flex-wrap: wrap;
-    // flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.ideas-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    .idea {
-        width: 40%;
-        height: 250px;
-        margin: 10px;
-        border: 1px solid #CECAC8;
-        border-radius: 4px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        padding: 10px 10px 20px 20px;
-        background-color: white;
+  .create-btn {
+    margin: 10px 0 0 0;
+    width: 10%;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color:#F8DB68 ;
+    color: black;
 
-        @media( max-width: 500px ) {
-            width: 80%;
+    @media( max-width: 500px ) {
+        font-size: 10px;
+        width: 20%;
+      }
+  }
+
+  .create-btn:hover {
+    background-color:gray ;
+    color: white;
+  }
+
+  .ideas {
+      display: flex;
+      flex-wrap: wrap;
+      // flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+     
+
+      .idea {
+          width: 40%;
+          height: 300px;
+          margin: 10px;
+          border: 1px solid #CECAC8;
+          border-radius: 4px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+          padding: 10px 10px 20px 20px;
+          background-color: white;
+
+          @media( max-width: 500px ) {
+              width: 80%;
+            }
+
+
+
+          .project-info {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          width: 100%;
+
+          p {
+              margin: 8px;
+              @media( max-width: 500px ) {
+                  font-size: 12px;
+                }
+            
+
+              .title {
+                  font-weight: bold;
+
+                  @media( max-width: 500px ) {
+                      font-size: 14px;
+                    }
+              
+              }
+
+              .text {
+                  color: #6A6564;
+                  font-size: 14px;
+
+                  @media( max-width: 500px ) {
+                      font-size: 12px;
+                    }
+              }
+          }
+          }
+
+          .join-btn {
+              margin: 10px 0 0 0;
+              width: 12%;
+              padding: 5px;
+              border-radius: 4px;
+              font-size: 14px;
+              background-color: #4C4D4D  ;
+              color: white;
+
+              @media( max-width: 500px ) {
+                  font-size: 10px;
+                  width: 20%;
+                }
+          }
+
+          .join-btn:hover {
+            background-color:gray ;
+            color: white;
           }
 
 
+      }
+  }
 
-        .project-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        width: 100%;
-
-        p {
-            margin: 8px;
-            @media( max-width: 500px ) {
-                font-size: 12px;
-              }
-           
-
-            .title {
-                font-weight: bold;
-
-                @media( max-width: 500px ) {
-                    font-size: 14px;
-                  }
-             
-            }
-
-            .text {
-                color: #6A6564;
-                font-size: 14px;
-
-                @media( max-width: 500px ) {
-                    font-size: 12px;
-                  }
-            }
-        }
-        }
-
-        .join-btn {
-            margin: 10px 0 0 0;
-            width: 12%;
-            padding: 5px;
-            border-radius: 4px;
-            font-size: 14px;
-            background-color: #4C4D4D  ;
-            color: white;
-
-            @media( max-width: 500px ) {
-                font-size: 10px;
-                width: 20%;
-              }
-        }
-
-
-    }
 }

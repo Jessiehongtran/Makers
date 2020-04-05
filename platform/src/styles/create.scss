@@ -1,0 +1,19 @@
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    input {
+        height: 30px;
+        margin: 5px;
+    }
+
+    .more-details{
+        height: 50px;
+        margin-top: 10px
+    }
+
+    button {
+        width: 30%
+    }
+}
