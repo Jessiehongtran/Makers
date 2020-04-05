@@ -30,14 +30,21 @@ class Join extends React.Component {
                                     <p><span className="title">Joined members: </span> <span className="text">{IdeaData[i].join_count}</span></p>
                             </div>
                             <div className="member-info">
+                                    <p>Share with us about you</p>
                                     <input placeholder="What can you contribute to the project?"/>
                                     <input placeholder="Your intro"/>
                                     <input placeholder="Your Linkedin Url"/>
                                     <button>Join</button>
                             </div>
                         </div>
-                        <div className="thoughts">
-                            <img src="https://qph.fs.quoracdn.net/main-qimg-3234084c90912949b3136194769ebd72"/>
+                        <div className="expand-info">
+                            <div className="members">
+                                <p>Member List</p>
+                            </div>
+                            <div className="thoughts">
+                                <p>Thoughts</p>
+                                <img src="https://qph.fs.quoracdn.net/main-qimg-3234084c90912949b3136194769ebd72"/>
+                            </div>
                         </div>
                     </div>
                 )
