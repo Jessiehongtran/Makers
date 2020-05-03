@@ -3,12 +3,23 @@ import {IdeaData} from '../data/ideaData';
 import '../styles/join.scss'
 
 class Join extends React.Component {
-    constructor(){
-        super();
-        this.state = {
-           
-        };
-    }
+    constructor(props) {
+        super(props);
+        this.state = {value: ''};
+    
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+      }
+    
+      handleChange(event) {
+        this.setState({value: event.target.value});
+      }
+    
+      handleSubmit(event) {
+        alert('A name was submitted: ' + this.state.value);
+        event.preventDefault();
+      }
+      
 
 
     render(){
@@ -30,11 +41,24 @@ class Join extends React.Component {
                                     <p><span className="title">Joined members: </span> <span className="text">{IdeaData[i].join_count}</span></p>
                             </div>
                             <div className="member-info">
-                                    <p>Share with us about you</p>
-                                    <input placeholder="What can you contribute to the project?"/>
-                                    <input placeholder="Your intro"/>
-                                    <input placeholder="Your Linkedin Url"/>
-                                    <button>Join</button>
+                                <p>Share with us about yourself</p>
+                                <form onSubmit={this.handleSubmit}>
+                                <label>
+                                    <input type="text" placeholder="Name" value={this.state.value} onChange={this.handleChange} />
+                                </label>
+                                    <input placeholder="Your intro" value={this.state.value} onChange={this.handleChange}/>
+                                    <input placeholder="What can you contribute to the project?" value={this.state.value} onChange={this.handleChange}/>
+                                <label>
+                                    Select your role: <select value={this.state.value} onChange={this.handleChange}>
+                                        <option value="teamLead">Team Lead</option>
+                                        <option value="frontEnd">Front End</option>
+                                        <option value="backEnd">Back End</option>
+                                        <option value="ux">UX/UI</option>
+                                    </select>
+                                </label>
+                                    <input placeholder="Your Linkedin Url" value={this.state.value} onChange={this.handleChange}/>
+                                    <input type="submit" value="Join"/>
+                                </form>
                             </div>
                         </div>
                         <div className="expand-info">
