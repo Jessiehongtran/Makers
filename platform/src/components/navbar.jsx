@@ -16,6 +16,16 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
+// Icons Imports
+import { FaSearch,
+  FaUserCog,
+  FaMailBulk,
+  FaCommentDots,
+  FaEllipsisV,
+  FaUserCircle,
+  FaAngleDoubleDown } from 'react-icons/fa'
+
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -136,6 +146,7 @@ const PrimarySearchNavBar = () => {
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
             {/* <MailIcon /> */}
+            <FaMailBulk />
           </Badge>
         </IconButton>
         <p>Messages</p>
@@ -144,19 +155,20 @@ const PrimarySearchNavBar = () => {
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
             {/* <NotificationsIcon /> */}
+            <FaCommentDots />
           </Badge>
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
-        {/* <IconButton
+        <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
-        </IconButton> */}
+          <FaUserCog />
+        </IconButton>
         <p>Profile</p>
       </MenuItem>
     </Menu>
@@ -173,6 +185,7 @@ const PrimarySearchNavBar = () => {
             aria-label="open drawer"
           >
             {/* <MenuIcon /> */}
+            <FaEllipsisV />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             Material-UI
@@ -180,7 +193,8 @@ const PrimarySearchNavBar = () => {
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               {/* <SearchIcon /> */}
-            </div> */}
+              <FaSearch />
+            </div>
             <InputBase
               placeholder="Search…"
               classes={{
@@ -195,11 +209,13 @@ const PrimarySearchNavBar = () => {
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 {/* <MailIcon /> */}
+                <FaMailBulk />
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
                 {/* <NotificationsIcon /> */}
+                <FaCommentDots />
               </Badge>
             </IconButton>
             <IconButton
@@ -211,6 +227,7 @@ const PrimarySearchNavBar = () => {
               color="inherit"
             >
               {/* <AccountCircle /> */}
+              <FaUserCircle />
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
@@ -222,6 +239,7 @@ const PrimarySearchNavBar = () => {
               color="inherit"
             >
               {/* <MoreIcon /> */}
+              <FaAngleDoubleDown />
             </IconButton>
           </div>
         </Toolbar>
