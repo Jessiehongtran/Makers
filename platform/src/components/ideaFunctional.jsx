@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import '../styles/ideas.scss';
 
+import { Card,
+    CardActionArea,
+    CardMedia,
+    CardContent,
+    Typography,
+    CardActions,
+    Button }          from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
 // Passing theme into the makeStyles function
@@ -28,22 +35,43 @@ const IdeaFunctional = (props) => {
     var titleRandomColor = Math.floor(Math.random()*16777215).toString(16);
 
     return (
-        <div className="idea">
-            <div className="project-info">
-            <p><span className="title">Project:</span><span style={{color: `#${titleRandomColor}`, fontWeight: 'bold', fontSize: '20px'}}> {props.idea.idea}</span></p>
-            <p><span className="title">Category: </span><span className="text"> {props.idea.category}</span></p>
-            <p><span className="title">Target users:</span>  <span className="text">{props.idea.target}</span></p>
-            <p><span className="title">Impact:</span> <span className="text">{props.idea.impact}</span></p>
-            <p><span className="title">Team: </span> <span className="text">{props.idea.HR}</span></p>
-            <p><span className="title">Joined members: </span> <span className="text">{props.idea.join_count}</span></p>
-            </div>
-            <button className="join-btn" onClick={() => {
+        <Card className={classes.root}>
+        <CardActionArea>
+          {/* <CardMedia
+            className={classes.media}
+            image="https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1955&q=80"
+            title="Surprised monkey"
+          /> */}
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2" className={classes.title} style={{color: `#${titleRandomColor}`}} >
+            Project: {props.idea.idea}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+                Category: {props.idea.category}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+                Target: {props.idea.target}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+                Impact: {props.idea.impact}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+                Team: {props.idea.HR}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+                Joined Members: {props.idea.join_count}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Button size="small" color="primary" style={{color: `#${titleRandomColor}`}} onClick={() => {
                 props.history.push('/join')
                 localStorage.setItem('ideaId', props.idea.id)
                 }}>
-                    Join
-            </button>
-        </div>
+            Join
+          </Button>
+        </CardActions>
+      </Card>
     )
 // }
 }
