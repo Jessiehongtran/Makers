@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import '../styles/ideas.scss';
 
+import { FaHeart } from 'react-icons/fa';
+import {FaShareAlt} from 'react-icons/fa'
+
 import { Card,
     CardActionArea,
+    CardActions,
     CardMedia,
+    CardHeader,
     CardContent,
     Typography,
-    CardActions,
+    IconButton,
     Button }          from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import clsx from 'clsx';
+
 
 // Passing theme into the makeStyles function
 const useStyles = makeStyles(theme => ({
@@ -29,6 +40,7 @@ const useStyles = makeStyles(theme => ({
 
 const IdeaFunctional = (props) => {
 
+  
     // This is our style hook, allowing us to apply the styles as a className:
     const classes = useStyles()
     // console.log('props in idea', props)
@@ -36,7 +48,7 @@ const IdeaFunctional = (props) => {
 
     return (
         <Card className={classes.root}>
-        <CardActionArea>
+        {/* <CardActionArea> */}
           {/* <CardMedia
             className={classes.media}
             image="https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1955&q=80"
@@ -44,9 +56,9 @@ const IdeaFunctional = (props) => {
           /> */}
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2" className={classes.title} style={{color: `#${titleRandomColor}`}} >
-            Project: {props.idea.idea}
+            {props.idea.idea}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
+            <Typography variant="body1" color="textSecondary" component="p">
                 Category: {props.idea.category}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
@@ -62,14 +74,25 @@ const IdeaFunctional = (props) => {
                 Joined Members: {props.idea.join_count}
             </Typography>
           </CardContent>
-        </CardActionArea>
-        <CardActions>
+        {/* </CardActionArea> */}
+        <CardActions disableSpacing>
+        <CardActionArea>
+          {/* <ExpandMoreIcon /> */}
           <Button size="small" color="primary" style={{color: `#${titleRandomColor}`}} onClick={() => {
                 props.history.push('/join')
                 localStorage.setItem('ideaId', props.idea.id)
                 }}>
             Join
           </Button>
+          </CardActionArea>
+        {/* <CardActionArea> */}
+        <IconButton aria-label="add to favorites">
+          <FaHeart />
+        </IconButton>
+          {/* </CardActionArea> */}
+        <IconButton aria-label="share">
+          <FaShareAlt />
+        </IconButton>
         </CardActions>
       </Card>
     )
