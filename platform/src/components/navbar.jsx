@@ -1,4 +1,6 @@
 import React from 'react';
+
+// Material-UI Imports
 import { fade } from '@material-ui/core/styles';
 import { makeStyles} from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,12 +11,6 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
 
 // Icons Imports
 import { FaSearch,
@@ -29,6 +25,7 @@ import { FaSearch,
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
+    width: '100%',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -80,6 +77,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
     [theme.breakpoints.up('md')]: {
       display: 'flex',
+      flexGrow: 1,
+      // width: '100%',
     },
   },
   sectionMobile: {
@@ -145,7 +144,6 @@ const PrimarySearchNavBar = () => {
       <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
-            {/* <MailIcon /> */}
             <FaMailBulk />
           </Badge>
         </IconButton>
@@ -154,7 +152,6 @@ const PrimarySearchNavBar = () => {
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
-            {/* <NotificationsIcon /> */}
             <FaCommentDots />
           </Badge>
         </IconButton>
@@ -184,15 +181,13 @@ const PrimarySearchNavBar = () => {
             color="inherit"
             aria-label="open drawer"
           >
-            {/* <MenuIcon /> */}
             <FaEllipsisV />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+          <Typography className={classes.title} variant="h6" >
+            Makers
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              {/* <SearchIcon /> */}
               <FaSearch />
             </div>
             <InputBase
@@ -208,13 +203,11 @@ const PrimarySearchNavBar = () => {
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
-                {/* <MailIcon /> */}
                 <FaMailBulk />
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
-                {/* <NotificationsIcon /> */}
                 <FaCommentDots />
               </Badge>
             </IconButton>
@@ -226,7 +219,6 @@ const PrimarySearchNavBar = () => {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              {/* <AccountCircle /> */}
               <FaUserCircle />
             </IconButton>
           </div>
@@ -238,7 +230,6 @@ const PrimarySearchNavBar = () => {
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              {/* <MoreIcon /> */}
               <FaAngleDoubleDown />
             </IconButton>
           </div>
