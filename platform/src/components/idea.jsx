@@ -27,7 +27,7 @@ class Idea extends React.Component {
     }
 
     // This is our style hook, allowing us to apply the styles as a className:
-    classes = useStyles()
+    // classes = useStyles()
 
     render(){
         console.log('props in idea', this.props)
