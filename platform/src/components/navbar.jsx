@@ -135,7 +135,7 @@ const PrimarySearchNavBar = () => {
       <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
-            <MailIcon />
+            {/* <MailIcon /> */}
           </Badge>
         </IconButton>
         <p>Messages</p>
@@ -143,20 +143,20 @@ const PrimarySearchNavBar = () => {
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
+            {/* <NotificationsIcon /> */}
           </Badge>
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
+        {/* <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
         >
           <AccountCircle />
-        </IconButton>
+        </IconButton> */}
         <p>Profile</p>
       </MenuItem>
     </Menu>
@@ -172,15 +172,15 @@ const PrimarySearchNavBar = () => {
             color="inherit"
             aria-label="open drawer"
           >
-            <MenuIcon />
+            {/* <MenuIcon /> */}
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             Material-UI
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
+              {/* <SearchIcon /> */}
+            </div> */}
             <InputBase
               placeholder="Search…"
               classes={{
@@ -189,17 +189,17 @@ const PrimarySearchNavBar = () => {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
-                <MailIcon />
+                {/* <MailIcon /> */}
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
+                {/* <NotificationsIcon /> */}
               </Badge>
             </IconButton>
             <IconButton
@@ -210,7 +210,7 @@ const PrimarySearchNavBar = () => {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              {/* <AccountCircle /> */}
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
@@ -221,7 +221,7 @@ const PrimarySearchNavBar = () => {
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <MoreIcon />
+              {/* <MoreIcon /> */}
             </IconButton>
           </div>
         </Toolbar>
