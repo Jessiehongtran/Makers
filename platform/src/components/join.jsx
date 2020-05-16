@@ -1,5 +1,6 @@
 import React from 'react';
 import {IdeaData} from '../data/ideaData';
+import Comments from '../components/comments';
 import '../styles/join.scss'
 
 class Join extends React.Component {
@@ -62,13 +63,14 @@ class Join extends React.Component {
                             </div>
                         </div>
                         <div className="expand-info">
+                            <div className="thoughts">
+                                <p>Thoughts</p>
+                                <Comments /> 
+                            </div>
                             <div className="members">
                                 <p>Member List</p>
                             </div>
-                            <div className="thoughts">
-                                <p>Thoughts</p>
-                                <img src="https://qph.fs.quoracdn.net/main-qimg-3234084c90912949b3136194769ebd72"/>
-                            </div>
+                            
                         </div>
                     </div>
                 )
