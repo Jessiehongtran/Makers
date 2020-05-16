@@ -6,6 +6,7 @@ import './App.css';
 import Ideas from './components/ideas';
 import Join from './components/join';
 import Create from './components/create';
+import PrimarySearchNavBar from './components/navbar';
 
 // Material-UI imports
 import { ThemeProvider } from '@material-ui/core/styles'
@@ -35,6 +36,7 @@ render(){
     <ThemeProvider theme={theme}>
     <CssBaseline />
     <div className="App">
+      <PrimarySearchNavBar />
       <Switch>
         <Route
           exact path="/" 
