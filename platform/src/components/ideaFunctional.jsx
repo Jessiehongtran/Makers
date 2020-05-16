@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import '../styles/ideas.scss';
 
-import { FaHeart } from 'react-icons/fa';
-import {FaShareAlt} from 'react-icons/fa'
+// Icon Imports
+import { FaHeart,
+         FaShareAlt,
+         FaArchive } from 'react-icons/fa'
 
+// Material-UI Imports
 import { Card,
     CardActionArea,
     CardActions,
@@ -35,6 +38,9 @@ const useStyles = makeStyles(theme => ({
     title: {
       color: theme.palette.primary.main
     }
+    // archiveIcon: {
+    //   align: 'right'
+    // }
   }))
 // Note: when defining styles we write a style object, similar to adding an inline style to a React elementstyle={{ height: '100px' }}
 
@@ -48,13 +54,10 @@ const IdeaFunctional = (props) => {
 
     return (
         <Card className={classes.root}>
-        {/* <CardActionArea> */}
-          {/* <CardMedia
-            className={classes.media}
-            image="https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1955&q=80"
-            title="Surprised monkey"
-          /> */}
           <CardContent>
+            <IconButton aria-label="archive this card"style={{ width: '180%', textAlign: 'right' }}>
+              <FaArchive />
+            </IconButton>
             <Typography gutterBottom variant="h5" component="h2" className={classes.title} style={{color: `#${titleRandomColor}`}} >
             {props.idea.idea}
             </Typography>
@@ -74,7 +77,6 @@ const IdeaFunctional = (props) => {
                 Joined Members: {props.idea.join_count}
             </Typography>
           </CardContent>
-        {/* </CardActionArea> */}
         <CardActions disableSpacing>
         <CardActionArea>
           {/* <ExpandMoreIcon /> */}
