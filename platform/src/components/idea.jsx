@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
       color: theme.palette.primary.main
-    }
+    },
   }))
 // Note: when defining styles we write a style object, similar to adding an inline style to a React elementstyle={{ height: '100px' }}
 
