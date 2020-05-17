@@ -1,9 +1,17 @@
 import React from 'react';
 import { Route, Switch } from "react-router-dom";
 import './App.css';
+
+// Component imports
 import Ideas from './components/ideas';
 import Join from './components/join';
 import Create from './components/create';
+import PrimarySearchNavBar from './components/navbar';
+
+// Material-UI imports
+import { ThemeProvider } from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import theme from './theme'
 
 class App extends React.Component {
   constructor(){
@@ -24,7 +32,10 @@ render(){
   
 
   return (
+    <ThemeProvider theme={theme}>
+    <CssBaseline />
     <div className="App">
+      <PrimarySearchNavBar />
       <Switch>
         <Route
           exact path="/" 
@@ -63,6 +74,7 @@ render(){
       </Switch>
       
     </div>
+    </ThemeProvider>
   );
   }
 }

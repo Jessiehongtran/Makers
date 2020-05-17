@@ -1,12 +1,33 @@
 import React from 'react';
 import '../styles/ideas.scss';
 
+import { makeStyles } from '@material-ui/styles'
+
+// Passing theme into the makeStyles function
+const useStyles = makeStyles(theme => ({
+    // Defining style objects (root, media, and title), which we can access later
+    root: {
+        // We access default and custom variables using our theme (theme.spacing is a default value)
+      margin: theme.spacing(3),
+      width: 345,
+    },
+    media: {
+      height: 140,
+    },
+    title: {
+      color: theme.palette.primary.main
+    },
+  }))
+// Note: when defining styles we write a style object, similar to adding an inline style to a React elementstyle={{ height: '100px' }}
+
 class Idea extends React.Component {
     constructor(props){
         super(props);
         this.state = {};
     }
 
+    // This is our style hook, allowing us to apply the styles as a className:
+    // classes = useStyles()
 
     render(){
         console.log('props in idea', this.props)
