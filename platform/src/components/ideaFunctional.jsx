@@ -73,20 +73,20 @@ class IdeaFunctional extends React.Component {
             />
             <Divider className={classes.divider} light />
               <Typography gutterBottom variant="h1" component="h1" className={classes.title} style={{color: `#${titleRandomColor}`}} >
-                {this.props.idea.idea}
+                {this.props.idea.project_name}
               </Typography>
               <Typography variant="body1" color="textPrimary" component="p">
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
               </Typography>
               <Divider className={classes.dividerSecondary} light />
-              {/* <Typography variant="body2" color="textSecondary" component="p">
-                  Target: {props.idea.target}
-              </Typography> */}
+              <Typography variant="body2" color="textSecondary" component="p">
+                  Target: {this.props.idea.target_user}
+              </Typography>
               <Typography variant="body2" color="textSecondary" component="p" style={{paddingTop: '.5rem'}}>
                 <FaAward /> Impact: {this.props.idea.impact}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p" style={{paddingTop: '.5rem'}}>
-                <FaUsers style={{marginRight: '.2rem'}}/> Team: {this.props.idea.HR}
+                <FaUsers style={{marginRight: '.2rem'}}/> Team: {this.props.idea.human_resources}
               </Typography> 
               <Typography variant="body2" color="textSecondary" component="p" style={{paddingTop: '.5rem'}}>
                 <FaUserFriends style={{marginRight: '.2rem'}}/> Joined Members: {this.props.idea.join_count}

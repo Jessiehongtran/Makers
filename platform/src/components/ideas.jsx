@@ -3,16 +3,26 @@ import '../styles/ideas.scss';
 import Idea from './idea';
 import {IdeaData} from '../data/ideaData';
 import IdeaFunctional from './ideaFunctional';
+import axios from 'axios';
 
 class Ideas extends React.Component {
     constructor(){
         super();
         this.state = {
-            ideas: IdeaData
+            ideas: []
 
         };
     }
-
+    componentDidMount(){
+        axios.get(`https://makers-app.herokuapp.com/api/projects`)
+            .then(res => {
+                console.log('res in Ideas', res)
+                this.setState({ideas: res.data})
+            })
+            .catch(err => {
+                console.log(err.message)
+            })
+    }
 
     render(){
         return (

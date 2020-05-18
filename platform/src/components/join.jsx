@@ -8,7 +8,9 @@ class Join extends React.Component {
         super(props);
         this.state = {
             value: '',
-            comment: ''
+            comment: '',
+            avatar: '',
+            comments: []
         };
     
         this.handleChange = this.handleChange.bind(this);
@@ -28,23 +30,50 @@ class Join extends React.Component {
 
     componentDidMount(){
         const projectId = localStorage.getItem('ideaId')
-        axios.get('')
+        axios.get(`https://makers-app.herokuapp.com/api/comments/${projectId}`)
+             .then(res => {
+                 this.setState({comments: res.data})
+             })
+             .catch(err => {
+                 console.log(err)
+             })
     }
 
     handleComment(event){
-        console.log(event.target.value)
+        console.log('in handleComment', event.target.value)
         this.setState({comment: event.target.value})
     }
 
     handleCommentSubmit(event){
         event.preventDefault();
-        console.log('submit comment', this.state.comment)
+        //with current architecture, have to make sure a user exists before posting a comment
+        //seed a user and give it id to 1 is a way to trick for anonymous
+        var userId = 1
+        if (this.state.avatar.length > 0){
+            userId = localStorage.getItem('userId')
+        }
+        const projectId = localStorage.getItem('ideaId')
+
+        const comment_to_post = {
+            user_id: userId,
+            project_id: projectId,
+            comment: this.state.comment
+        }
+        
+        axios.post('https://makers-app.herokuapp.com/api/comments', comment_to_post)
+             .then(res => {
+                 console.log('res in posting comment', res)
+             })
+             .catch(err => {
+                 console.log(err.message)
+             })
     }
       
 
 
     render(){
         var titleRandomColor = Math.floor(Math.random()*16777215).toString(16);
+        const avatar = this.state.avatar || "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTNWvAlntajQ9uki4_E508d7cB1qdQtc_UngZ2A5mJArKpontMT&usqp=CAU"
        
 
         for(let i = 0; i < IdeaData.length; i++){
@@ -66,10 +95,16 @@ class Join extends React.Component {
                                 <p>Share with us about yourself</p>
                                 <form onSubmit={this.handleSubmit}>
                                 <label>
-                                    <input type="text" placeholder="Name" value={this.state.value} onChange={this.handleChange} />
+                                    <input type="text" placeholder="Your name" value={this.state.value} onChange={this.handleChange} />
                                 </label>
-                                    <input placeholder="Your intro" value={this.state.value} onChange={this.handleChange}/>
-                                    <input placeholder="What can you contribute to the project?" value={this.state.value} onChange={this.handleChange}/>
+                                <label>
+                                    Who you are?
+                                    <input placeholder="I am" value={this.state.value} onChange={this.handleChange}/>
+                                </label>
+                                <label>
+                                    What can you bring to the table?
+                                    <input placeholder="I can" value={this.state.value} onChange={this.handleChange}/>
+                                </label>
                                 <label>
                                     Select your role: <select value={this.state.value} onChange={this.handleChange}>
                                         <option value="teamLead">Team Lead</option>
@@ -79,7 +114,7 @@ class Join extends React.Component {
                                     </select>
                                 </label>
                                     <input placeholder="Your Linkedin Url" value={this.state.value} onChange={this.handleChange}/>
-                                    <input type="submit" value="Join"/>
+                                    <input type="submit" value="Ask to join"/>
                                 </form>
                             </div>
                         </div>
@@ -89,12 +124,25 @@ class Join extends React.Component {
                             </div>
                             <div className="thoughts">
                                 <p>Thoughts</p>
-                                <input 
-                                    type="text" 
-                                    onChange={this.handleComment}
-                                />
-                                <button type="submit" onClick={this.handleCommentSubmit}>Comment</button>
-                                <img src="https://qph.fs.quoracdn.net/main-qimg-3234084c90912949b3136194769ebd72"/>
+                                <form>
+                                    <img className="avatar" src={avatar}/>
+                                    <input 
+                                        type="text" 
+                                        onChange={this.handleComment}
+                                    />
+                                    <button type="submit" onClick={this.handleCommentSubmit}>Send</button>
+                                </form>
+                                <div className="showComments">
+                                {this.state.comments.map(each => 
+                                    <div className="each-comment">
+                                        <img className="avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTNWvAlntajQ9uki4_E508d7cB1qdQtc_UngZ2A5mJArKpontMT&usqp=CAU"/>
+                                        <p>{each.comment}</p>
+                                    </div>
+                                )}
+                                
+                                </div>
+                                
+                                {/* <img src="https://qph.fs.quoracdn.net/main-qimg-3234084c90912949b3136194769ebd72"/> */}
                             </div>
                         </div>
                     </div>

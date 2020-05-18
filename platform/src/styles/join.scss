@@ -40,7 +40,7 @@
 
     .expand-info {
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
         align-items: flex-start;
 
         .members {
@@ -48,7 +48,40 @@
         }
 
         .thoughts {
+            form {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
 
+                .avatar {
+                    width: 7%;
+                    border-radius: 50%;
+                }
+
+                input {
+                    width: 80%;
+                }
+
+                button {
+                    width: 10%;
+                }
+            }
+            .showComments {
+                display: flex;
+                flex-direction: column;
+
+                .each-comment {
+                    display: flex;
+                    flex-direction: row;
+                    .avatar {
+                        width: 7%;
+                        height: auto;
+                        border-radius: 50%;
+                    }
+                }
+            }
         }
     }
 
