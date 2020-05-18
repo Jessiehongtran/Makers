@@ -30,10 +30,25 @@
             align-items: center;
             width: 50%;
 
-            input {
-                margin: 10px;
-                height: 30px;
-                width: 60%;
+            form {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+
+                input {
+                    margin: 10px;
+                    height: 30px;
+                    width: 60%;
+                    outline: 0;
+                    border-width: 0 0 2px;
+                    border-color: blue
+
+                }
+
+                input:focus {
+                    border-color: green
+                  }
             }
         }
     }

@@ -7,6 +7,13 @@ class Join extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            userInfo : {
+                name: "",
+                identity: "",
+                valueAdded: "",
+                role: "",
+                linkedin: ""
+            },
             value: '',
             comment: '',
             avatar: '',
@@ -20,12 +27,12 @@ class Join extends React.Component {
       }
     
     handleChange(event) {
-        this.setState({value: event.target.value});
+        this.setState({userInfo:{...this.state.userInfo,[event.target.name]: event.target.value}});
       }
     
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
         event.preventDefault();
+        console.log('submitted: ',  this.state.userInfo);
       }
 
     componentDidMount(){
@@ -72,6 +79,7 @@ class Join extends React.Component {
 
 
     render(){
+        console.log('userInfo', this.state.userInfo)
         var titleRandomColor = Math.floor(Math.random()*16777215).toString(16);
         const avatar = this.state.avatar || "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTNWvAlntajQ9uki4_E508d7cB1qdQtc_UngZ2A5mJArKpontMT&usqp=CAU"
        
@@ -92,36 +100,52 @@ class Join extends React.Component {
                                     <p><span className="title">Joined members: </span> <span className="text">{IdeaData[i].join_count}</span></p>
                             </div>
                             <div className="member-info">
-                                <p>Share with us about yourself</p>
+                                <p>Give us an idea about you</p>
                                 <form onSubmit={this.handleSubmit}>
-                                <label>
-                                    <input type="text" placeholder="Your name" value={this.state.value} onChange={this.handleChange} />
-                                </label>
-                                <label>
-                                    Who you are?
-                                    <input placeholder="I am" value={this.state.value} onChange={this.handleChange}/>
-                                </label>
-                                <label>
-                                    What can you bring to the table?
-                                    <input placeholder="I can" value={this.state.value} onChange={this.handleChange}/>
-                                </label>
-                                <label>
-                                    Select your role: <select value={this.state.value} onChange={this.handleChange}>
-                                        <option value="teamLead">Team Lead</option>
-                                        <option value="frontEnd">Front End</option>
-                                        <option value="backEnd">Back End</option>
-                                        <option value="ux">UX/UI</option>
-                                    </select>
-                                </label>
-                                    <input placeholder="Your Linkedin Url" value={this.state.value} onChange={this.handleChange}/>
-                                    <input type="submit" value="Ask to join"/>
+                                    <label>
+                                        <input 
+                                            type="text" 
+                                            placeholder="Your name" 
+                                            name="name"
+                                            onChange={this.handleChange} 
+                                        />
+                                    </label>
+                                    <label>
+                                        Who you are?
+                                        <input 
+                                            placeholder="I am" 
+                                            name="identity" 
+                                            onChange={this.handleChange}
+                                        />
+                                    </label>
+                                    <label>
+                                        What can you bring to the table?
+                                        <input 
+                                            placeholder="I can" 
+                                            name="valueAdded"
+                                            onChange={this.handleChange}
+                                        />
+                                    </label>
+                                    <label>
+                                        Select your role: <select  
+                                            name="role"
+                                            onChange={this.handleChange}>
+                                            <option value="teamLead">Team Lead</option>
+                                            <option value="frontEnd">Front End</option>
+                                            <option value="backEnd">Back End</option>
+                                            <option value="ux">UX/UI</option>
+                                        </select>
+                                    </label>
+                                    <input 
+                                        placeholder="Your Linkedin Url" 
+                                        name="linkedin"
+                                        onChange={this.handleChange}
+                                    />
+                                    <button type="submit">Ask to join</button>
                                 </form>
                             </div>
                         </div>
                         <div className="expand-info">
-                            <div className="members">
-                                <p>Member List</p>
-                            </div>
                             <div className="thoughts">
                                 <p>Thoughts</p>
                                 <form>
@@ -143,6 +167,9 @@ class Join extends React.Component {
                                 </div>
                                 
                                 {/* <img src="https://qph.fs.quoracdn.net/main-qimg-3234084c90912949b3136194769ebd72"/> */}
+                            </div>
+                            <div className="members">
+                                <p>Member List</p>
                             </div>
                         </div>
                     </div>
