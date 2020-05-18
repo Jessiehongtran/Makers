@@ -21,11 +21,13 @@ import { Card,
     Typography,
     IconButton,
     Button }          from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
+
+import { withStyles } from "@material-ui/core/styles";
+
 
 
 // Passing theme into the makeStyles function
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
     // Defining style objects (root, media, and title), which we can access later
     root: {
         // We access default and custom variables using our theme (theme.spacing is a default value)
@@ -44,16 +46,18 @@ const useStyles = makeStyles(theme => ({
     dividerSecondary: {
       margin: `${theme.spacing.unit * 1.5}px 0`
     }
-  }))
+  })
 // Note: when defining styles we write a style object, similar to adding an inline style to a React elementstyle={{ height: '100px' }}
 
-const IdeaFunctional = (props) => {
+class IdeaFunctional extends React.Component {
+      constructor(props){
+        super(props);
+        
+    }
 
-  
-    // This is our style hook, allowing us to apply the styles as a className:
-    const classes = useStyles()
-    // console.log('props in idea', props)
-    var titleRandomColor = Math.floor(Math.random()*16777215).toString(16);
+    render(){
+      var titleRandomColor = Math.floor(Math.random()*16777215).toString(16);
+      const {classes} = this.props
 
     return (
         <Card className={classes.root}>
@@ -69,7 +73,7 @@ const IdeaFunctional = (props) => {
             />
             <Divider className={classes.divider} light />
               <Typography gutterBottom variant="h1" component="h1" className={classes.title} style={{color: `#${titleRandomColor}`}} >
-                {props.idea.idea}
+                {this.props.idea.idea}
               </Typography>
               <Typography variant="body1" color="textPrimary" component="p">
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
@@ -79,21 +83,21 @@ const IdeaFunctional = (props) => {
                   Target: {props.idea.target}
               </Typography> */}
               <Typography variant="body2" color="textSecondary" component="p" style={{paddingTop: '.5rem'}}>
-                <FaAward /> Impact: {props.idea.impact}
+                <FaAward /> Impact: {this.props.idea.impact}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p" style={{paddingTop: '.5rem'}}>
-                <FaUsers style={{marginRight: '.2rem'}}/> Team: {props.idea.HR}
+                <FaUsers style={{marginRight: '.2rem'}}/> Team: {this.props.idea.HR}
               </Typography> 
               <Typography variant="body2" color="textSecondary" component="p" style={{paddingTop: '.5rem'}}>
-                <FaUserFriends style={{marginRight: '.2rem'}}/> Joined Members: {props.idea.join_count}
+                <FaUserFriends style={{marginRight: '.2rem'}}/> Joined Members: {this.props.idea.join_count}
               </Typography>
             </CardActionArea>
           </CardContent>
         <CardActions disableSpacing>
         <CardActionArea>
           <Button size="small" color="primary" style={{color: `#${titleRandomColor}`}} onClick={() => {
-                props.history.push('/join')
-                localStorage.setItem('ideaId', props.idea.id)
+                this.props.history.push('/join')
+                localStorage.setItem('ideaId', this.props.idea.id)
                 }}>
             Join
           </Button>
@@ -107,6 +111,7 @@ const IdeaFunctional = (props) => {
         </CardActions>
       </Card>
     )
+  }
 }
 
-export default IdeaFunctional;
+export default withStyles(styles, { withTheme: true })(IdeaFunctional);

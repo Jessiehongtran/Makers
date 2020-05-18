@@ -1,29 +1,51 @@
 import React from 'react';
 import {IdeaData} from '../data/ideaData';
+import axios from 'axios';
 import '../styles/join.scss'
 
 class Join extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: ''};
+        this.state = {
+            value: '',
+            comment: ''
+        };
     
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleComment = this.handleComment.bind(this);
+        this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
       }
     
-      handleChange(event) {
+    handleChange(event) {
         this.setState({value: event.target.value});
       }
     
-      handleSubmit(event) {
+    handleSubmit(event) {
         alert('A name was submitted: ' + this.state.value);
         event.preventDefault();
       }
+
+    componentDidMount(){
+        const projectId = localStorage.getItem('ideaId')
+        axios.get('')
+    }
+
+    handleComment(event){
+        console.log(event.target.value)
+        this.setState({comment: event.target.value})
+    }
+
+    handleCommentSubmit(event){
+        event.preventDefault();
+        console.log('submit comment', this.state.comment)
+    }
       
 
 
     render(){
         var titleRandomColor = Math.floor(Math.random()*16777215).toString(16);
+       
 
         for(let i = 0; i < IdeaData.length; i++){
             if (IdeaData[i].id == localStorage.getItem('ideaId')){
@@ -67,6 +89,11 @@ class Join extends React.Component {
                             </div>
                             <div className="thoughts">
                                 <p>Thoughts</p>
+                                <input 
+                                    type="text" 
+                                    onChange={this.handleComment}
+                                />
+                                <button type="submit" onClick={this.handleCommentSubmit}>Comment</button>
                                 <img src="https://qph.fs.quoracdn.net/main-qimg-3234084c90912949b3136194769ebd72"/>
                             </div>
                         </div>
