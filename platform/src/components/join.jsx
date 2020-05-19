@@ -7,6 +7,7 @@ class Join extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            project: {},
             userInfo : {
                 name: "",
                 identity: "",
@@ -35,15 +36,37 @@ class Join extends React.Component {
         console.log('submitted: ',  this.state.userInfo);
       }
 
-    componentDidMount(){
-        const projectId = localStorage.getItem('ideaId')
-        axios.get(`https://makers-app.herokuapp.com/api/comments/${projectId}`)
+    fetchProject(projectId){
+        axios.get(`https://makers-app.herokuapp.com/api/projects/${projectId}`)
              .then(res => {
-                 this.setState({comments: res.data})
+                 this.setState({project: res.data})
              })
              .catch(err => {
                  console.log(err)
              })
+    }
+
+    fetchComments(){
+        const projectId = localStorage.getItem('ideaId')
+        axios.get(`https://makers-app.herokuapp.com/api/comments/${projectId}`)
+             .then(res => {
+                 let arr = res.data
+                 for (let i = 0; i < (arr.length/2); i++){
+                    let el = arr[i]
+                    arr[i] = arr[arr.length-1-i]
+                    arr[arr.length-1-i] = el
+                 }
+                 this.setState({comments: arr})
+             })
+             .catch(err => {
+                 console.log(err)
+             })
+    }
+
+    componentDidMount(){
+       const projectId = localStorage.getItem('ideaId')
+       this.fetchProject(projectId)
+       this.fetchComments()
     }
 
     handleComment(event){
@@ -70,6 +93,7 @@ class Join extends React.Component {
         axios.post('https://makers-app.herokuapp.com/api/comments', comment_to_post)
              .then(res => {
                  console.log('res in posting comment', res)
+                 this.fetchComments()
              })
              .catch(err => {
                  console.log(err.message)
@@ -82,22 +106,33 @@ class Join extends React.Component {
         console.log('userInfo', this.state.userInfo)
         var titleRandomColor = Math.floor(Math.random()*16777215).toString(16);
         const avatar = this.state.avatar || "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTNWvAlntajQ9uki4_E508d7cB1qdQtc_UngZ2A5mJArKpontMT&usqp=CAU"
-       
+        const profileImages = [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSFD1Ofi7-DsfgVE7CojIqMuNGYEN1N4dGyec3hJQebtISancyF&usqp=CAU",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQMl6NTlCzCCbsGYUM6UL20gHLtNf78lW8BjVl4a1EeQDoSlSQS&usqp=CAU",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTdYFX7Pl4vLFV83iJ5MUsDCpMC6AABe98QoiIjArq_upOhRKfa&usqp=CAU",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSTEqJ07Y1GCvnoWd76ffZwIyKleI2Y-UZrWrfxgldtXzyy1YU8&usqp=CAU",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcShGctjfurkFe-BYgtExvOCLH_JzgHucN2-X7F2Y431nicgcfPW&usqp=CAU",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQJo3Fn6BEXivjOV5TmZpRwLg_fznF876zunwRez-CKba0EEdoP&usqp=CAU",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSdvsUvxV4_gkBisReH_2b-b-aPONPGVODQ08g6byuz4DV1q7sy&usqp=CAU",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSli_BLm0Wgk5nIjJipTJYeBrRjgzKMASnlKBTlhP1AUkOn3yfM&usqp=CAU",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQZjIBeDa-waFYq5olrYXtyhM3WBZ_nAmgBTUkvLTzVyDlr5wGX&usqp=CAU"
+        ]
 
-        for(let i = 0; i < IdeaData.length; i++){
-            if (IdeaData[i].id == localStorage.getItem('ideaId')){
-                console.log('fired')
-                return (
+        const randomInd = Math.floor(Math.random()*profileImages.length)
+
+        const tempAvatar = profileImages[randomInd]
+        
+        return (
                     <div className="join">
-                        <p><span className="title">Project:</span><span style={{color: `#${titleRandomColor}`, fontWeight: 'bold', fontSize: '20px'}}> {IdeaData[i].idea}</span></p>
+                        <p><span className="title">Project:</span><span style={{color: `#${titleRandomColor}`, fontWeight: 'bold', fontSize: '20px'}}> {this.state.project.project_name}</span></p>
                         <div className="info">
                             <div className="project-info">
-                                    <p><span className="title">Category: </span><span className="text"> {IdeaData[i].category}</span></p>
-                                    <p><span className="title">Target users:</span>  <span className="text">{IdeaData[i].target}</span></p>
-                                    <p><span className="title">Impact:</span> <span className="text">{IdeaData[i].impact}</span></p>
-                                    <p><span className="title">Team: </span> <span className="text">{IdeaData[i].HR}</span></p>
-                                    <p><span className="title">Host: </span> <span className="text">{IdeaData[i].host}</span></p>
-                                    <p><span className="title">Joined members: </span> <span className="text">{IdeaData[i].join_count}</span></p>
+                                    <p><span className="title">Category: </span><span className="text"> {this.state.project.category}</span></p>
+                                    <p><span className="title">Target users:</span>  <span className="text">{this.state.project.target_user}</span></p>
+                                    <p><span className="title">Impact:</span> <span className="text">{this.state.project.impact}</span></p>
+                                    <p><span className="title">Team: </span> <span className="text">{this.state.project.human_resources}</span></p>
+                                    {/* <p><span className="title">Host: </span> <span className="text">{IdeaData[i].host}</span></p> */}
+                                    <p><span className="title">Joined members: </span> <span className="text">{this.state.project.join_count}</span></p>
                             </div>
                             <div className="member-info">
                                 <p>Give us an idea about you</p>
@@ -159,7 +194,7 @@ class Join extends React.Component {
                                 <div className="showComments">
                                 {this.state.comments.map(each => 
                                     <div className="each-comment">
-                                        <img className="avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTNWvAlntajQ9uki4_E508d7cB1qdQtc_UngZ2A5mJArKpontMT&usqp=CAU"/>
+                                        <img className="avatar" src={tempAvatar}/>
                                         <p>{each.comment}</p>
                                     </div>
                                 )}
@@ -173,9 +208,7 @@ class Join extends React.Component {
                             </div>
                         </div>
                     </div>
-                )
-            }
-        }   
+        )
     }
 }
 

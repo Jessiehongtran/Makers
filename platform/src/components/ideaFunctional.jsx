@@ -52,12 +52,24 @@ const styles = theme => ({
 class IdeaFunctional extends React.Component {
       constructor(props){
         super(props);
+        this.state = {
+          forward: 0
+        }
+
+      this.increaseForward = this.increaseForward.bind(this);
         
+    }
+
+    increaseForward(){
+      var forward = this.state.forward + 1
+      this.setState({forward: forward})
     }
 
     render(){
       var titleRandomColor = Math.floor(Math.random()*16777215).toString(16);
       const {classes} = this.props
+
+      console.log("forward", this.state.forward)
 
     return (
         <Card className={classes.root}>
@@ -102,12 +114,18 @@ class IdeaFunctional extends React.Component {
             Join
           </Button>
         </CardActionArea>
-        <IconButton aria-label="add to favorites">
+        <img 
+          className="forward-btn" 
+          onClick={() => this.increaseForward()}
+          src="https://res.cloudinary.com/dfulxq7so/image/upload/v1589909084/Screen_Shot_2020-05-19_at_10.24.22_AM_c0tipf.png"
+        />
+        <p>{this.state.forward}</p>
+        {/* <IconButton aria-label="add to favorites">
           <FaHeart />
-        </IconButton>
-          <IconButton aria-label="share">
+        </IconButton> */}
+        {/* <IconButton aria-label="share">
             <FaShareAlt />
-          </IconButton>
+          </IconButton> */}
         </CardActions>
       </Card>
     )
