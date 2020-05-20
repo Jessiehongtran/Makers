@@ -195,7 +195,7 @@ class Join extends React.Component {
                                 {this.state.comments.map(each => 
                                     <div className="each-comment">
                                         <img className="avatar" src={tempAvatar}/>
-                                        <p>{each.comment}</p>
+                                        <p className="comment-container">{each.comment}</p>
                                     </div>
                                 )}
                                 
@@ -203,9 +203,9 @@ class Join extends React.Component {
                                 
                                 {/* <img src="https://qph.fs.quoracdn.net/main-qimg-3234084c90912949b3136194769ebd72"/> */}
                             </div>
-                            <div className="members">
+                            {/* <div className="members">
                                 <p>Member List</p>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
         )
