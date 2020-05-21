@@ -70,6 +70,7 @@ class IdeaFunctional extends React.Component {
       const {classes} = this.props
 
       console.log("forward", this.state.forward)
+      console.log('idea', this.props.idea)
 
     return (
         <Card className={classes.root}>
@@ -78,17 +79,30 @@ class IdeaFunctional extends React.Component {
             </IconButton>
           <CardContent>
                <CardActionArea>
-            <CardMedia
+            {/* <CardMedia
               className={classes.media}
               image="https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1955&q=80"
               title="Project Image"
-            />
+            /> */}
+            <div 
+            style={{
+                backgroundColor: this.props.idea.banner_color,
+                height: "180px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: "24px",
+                padding: "20px",
+                fontFamily: "Verdana"
+                }}>
+              {this.props.idea.idea}
+            </div>
             <Divider className={classes.divider} light />
-              <Typography gutterBottom variant="h1" component="h1" className={classes.title} style={{color: `#${titleRandomColor}`}} >
+              <Typography gutterBottom variant="h1" component="h1" className={classes.title} style={{color: this.props.idea.banner_color}} >
                 {this.props.idea.project_name}
               </Typography>
               <Typography variant="body1" color="textPrimary" component="p">
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+              {this.props.idea.description}
               </Typography>
               <Divider className={classes.dividerSecondary} light />
               <Typography variant="body2" color="textSecondary" component="p">

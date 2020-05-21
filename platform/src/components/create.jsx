@@ -171,7 +171,20 @@ class Create extends React.Component {
                             <option value="Sans-Serif"> Sans-Serif </option>                                  
                             <option value="Tahoma"> Tahoma </option>
                             <option value="Verdana"> Verdana </option>
-                            <option value="Lucida Sans Unicode"> Lucida Sans Unicode </option>                               
+                            <option value="Lucida Sans Unicode"> Lucida Sans Unicode </option>
+                            <option value="'Times New Roman', Times, serif"> Times New Roman </option>    
+                            <option value="Helvetica"> Helvetica </option> 
+                            <option value="Verdana"> Verdana </option> 
+                            <option value="Garamond"> Garamond </option>  
+                            <option value="Courier"> Courier </option>    
+                            <option value="'Georgia', serif"> Georgia </option> 
+                            <option value="Palatino"> Palatino </option>
+                            <option value="Impact"> Impact </option> 
+                            <option value="Candara"> Candara </option>   
+                            <option value="Optima"> Optima </option> 
+                            <option value="Perpetua"> Perpetua </option> 
+                            <option value="Trebuchet MS"> Trebuchet MS </option> 
+                            <option value="Comic Sans"> Comic Sans </option>                               
                         </select>
                     </div>
                     <div className="display-fontSize-picker">
