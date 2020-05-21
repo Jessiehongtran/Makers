@@ -19,7 +19,9 @@ class Create extends React.Component {
                red: 228,
                green: 179,
                blue: 67
-           }
+           },
+           font: "",
+           fontSize: 14,
         };
         
     }
@@ -54,6 +56,20 @@ class Create extends React.Component {
         return red+green+blue; 
     }
 
+    updateFont(event){
+        this.setState({font: event.target.value})
+    }
+
+    updateFontSize(toDo){
+        if (toDo === "down"){
+            var newfontSize = this.state.fontSize - 1
+            this.setState({fontSize: newfontSize})
+        }
+        else if (toDo === "up"){
+            var newfontSize = this.state.fontSize + 1
+            this.setState({fontSize: newfontSize})
+        }
+    }
 
 
     render(){
@@ -123,9 +139,14 @@ class Create extends React.Component {
                     <p>---------</p> */}
 
                     {/* Using RGB */}
-                    <div className="display-container" style={{backgroundColor: `#${this.fullColorHex(this.state.colorRGB.red, this.state.colorRGB.green, this.state.colorRGB.blue)}`  }}>                      
-                       
-                        {this.state.project.idea}
+                    <div 
+                        className="display-container" 
+                        style={{
+                            backgroundColor: `#${this.fullColorHex(this.state.colorRGB.red, this.state.colorRGB.green, this.state.colorRGB.blue)}`,
+                            fontFamily: this.state.font,
+                            fontSize: this.state.fontSize,
+                        }}>                      
+                            {this.state.project.idea}
                     </div>
                     <div className="display-color-picker">
                         <form>
@@ -142,6 +163,22 @@ class Create extends React.Component {
                                 <br/>0 <input type="number" name="blue" onChange={e => this.handleColorChange(e)}/> 255
                             </label>
                         </form>
+                    </div>
+                    <div className="display-font-picker">
+                        <select name="font" onchange={e => this.updateFont(e)}>
+                            <option value="Serif"> Serif </option>
+                            <option value="Arial"> Arial </option>
+                            <option value="Sans-Serif"> Sans-Serif </option>                                  
+                            <option value="Tahoma"> Tahoma </option>
+                            <option value="Verdana"> Verdana </option>
+                            <option value="Lucida Sans Unicode"> Lucida Sans Unicode </option>                               
+                        </select>
+                    </div>
+                    <div className="display-fontSize-picker">
+                        Adjust font size
+                        <button onClick={() => this.updateFontSize("down")}>-</button>
+                        {this.state.fontSize}
+                        <button onClick={() => this.updateFontSize("up")}>+</button>
                     </div>
                 </div>
             </div>
