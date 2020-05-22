@@ -37,17 +37,36 @@ class Idea extends React.Component {
 
     render(){
 
-        console.log('props in Idea', this.props.project)
+        var idea = "";
+        if (this.props.project.idea.length > 65){
+            for (var i = 0;i<this.props.project.idea.length; i++){
+                if (i <65){
+                idea += this.props.project.idea[i]
+                }
+            }
+            idea += "..."
+        }
+        else {
+            idea = this.props.project.idea
+        }
 
         return (
             <>
-                <div className="each-project" style={{backgroundColor: this.props.bannerColor}}>
+                <div 
+                    className="each-project" 
+                    style={{backgroundColor: this.props.bannerColor}}
+                    onClick={() => {
+                        this.props.history.push('/join')
+                        localStorage.setItem('ideaId', this.props.project.id)
+                        }}
+                >
+                
                     <div className="project-headers">
                         <p className="project-name">{this.props.project.project_name}</p>
-                        <p className="project-idea">{this.props.project.idea}</p>
+                        <p className="project-idea">{idea}</p>
                     </div>
                     <div className="icons">
-                        <i class="fas fa-users" onClick={() => this.updateCount("join")}></i>
+                        <i class="fas fa-users"></i>
                         <p className="count">{this.state.join_count}</p>
                         <i class="far fa-heart" onClick={() => this.updateCount("like")}></i>
                         <p className="count">{this.state.upvote}</p>

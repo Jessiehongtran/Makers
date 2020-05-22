@@ -49,6 +49,13 @@ class Ideas extends React.Component {
     render(){
         return (
             <div className="ideas-frame">
+                <div className="category">
+                    <p>Web dev</p>
+                    <p>Mobile</p>
+                    <p>Game dev</p>
+                    <p>Data science</p>
+                    <p>Machine learning</p>
+                </div>
                 <div className="ideas">
                     {this.state.ideas.map(project => 
                         <Idea 
