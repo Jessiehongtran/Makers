@@ -1,5 +1,6 @@
 import React from 'react';
-import "../styles/create.scss"
+import "../styles/create.scss";
+import axios from 'axios';
 
 class Create extends React.Component {
     constructor(){
@@ -71,13 +72,37 @@ class Create extends React.Component {
         }
     }
 
+    submitProject(){
+        //gather all project info and make a post request here
+        const projectToPost = {
+            idea: this.state.project.idea,
+            project_name: this.state.project.project_name,
+            banner_color: `#${this.fullColorHex(this.state.colorRGB.red, this.state.colorRGB.green, this.state.colorRGB.blue)}` || "#F5F4F4",
+            category: this.state.project.category,
+            target_user: this.state.project.target,
+            impact: this.state.project.impact,
+            human_resources: this.state.project.team,
+            join_count: 0,
+            description: this.state.project.description,
+            upvote: 0
+        }
+        console.log('projectToPost', projectToPost)
+        axios.post(`https://makers-app.herokuapp.com/api/projects`, projectToPost)
+             .then(res => {
+                 console.log("posted successfully", res.data)
+             })
+             .catch(err => {
+                 console.log(err.message)
+             })
+        this.props.history.push('/createProfile')
+        
+    }
+
 
     render(){
 
         console.log('color state out', this.state.color)
         console.log('color RGB', this.fullColorHex(228,179,66))
-
-
 
         return (
             <div className="create-frame">
@@ -122,7 +147,7 @@ class Create extends React.Component {
                             onChange={e => this.updateProject(e)}
                         />
                         <button 
-                            onClick={() => {this.props.history.push('/createProfile')}}>
+                            onClick={() => this.submitProject()}>
                                 Create
                         </button>
                         {/* Lead to sign in/sign up/create profile */}
