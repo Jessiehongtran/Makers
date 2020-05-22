@@ -1,0 +1,24 @@
+.nav-frame {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .logo {
+        margin-right: 20px;
+        margin-left: 20px;
+        color: #ff4d2e;
+        // font-family: 'Poppins', sans-serif;
+        font-family: 'Dancing Script', cursive;
+        
+    }
+
+    .navigation {
+        display: flex;
+        justify-content: space-around;
+
+        a {
+            margin-right: 20px;
+            font-family: 'Poppins', sans-serif
+        }
+    }
+}

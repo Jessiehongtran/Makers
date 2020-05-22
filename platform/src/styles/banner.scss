@@ -1,0 +1,33 @@
+.banner {
+    height: 300px;
+    background-image: linear-gradient(to right, #FDDACC , #FCF1C7 );
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 150px;
+
+    h3 {
+        font-size: 44px;
+        margin-bottom: 0;
+        font-family: 'Poppins', sans-serif
+    }
+
+    p {
+        font-size: 20px;
+        margin-top: 0;
+        font-family: 'Poppins', sans-serif
+    }
+
+    button {
+        width: 120px;
+        border-radius: 14px;
+        padding: 10px;
+        background-color: #ff4d2e;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        border: 1px solid #ff4d2e;
+        font-family: 'Poppins', sans-serif;
+        margin-bottom: 40px;
+    }
+}

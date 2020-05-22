@@ -1,5 +1,5 @@
 import React from 'react';
-import {IdeaData} from '../data/ideaData';
+// import {IdeaData} from '../data/ideaData';
 import axios from 'axios';
 import '../styles/join.scss'
 

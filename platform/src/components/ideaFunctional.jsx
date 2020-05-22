@@ -69,6 +69,8 @@ class IdeaFunctional extends React.Component {
       var titleRandomColor = Math.floor(Math.random()*16777215).toString(16);
       const {classes} = this.props
 
+      var bannerColors = ["#f7f4ea", "#ded9e2","#cob9dd", "#8oa1d4", "#75c9c8"]
+
       console.log("forward", this.state.forward)
       console.log('idea', this.props.idea)
 
@@ -86,23 +88,24 @@ class IdeaFunctional extends React.Component {
             /> */}
             <div 
             style={{
-                backgroundColor: this.props.idea.banner_color,
+                backgroundColor: bannerColors[Math.floor(Math.random()*bannerColors.length)],
+                // color: `#${titleRandomColor}`,
                 height: "180px",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                fontSize: "24px",
+                fontSize: "18px",
                 padding: "20px",
                 fontFamily: "Verdana"
                 }}>
               {this.props.idea.idea}
             </div>
             <Divider className={classes.divider} light />
-              <Typography gutterBottom variant="h1" component="h1" className={classes.title} style={{color: this.props.idea.banner_color}} >
+              <Typography gutterBottom variant="h1" component="h1" className={classes.title} style={{color:`#${titleRandomColor}`}} >
                 {this.props.idea.project_name}
               </Typography>
               <Typography variant="body1" color="textPrimary" component="p">
-              {this.props.idea.description}
+              {/* {this.props.idea.description} */}
               </Typography>
               <Divider className={classes.dividerSecondary} light />
               <Typography variant="body2" color="textSecondary" component="p">
