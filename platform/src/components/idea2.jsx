@@ -37,19 +37,23 @@ class Idea extends React.Component {
 
     render(){
 
-        var idea = "";
-        if (this.props.project.idea.length > 65){
-            for (var i = 0;i<this.props.project.idea.length; i++){
-                if (i <65){
-                idea += this.props.project.idea[i]
-                }
-            }
-            idea += "..."
-        }
-        else {
-            idea = this.props.project.idea
-        }
+        console.log('project', this.props.project.idea)
 
+        var idea = "";
+        if (this.props.project.idea != null){
+            if (this.props.project.idea.length > 65){
+                for (var i = 0;i<this.props.project.idea.length; i++){
+                    if (i <65){
+                    idea += this.props.project.idea[i]
+                    }
+                }
+                idea += "..."
+            }
+            else {
+                idea = this.props.project.idea
+            }
+        } 
+        
         return (
             <>
                 <div 
