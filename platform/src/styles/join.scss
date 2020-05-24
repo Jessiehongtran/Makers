@@ -1,8 +1,15 @@
+
 .join {
     display: flex;
     flex-direction: column;
+    height: auto;
     width: 100%;
     // padding: 30px;
+    padding: 30px 60px 60px 30px;
+    height: 100%;
+    overflow:hidden;
+    // position: absolute;
+    background-image: linear-gradient(to right, #FDDACC , #FCF1C7 );
 
     .info {
         display: flex;
@@ -10,6 +17,7 @@
         align-items: center;
         background-color: white;
         width: 100%;
+        
         
 
         .project-info {
@@ -106,6 +114,42 @@
                         margin-top: 0;
                         font-size: 14px;
                         color: #ff4d2e
+                    }
+                }
+
+                .roles {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+
+                    .title {
+                    width: 80%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    padding: 0;
+                    margin-top: -15px;
+
+                    i {
+                        font-size: 20px;
+                        color: grey;
+                        margin-right: 10px
+                    }
+                    }
+
+                    .list-role {
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        align-items: flex-start;
+
+
+                        .each-role {
+                            border-radius: 10px;
+                            padding: 5px 10px 5px 10px;
+                            margin-right: 5px;
+                            font-size: 10px;
+                        }
                     }
                 }
             }

@@ -1,7 +1,8 @@
 import React from 'react';
 // import {IdeaData} from '../data/ideaData';
 import axios from 'axios';
-import '../styles/join.scss'
+import '../styles/join.scss';
+import Nav from '../components/navigation'
 
 class Join extends React.Component {
     constructor(props) {
@@ -126,8 +127,12 @@ class Join extends React.Component {
         const bannerColor = localStorage.getItem('bannerColor')
 
         const category = "Web dev"
+
+        const roles = ["Software engineers", "Product managers", "Backend"]
         
         return (
+            <>
+                    
                     <div className="join">
                         <div className="info">
                             <div className="project-info">
@@ -145,22 +150,30 @@ class Join extends React.Component {
                                     <div className="project-impact">
                                         <i 
                                             class="fas fa-hand-holding-heart"
-                                            // style={{
-                                            //     color: bannerColor
-                                            // }}
                                         ></i>
                                         <p>{this.state.project.impact}</p>
                                     </div>
                                     <div className="join-members">
                                         <i 
                                             class="fas fa-users"
-                                            // style={{
-                                            //     color: bannerColor
-                                            // }}
                                         ></i>
                                         <p>{this.state.project.join_count} <span> members</span></p>
                                     </div>
-                                    
+                                    <div className="roles">
+                                        <div className="title">
+                                            <i class="fas fa-user-tag"></i>
+                                            <p>Roles available</p>
+                                        </div>
+                                        <div class="list-role">
+                                            {roles.map(role => 
+                                                <p 
+                                                className="each-role"
+                                                style={{
+                                                backgroundColor: bannerColor
+                                                }}
+                                                >{role}</p>)}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="member-info">
@@ -237,7 +250,9 @@ class Join extends React.Component {
                             </div> */}
                         </div>
                     </div>
+                </>
         )
+
     }
 }
 
