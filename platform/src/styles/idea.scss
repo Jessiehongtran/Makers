@@ -16,10 +16,13 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        font-family: 'Poppins', sans-serif;
+
         
         .project-name {
             font-size: 25px;
-            margin-bottom: 0
+            margin-bottom: 0;
+            
             // margin-bottom: -30px
         }
 
@@ -37,6 +40,7 @@
         justify-content: flex-end;
         align-items: center;
         margin-bottom: 5px;
+        
 
         i{
             margin-right: 3px;

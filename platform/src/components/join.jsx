@@ -104,6 +104,7 @@ class Join extends React.Component {
 
     render(){
         console.log('userInfo', this.state.userInfo)
+        console.log('project in Join', this.state.project)
         var titleRandomColor = Math.floor(Math.random()*16777215).toString(16);
         const avatar = this.state.avatar || "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTNWvAlntajQ9uki4_E508d7cB1qdQtc_UngZ2A5mJArKpontMT&usqp=CAU"
         const profileImages = [
@@ -121,18 +122,46 @@ class Join extends React.Component {
         const randomInd = Math.floor(Math.random()*profileImages.length)
 
         const tempAvatar = profileImages[randomInd]
+
+        const bannerColor = localStorage.getItem('bannerColor')
+
+        const category = "Web dev"
         
         return (
                     <div className="join">
-                        <p><span className="title">Project:</span><span style={{color: `#${titleRandomColor}`, fontWeight: 'bold', fontSize: '20px'}}> {this.state.project.project_name}</span></p>
                         <div className="info">
                             <div className="project-info">
-                                    <p><span className="title">Category: </span><span className="text"> {this.state.project.category}</span></p>
-                                    <p><span className="title">Target users:</span>  <span className="text">{this.state.project.target_user}</span></p>
-                                    <p><span className="title">Impact:</span> <span className="text">{this.state.project.impact}</span></p>
-                                    <p><span className="title">Team: </span> <span className="text">{this.state.project.human_resources}</span></p>
-                                    {/* <p><span className="title">Host: </span> <span className="text">{IdeaData[i].host}</span></p> */}
-                                    <p><span className="title">Joined members: </span> <span className="text">{this.state.project.join_count}</span></p>
+                                <div className="name-cate">
+                                    <p 
+                                        className="project-name"
+                                        style={{
+                                            backgroundColor: bannerColor
+                                        }}
+                                    >{this.state.project.project_name}</p>
+                                    <p className="project-cate">{category}</p>
+                                </div>
+                                <div className="more-info">
+                                    <p className="project-idea">{this.state.project.idea}</p>
+                                    <div className="project-impact">
+                                        <i 
+                                            class="fas fa-hand-holding-heart"
+                                            // style={{
+                                            //     color: bannerColor
+                                            // }}
+                                        ></i>
+                                        <p>{this.state.project.impact}</p>
+                                    </div>
+                                    <div className="join-members">
+                                        <i 
+                                            class="fas fa-users"
+                                            // style={{
+                                            //     color: bannerColor
+                                            // }}
+                                        ></i>
+                                        <p>{this.state.project.join_count} <span> members</span></p>
+                                    </div>
+                                    
+                                </div>
                             </div>
                             <div className="member-info">
                                 <p>Give us an idea about you</p>

@@ -49,6 +49,7 @@ render(){
             props => {
               return (
                 <> 
+                  <Nav {...props} />
                   <Join {...props}/>
                 </>
               )}}

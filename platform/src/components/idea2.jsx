@@ -34,6 +34,12 @@ class Idea extends React.Component {
         }
     }
 
+    getIntoProject(){
+        this.props.history.push('/join')
+        localStorage.setItem('ideaId', this.props.project.id)
+        localStorage.setItem('bannerColor', this.props.bannerColor)
+    }
+
 
     render(){
 
@@ -59,14 +65,11 @@ class Idea extends React.Component {
                 <div 
                     className="each-project" 
                     style={{backgroundColor: this.props.bannerColor}}
-                    onClick={() => {
-                        this.props.history.push('/join')
-                        localStorage.setItem('ideaId', this.props.project.id)
-                        }}
+                    onClick={() => this.getIntoProject()}
                 >
                 
                     <div className="project-headers">
-                        <p className="project-name">{this.props.project.project_name}</p>
+                        <p className="project-name">{this.props.project.project_name || "Unnamed"}</p>
                         <p className="project-idea">{idea}</p>
                     </div>
                     <div className="icons">

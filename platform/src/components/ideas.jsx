@@ -2,7 +2,6 @@ import React from 'react';
 import '../styles/ideas.scss';
 import Idea from './idea2';
 import {IdeaData} from '../data/ideaData';
-import IdeaFunctional from './ideaFunctional';
 import axios from 'axios';
 
 class Ideas extends React.Component {
