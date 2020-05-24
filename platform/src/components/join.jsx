@@ -12,9 +12,9 @@ class Join extends React.Component {
             userInfo : {
                 name: "",
                 identity: "",
-                valueAdded: "",
                 role: "",
-                linkedin: ""
+                linkedin: "",
+                github: ""
             },
             value: '',
             comment: '',
@@ -177,47 +177,42 @@ class Join extends React.Component {
                                 </div>
                             </div>
                             <div className="member-info">
-                                <p>Give us an idea about you</p>
+                                <p>Who are you?</p>
                                 <form onSubmit={this.handleSubmit}>
-                                    <label>
-                                        <input 
+                                    <input 
                                             type="text" 
-                                            placeholder="Your name" 
+                                            placeholder="Name" 
                                             name="name"
                                             onChange={this.handleChange} 
-                                        />
-                                    </label>
-                                    <label>
-                                        Who you are?
-                                        <input 
-                                            placeholder="I am" 
+                                    />
+                                    <input 
+                                            placeholder="Intro" 
                                             name="identity" 
                                             onChange={this.handleChange}
-                                        />
-                                    </label>
-                                    <label>
-                                        What can you bring to the table?
-                                        <input 
-                                            placeholder="I can" 
-                                            name="valueAdded"
-                                            onChange={this.handleChange}
-                                        />
-                                    </label>
-                                    <label>
-                                        Select your role: <select  
-                                            name="role"
-                                            onChange={this.handleChange}>
-                                            <option value="teamLead">Team Lead</option>
-                                            <option value="frontEnd">Front End</option>
-                                            <option value="backEnd">Back End</option>
-                                            <option value="ux">UX/UI</option>
-                                        </select>
-                                    </label>
+                                    />
                                     <input 
-                                        placeholder="Your Linkedin Url" 
+                                        placeholder="Linkedin" 
                                         name="linkedin"
                                         onChange={this.handleChange}
                                     />
+                                    <input 
+                                        placeholder="Github" 
+                                        name="github"
+                                        onChange={this.handleChange}
+                                    />
+                                    
+                                   <select  
+                                            name="role"
+                                            className="select-css"
+                                            onChange={this.handleChange}>
+                                            <option>Select your role</option>
+                                            {roles.map(role => 
+                                                <option value={role}>{role}</option>
+                                               )}
+        
+                                    </select>
+                                 
+                                    
                                     <button type="submit">Ask to join</button>
                                 </form>
                             </div>
