@@ -60,6 +60,7 @@ render(){
             props => {
               return (
                 <> 
+                  <Nav {...props} />
                   <Create {...props}/>
                 </>
               )}}

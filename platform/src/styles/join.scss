@@ -4,11 +4,10 @@
     flex-direction: column;
     height: auto;
     width: 100%;
-    // padding: 30px;
     padding: 30px 60px 60px 30px;
     height: 100%;
     overflow:hidden;
-    // position: absolute;
+    min-height: 100vh;
     background-image: linear-gradient(to right, #FDDACC , #FCF1C7 );
 
     .info {
