@@ -219,14 +219,15 @@ class Join extends React.Component {
                         </div>
                         <div className="expand-info">
                             <div className="thoughts">
-                                <p>Thoughts</p>
+                                <p className="title">Thoughts</p>
                                 <form>
-                                    <img className="avatar" src={avatar}/>
+                                    {/* <img className="avatar" src={avatar}/> */}
                                     <input 
                                         type="text" 
                                         onChange={this.handleComment}
+                                        placeholder="leave a comment"
                                     />
-                                    <button type="submit" onClick={this.handleCommentSubmit}>Send</button>
+                                    <i class="fas fa-paper-plane" onClick={this.handleCommentSubmit}></i>
                                 </form>
                                 <div className="showComments">
                                 {this.state.comments.map(each => 
