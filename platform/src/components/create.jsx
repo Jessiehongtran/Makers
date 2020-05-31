@@ -74,6 +74,22 @@ class Create extends React.Component {
 
     submitProject(){
         //gather all project info and make a post request here
+
+        var roles = this.state.project.team
+        var j = 0
+        const roleList = []
+        for (var i =0; i< roles.length; i++){
+            if (roles[i]== "," && j < roles.length){
+                roleList.push(roles.slice(j,i))
+                j = i+ 1
+            }
+
+            else if (i === roles.length - 1){
+                roleList.push(roles.slice(j,roles.length))
+            }
+        }
+
+        console.log('roleList', roleList)
         const projectToPost = {
             idea: this.state.project.idea,
             project_name: this.state.project.project_name,
@@ -81,7 +97,7 @@ class Create extends React.Component {
             category: this.state.project.category,
             target_user: this.state.project.target,
             impact: this.state.project.impact,
-            human_resources: this.state.project.team,
+            human_resources: roleList,
             join_count: 0,
             description: this.state.project.description,
             upvote: 0
@@ -94,6 +110,8 @@ class Create extends React.Component {
              .catch(err => {
                  console.log(err.message)
              })
+
+        // alert("Project was created successfully!")
         this.props.history.push('/createProfile')
         
     }
@@ -101,8 +119,7 @@ class Create extends React.Component {
 
     render(){
 
-        console.log('color state out', this.state.color)
-        console.log('color RGB', this.fullColorHex(228,179,66))
+        const cates = ["Web dev", "Mobile", "Game dev", "Data science", "Machine learning"]
 
         return (
             <div className="create-frame">
@@ -133,19 +150,33 @@ class Create extends React.Component {
                                 onChange={e => this.updateProject(e)}
                             /> 
                         </div>
-                        
-                        {/* dropdown for category */}
                         <div className="cate-team">
-                            <input 
+                            {/* <input 
                                 placeholder="Category" 
                                 name="category"
                                 onChange={e => this.updateProject(e)}
-                            /> 
+                            />  */}
+                            <select  
+                                name="category"
+                                className="cate"
+                                onChange={e => this.updateProject(e)}>
+                                <option>Select a category</option>
+                                {cates.map(cate => 
+                                    <option value={cate}>{cate}</option>
+                                    )}
+
+                            </select>
+
+
                             <input 
                                 placeholder="Team includes" 
                                 name="team"
                                 onChange={e => this.updateProject(e)}
+                               
                             />
+                        </div>
+                        <div className="showRoles">
+                            Test
                         </div>
 
                         <div className="details">

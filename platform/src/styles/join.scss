@@ -185,7 +185,8 @@
                     outline: 0;
                     font-size: 14px;
                     border-width: 0 0 2px;
-                    border-color: #ff4d2e
+                    border-color: #ff4d2e;
+                    color: #545150  ;
 
                 }
 
@@ -310,9 +311,10 @@
                     display: flex;
                     flex-direction: row;
                     align-items: center;
+                    margin-top: 10px;
                     .avatar {
-                        width: 8%;
-                        height: 8%;
+                        width: 3%;
+                        height: 3%;
                         border-radius: 50%;
                         margin-right: 10px
                     }

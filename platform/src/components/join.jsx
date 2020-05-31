@@ -35,6 +35,12 @@ class Join extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         console.log('submitted: ',  this.state.userInfo);
+
+        localStorage.setItem('name', this.state.userInfo.name)
+        localStorage.setItem('intro', this.state.userInfo.identity)
+        localStorage.setItem('role', this.state.userInfo.role)
+        localStorage.setItem('linkedin', this.state.userInfo.linkedin)
+        localStorage.setItem('github', this.state.userInfo.github)
       }
 
     fetchProject(projectId){
@@ -181,7 +187,7 @@ class Join extends React.Component {
                                 <form onSubmit={this.handleSubmit}>
                                     <input 
                                             type="text" 
-                                            placeholder="Name" 
+                                            placeholder="Name"
                                             name="name"
                                             onChange={this.handleChange} 
                                     />
@@ -192,7 +198,7 @@ class Join extends React.Component {
                                     />
                                     <input 
                                         placeholder="Linkedin" 
-                                        name="linkedin"
+                                        name="linkedin" 
                                         onChange={this.handleChange}
                                     />
                                     <input 
