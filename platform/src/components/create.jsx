@@ -75,19 +75,7 @@ class Create extends React.Component {
     submitProject(){
         //gather all project info and make a post request here
 
-        var roles = this.state.project.team
-        var j = 0
-        const roleList = []
-        for (var i =0; i< roles.length; i++){
-            if (roles[i]== "," && j < roles.length){
-                roleList.push(roles.slice(j,i))
-                j = i+ 1
-            }
-
-            else if (i === roles.length - 1){
-                roleList.push(roles.slice(j,roles.length))
-            }
-        }
+        var roleList = this.state.project.team
 
         console.log('roleList', roleList)
         const projectToPost = {
