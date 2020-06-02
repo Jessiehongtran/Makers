@@ -30,12 +30,18 @@ class Join extends React.Component {
     
     handleChange(event) {
         this.setState({userInfo:{...this.state.userInfo,[event.target.name]: event.target.value}});
-      }
+    }
     
     handleSubmit(event) {
         event.preventDefault();
         console.log('submitted: ',  this.state.userInfo);
-      }
+
+        localStorage.setItem('name', this.state.userInfo.name)
+        localStorage.setItem('intro', this.state.userInfo.identity)
+        localStorage.setItem('role', this.state.userInfo.role)
+        localStorage.setItem('linkedin', this.state.userInfo.linkedin)
+        localStorage.setItem('github', this.state.userInfo.github)
+    }
 
     fetchProject(projectId){
         axios.get(`https://makers-app.herokuapp.com/api/projects/${projectId}`)
@@ -106,6 +112,7 @@ class Join extends React.Component {
     render(){
         console.log('userInfo', this.state.userInfo)
         console.log('project in Join', this.state.project)
+        console.log('HR', `1 ${this.state.project.human_resources}` )
         var titleRandomColor = Math.floor(Math.random()*16777215).toString(16);
         const avatar = this.state.avatar || "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTNWvAlntajQ9uki4_E508d7cB1qdQtc_UngZ2A5mJArKpontMT&usqp=CAU"
         const profileImages = [
@@ -126,9 +133,25 @@ class Join extends React.Component {
 
         const bannerColor = localStorage.getItem('bannerColor')
 
-        const category = "Web dev"
+        const category = this.state.project.category || "Undefined category"
 
-        const roles = ["Software engineers", "Product managers", "Backend"]
+        // const roleList = ["Software engineers", "Product managers", "Backend"]
+
+        // turn string of roles into an array
+        const roles = `${this.state.project.human_resources }`
+
+        var j = 0
+        const roleList = []
+        for (var i =0; i< roles.length; i++){
+            if (roles[i]== "," && j < roles.length){
+                roleList.push(roles.slice(j,i))
+                j = i+ 1
+            }
+
+            else if (i === roles.length - 1){
+                roleList.push(roles.slice(j,roles.length))
+            }
+        }
         
         return (
             <>
@@ -165,7 +188,7 @@ class Join extends React.Component {
                                             <p>Roles available</p>
                                         </div>
                                         <div class="list-role">
-                                            {roles.map(role => 
+                                            {roleList.map(role => 
                                                 <p 
                                                 className="each-role"
                                                 style={{
@@ -181,7 +204,7 @@ class Join extends React.Component {
                                 <form onSubmit={this.handleSubmit}>
                                     <input 
                                             type="text" 
-                                            placeholder="Name" 
+                                            placeholder="Name"
                                             name="name"
                                             onChange={this.handleChange} 
                                     />
@@ -192,7 +215,7 @@ class Join extends React.Component {
                                     />
                                     <input 
                                         placeholder="Linkedin" 
-                                        name="linkedin"
+                                        name="linkedin" 
                                         onChange={this.handleChange}
                                     />
                                     <input 
@@ -206,7 +229,7 @@ class Join extends React.Component {
                                             className="select-css"
                                             onChange={this.handleChange}>
                                             <option>Select your role</option>
-                                            {roles.map(role => 
+                                            {roleList.map(role => 
                                                 <option value={role}>{role}</option>
                                                )}
         
@@ -219,14 +242,15 @@ class Join extends React.Component {
                         </div>
                         <div className="expand-info">
                             <div className="thoughts">
-                                <p>Thoughts</p>
+                                <p className="title">Thoughts</p>
                                 <form>
-                                    <img className="avatar" src={avatar}/>
+                                    {/* <img className="avatar" src={avatar}/> */}
                                     <input 
                                         type="text" 
                                         onChange={this.handleComment}
+                                        placeholder="leave a comment"
                                     />
-                                    <button type="submit" onClick={this.handleCommentSubmit}>Send</button>
+                                    <i class="fas fa-paper-plane" onClick={this.handleCommentSubmit}></i>
                                 </form>
                                 <div className="showComments">
                                 {this.state.comments.map(each => 

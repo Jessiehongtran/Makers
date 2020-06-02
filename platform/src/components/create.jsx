@@ -15,6 +15,9 @@ class Create extends React.Component {
               team: "",
               description: "",
            },
+           projectId: 0,
+           project_created: false,
+           showOtherField: false,
            colorHex: "#e66465",
            colorRGB: {
                red: 228,
@@ -24,6 +27,8 @@ class Create extends React.Component {
            font: "",
            fontSize: 14,
         };
+
+        this.submitProject =  this.submitProject.bind(this)
         
     }
 
@@ -72,8 +77,13 @@ class Create extends React.Component {
         }
     }
 
-    submitProject(){
+    submitProject(e){
         //gather all project info and make a post request here
+        
+        e.preventDefault()
+        var roleList = this.state.project.team
+
+        console.log('roleList', roleList)
         const projectToPost = {
             idea: this.state.project.idea,
             project_name: this.state.project.project_name,
@@ -81,144 +91,144 @@ class Create extends React.Component {
             category: this.state.project.category,
             target_user: this.state.project.target,
             impact: this.state.project.impact,
-            human_resources: this.state.project.team,
+            human_resources: roleList,
             join_count: 0,
             description: this.state.project.description,
             upvote: 0
         }
         console.log('projectToPost', projectToPost)
+
+        //Post to project table
         axios.post(`https://makers-app.herokuapp.com/api/projects`, projectToPost)
              .then(res => {
                  console.log("posted successfully", res.data)
+                 this.setState({projectId: res.data.id})
+                 this.setState({project_created: true})
              })
              .catch(err => {
                  console.log(err.message)
              })
-        this.props.history.push('/createProfile')
+        
+
+        //Post to user_project table
+        const userId = localStorage.getItem('userId')
+
+        console.log('userId', userId)
+        console.log('projectId', this.state.projectId)
+        const projectHost = {
+            user_id: userId,
+            project_id: this.state.projectId,
+            is_host: true,
+            is_member: false
+        }
+        axios.post(`https://makers-app.herokuapp.com/api/user_project`, projectHost)
+             .then(res => {
+                 console.log(res.data)
+             })
+             .catch(err => {
+                console.log(err.message)
+            })
+
+        
+        // this.props.history.push('/createProfile')
         
     }
 
 
     render(){
 
-        console.log('color state out', this.state.color)
-        console.log('color RGB', this.fullColorHex(228,179,66))
+        const cates = ["Web dev", "Mobile", "Game dev", "Data science", "Machine learning", "Others"]
+
+        if (this.state.project.category === "Others"){
+            this.state.showOtherField = true
+        }
 
         return (
             <div className="create-frame">
+                {this.state.project_created? 
+                    <div class="created">
+                        <h3 className="announce">Project created successfully</h3> 
+                        <a>back</a>
+                    </div>
+                : 
                 <div className="info">
                     <h1>So what's on your mind?</h1>
                     <form>
-                        <input 
-                            placeholder="What's your idea in short" 
-                            name="idea"
-                            onChange={e => this.updateProject(e)}
-                        />
-                        <input 
-                            placeholder="Find for it a name" 
-                            name="project_name"
-                            onChange={e => this.updateProject(e)}
-                        />
-                        {/* dropdown for category */}
-                        <input 
-                            placeholder="Category" 
-                            name="category"
-                            onChange={e => this.updateProject(e)}
-                        /> 
-                        <input 
-                            placeholder="Target users" 
-                            name="target"
-                            onChange={e => this.updateProject(e)}
-                        /> 
-                        <input 
-                            placeholder="Impact" 
-                            name="impact"
-                            onChange={e => this.updateProject(e)}
-                        /> 
-                        <input 
-                            placeholder="Team includes" 
-                            name="team"
-                            onChange={e => this.updateProject(e)}
-                        />
-                        <input 
-                            className="more-details" 
-                            placeholder="More details" 
-                            name="description"
-                            onChange={e => this.updateProject(e)}
-                        />
+                        <div className="name">
+                            <input 
+                                placeholder="Project name" 
+                                name="project_name"
+                                onChange={e => this.updateProject(e)}
+                            />
+                            <input 
+                                placeholder="What's your idea in short" 
+                                name="idea"
+                                onChange={e => this.updateProject(e)}
+                            />
+                        </div>
+                        <div className="user">
+                            <input 
+                                placeholder="Target users" 
+                                name="target"
+                                onChange={e => this.updateProject(e)}
+                            /> 
+                            <input 
+                                placeholder="Impact" 
+                                name="impact"
+                                onChange={e => this.updateProject(e)}
+                            /> 
+                        </div>
+                        <div className="cate-team">
+                            <select  
+                                name="category"
+                                className="cate"
+                                onChange={e => this.updateProject(e)}>
+                                <option>Select a category</option>
+                                {cates.map(cate => 
+                                    <option value={cate}>{cate}</option>
+                                    )}
+
+                            </select>
+
+
+                            <input 
+                                placeholder="Team includes" 
+                                name="team"
+                                onChange={e => this.updateProject(e)}
+                               
+                            />
+                        </div>
+                       
+                        {this.state.showOtherField ? 
+                                <input
+                                className="otherCate"
+                                placeholder="What's that other category?" 
+                                onChange={e => this.updateProject(e)}
+                                /> : null
+                            }   
+
+                        <div className="details">
+                            <input 
+                                className="more-details" 
+                                placeholder="More details" 
+                                name="description"
+                                onChange={e => this.updateProject(e)}
+                            />
+                        </div>
+
+                        
+
                         <button 
-                            onClick={() => this.submitProject()}>
+                            onClick={e => this.submitProject(e)}>
                                 Create
                         </button>
                         {/* Lead to sign in/sign up/create profile */}
                     </form>
                 </div>
-                <div className="display">
-                    {/* Using color picker input, colorhex */}
-                    {/* <div className="display-container" style={{backgroundColor: this.state.colorHex }}>                      
-                        {this.state.color}
-                    </div>
-                    <div className="display-color-picker">
-                        <input name="Color Picker" type="color" value="#e66465" onChange={e => this.colorChange(e)}/>
-                    </div>
-                    <p>---------</p> */}
-
-                    {/* Using RGB */}
-                    <div 
-                        className="display-container" 
-                        style={{
-                            backgroundColor: `#${this.fullColorHex(this.state.colorRGB.red, this.state.colorRGB.green, this.state.colorRGB.blue)}`,
-                            fontFamily: this.state.font,
-                            fontSize: this.state.fontSize,
-                        }}>                      
-                            {this.state.project.idea}
-                    </div>
-                    <div className="display-color-picker">
-                        <form>
-                            <label>
-                                Red
-                                <br/>0 <input type="number" name="red" onChange={e => this.handleColorChange(e)}/> 255
-                            </label>
-                            <label>
-                                Green
-                                <br/>0 <input type="number" name="green" onChange={e => this.handleColorChange(e)}/> 255
-                            </label>
-                            <label>
-                                Blue
-                                <br/>0 <input type="number" name="blue" onChange={e => this.handleColorChange(e)}/> 255
-                            </label>
-                        </form>
-                    </div>
-                    <div className="display-font-picker">
-                        <select name="font" onchange={e => this.updateFont(e)}>
-                            <option value="Serif"> Serif </option>
-                            <option value="Arial"> Arial </option>
-                            <option value="Sans-Serif"> Sans-Serif </option>                                  
-                            <option value="Tahoma"> Tahoma </option>
-                            <option value="Verdana"> Verdana </option>
-                            <option value="Lucida Sans Unicode"> Lucida Sans Unicode </option>
-                            <option value="'Times New Roman', Times, serif"> Times New Roman </option>    
-                            <option value="Helvetica"> Helvetica </option> 
-                            <option value="Verdana"> Verdana </option> 
-                            <option value="Garamond"> Garamond </option>  
-                            <option value="Courier"> Courier </option>    
-                            <option value="'Georgia', serif"> Georgia </option> 
-                            <option value="Palatino"> Palatino </option>
-                            <option value="Impact"> Impact </option> 
-                            <option value="Candara"> Candara </option>   
-                            <option value="Optima"> Optima </option> 
-                            <option value="Perpetua"> Perpetua </option> 
-                            <option value="Trebuchet MS"> Trebuchet MS </option> 
-                            <option value="Comic Sans"> Comic Sans </option>                               
-                        </select>
-                    </div>
-                    <div className="display-fontSize-picker">
-                        Adjust font size
-                        <button onClick={() => this.updateFontSize("down")}>-</button>
-                        {this.state.fontSize}
-                        <button onClick={() => this.updateFontSize("up")}>+</button>
-                    </div>
-                </div>
+                
+                 } 
+                
+                
             </div>
         )
     }

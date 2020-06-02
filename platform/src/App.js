@@ -8,6 +8,8 @@ import Join from './components/join';
 import Create from './components/create';
 import Nav from './components/navigation';
 import Banner from './components/banner';
+import SignUp from './components/signup';
+import SignIn from './components/signin'
 
 // Material-UI imports
 import { ThemeProvider } from '@material-ui/core/styles'
@@ -44,6 +46,26 @@ render(){
               )}}
         />
         <Route
+          exact path="/signup" 
+          render = {
+            props => {
+              return (
+                <> 
+                  <SignUp {...props} />
+                </>
+              )}}
+        />
+        <Route
+          exact path="/signin" 
+          render = {
+            props => {
+              return (
+                <> 
+                  <SignIn {...props} />
+                </>
+              )}}
+        />
+        <Route
           exact path="/join" 
           render = {
             props => {
@@ -60,6 +82,7 @@ render(){
             props => {
               return (
                 <> 
+                  <Nav {...props} />
                   <Create {...props}/>
                 </>
               )}}

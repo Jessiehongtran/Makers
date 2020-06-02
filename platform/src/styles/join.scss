@@ -4,11 +4,10 @@
     flex-direction: column;
     height: auto;
     width: 100%;
-    // padding: 30px;
     padding: 30px 60px 60px 30px;
     height: 100%;
     overflow:hidden;
-    // position: absolute;
+    min-height: 100vh;
     background-image: linear-gradient(to right, #FDDACC , #FCF1C7 );
 
     .info {
@@ -186,7 +185,8 @@
                     outline: 0;
                     font-size: 14px;
                     border-width: 0 0 2px;
-                    border-color: #ff4d2e
+                    border-color: #ff4d2e;
+                    color: #545150  ;
 
                 }
 
@@ -253,47 +253,68 @@
     }
 
     .expand-info {
-        display: flex;
-        // justify-content: space-between;
-        align-items: flex-start;
+        font-family: 'Poppins', sans-serif;
 
         .members {
             width: 50%
         }
 
         .thoughts {
+
+            .title {
+                font-family: 'Poppins', sans-serif;
+                color: red;
+            }
+
+
             form {
                 display: flex;
+                align-items: center;
                 flex-direction: row;
-                // justify-content: center;
-                // align-items: center;
-
-                .avatar {
-                    width: 7%;
-                    border-radius: 50%;
-                }
+                width: 40%;
+               
 
                 input {
-                    width: 80%;
+                    width: 100%;
+                    height: 35px;
                     border-radius: 4px;
+                    font-family: 'Poppins', sans-serif;
+                    padding-left: 10px;
+                    font-size: 12px;
+                }
+
+                i {
+                    font-size: 20px;
+                    color: #ff4d2e;
+                    margin-left: 3px;
+                    
                 }
 
                 button {
-                    width: 15%;
-                    margin: 0
+                    margin: 0;
+                    width: 10%;
+                    border-radius: 12px;
+                    padding: 5px;
+                    margin-left: 10px;
+                    color: #ff4d2e;
+                    font-size: 12px;
+                    border: 1px solid #ff4d2e;
+                    font-family: 'Poppins', sans-serif;
                 }
             }
             .showComments {
                 display: flex;
                 flex-direction: column;
+                font-family: 'Poppins', sans-serif;
 
                 .each-comment {
                     display: flex;
                     flex-direction: row;
                     align-items: center;
+                    margin-top: 10px;
                     .avatar {
-                        width: 8%;
-                        height: 8%;
+                        width: 3%;
+                        height: 3%;
                         border-radius: 50%;
                         margin-right: 10px
                     }
