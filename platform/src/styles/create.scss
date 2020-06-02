@@ -71,6 +71,12 @@
                
             }
         }
+        .otherCate {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
         
         input {
             height: 40px;

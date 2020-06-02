@@ -133,11 +133,9 @@ class Join extends React.Component {
 
         const bannerColor = localStorage.getItem('bannerColor')
 
-        const category = "Web dev"
+        const category = this.state.project.category || "Undefined category"
 
         // const roleList = ["Software engineers", "Product managers", "Backend"]
-
-
 
         // turn string of roles into an array
         const roles = `${this.state.project.human_resources }`

@@ -15,6 +15,7 @@ class Create extends React.Component {
               team: "",
               description: "",
            },
+           showOtherField: false,
            colorHex: "#e66465",
            colorRGB: {
                red: 228,
@@ -107,7 +108,11 @@ class Create extends React.Component {
 
     render(){
 
-        const cates = ["Web dev", "Mobile", "Game dev", "Data science", "Machine learning"]
+        const cates = ["Web dev", "Mobile", "Game dev", "Data science", "Machine learning", "Others"]
+
+        if (this.state.project.category === "Others"){
+            this.state.showOtherField = true
+        }
 
         return (
             <div className="create-frame">
@@ -139,11 +144,6 @@ class Create extends React.Component {
                             /> 
                         </div>
                         <div className="cate-team">
-                            {/* <input 
-                                placeholder="Category" 
-                                name="category"
-                                onChange={e => this.updateProject(e)}
-                            />  */}
                             <select  
                                 name="category"
                                 className="cate"
@@ -163,9 +163,14 @@ class Create extends React.Component {
                                
                             />
                         </div>
-                        <div className="showRoles">
-                            Test
-                        </div>
+                       
+                        {this.state.showOtherField ? 
+                                <input
+                                className="otherCate"
+                                placeholder="What's that other category?" 
+                                onChange={e => this.updateProject(e)}
+                                /> : null
+                            }   
 
                         <div className="details">
                             <input 
