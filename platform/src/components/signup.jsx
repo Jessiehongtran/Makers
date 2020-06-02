@@ -43,6 +43,8 @@ class SignUp extends React.Component {
              .catch(err => {
                  console.log(err.message)
              })
+
+        this.props.history.push('/create')
     }
 
     render(){

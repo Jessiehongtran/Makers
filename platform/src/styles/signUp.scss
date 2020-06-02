@@ -11,7 +11,15 @@
 
     img {
         width: 40%;
-        height: auto
+        height: 100vh;
+
+        @media (max-width: 1000px) {
+            display: none
+        }
+
+        @media (max-width: 500px) {
+            display: none
+        }
         
     }
 
@@ -24,6 +32,14 @@
         align-items: center;
         // background-color: blue;
         padding: 40px;
+
+        @media (max-width: 1000px) {
+            width: 100%
+        }
+
+        @media (max-width: 500px) {
+            width: 100%
+        }
 
         h3 {
             margin-top: 0;
@@ -128,12 +144,12 @@
             border: 1px solid #ff4d2e;
             font-family: 'Poppins', sans-serif;
 
-            @media (max-width: 1000px) {
-                width: 30%;
-            }
+            // @media (max-width: 1000px) {
+            //     width: 30%;
+            // }
 
             @media (max-width: 500px) {
-                width: 40%;
+                width: 25%;
             }
         }
 
