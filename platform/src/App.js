@@ -9,6 +9,7 @@ import Create from './components/create';
 import Nav from './components/navigation';
 import Banner from './components/banner';
 import SignUp from './components/signup';
+import SignIn from './components/signin'
 
 // Material-UI imports
 import { ThemeProvider } from '@material-ui/core/styles'
@@ -51,6 +52,16 @@ render(){
               return (
                 <> 
                   <SignUp {...props} />
+                </>
+              )}}
+        />
+        <Route
+          exact path="/signin" 
+          render = {
+            props => {
+              return (
+                <> 
+                  <SignIn {...props} />
                 </>
               )}}
         />
