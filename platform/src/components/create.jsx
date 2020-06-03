@@ -78,8 +78,6 @@ class Create extends React.Component {
     }
 
     submitProject(e){
-        //gather all project info and make a post request here
-        
         e.preventDefault()
         var roleList = this.state.project.team
 
@@ -129,9 +127,6 @@ class Create extends React.Component {
                 console.log(err.message)
             })
 
-        
-        // this.props.history.push('/createProfile')
-        
     }
 
 
