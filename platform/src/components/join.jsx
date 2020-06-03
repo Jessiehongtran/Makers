@@ -15,6 +15,7 @@ class Join extends React.Component {
                 profileUrl: "",
                 role: "",
             },
+            member_submitted: false,
             value: '',
             comment: '',
             avatar: '',
@@ -47,6 +48,7 @@ class Join extends React.Component {
         axios.post('https://makers-app.herokuapp.com/api/members/', member)
             .then(res => {
                 console.log('member created', res.data)
+                this.setState({member_submitted: true})
                 
             })
             .catch(err => {
@@ -211,6 +213,10 @@ class Join extends React.Component {
                                 </div>
                             </div>
                             <div className="member-info">
+                                {this.state.member_submitted? 
+                                <h3>Thanks for your interest, host of this project will contact you.</h3>
+                                : 
+                                <>
                                 <p>Who are you?</p>
                                 <form onSubmit={this.handleSubmit}>
                                     <input 
@@ -242,6 +248,9 @@ class Join extends React.Component {
                                     
                                     <button type="submit">Ask to join</button>
                                 </form>
+                                </>
+                                }
+                                
                             </div>
                         </div>
                         <div className="expand-info">
