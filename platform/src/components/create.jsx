@@ -85,7 +85,6 @@ class Create extends React.Component {
         const projectToPost = {
             idea: this.state.project.idea,
             project_name: this.state.project.project_name,
-            banner_color: `#${this.fullColorHex(this.state.colorRGB.red, this.state.colorRGB.green, this.state.colorRGB.blue)}` || "#F5F4F4",
             category: this.state.project.category,
             target_user: this.state.project.target,
             impact: this.state.project.impact,

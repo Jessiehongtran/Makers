@@ -10,11 +10,10 @@ class Join extends React.Component {
         this.state = {
             project: {},
             userInfo : {
-                name: "",
                 identity: "",
+                why: "",
+                profileUrl: "",
                 role: "",
-                linkedin: "",
-                github: ""
             },
             value: '',
             comment: '',
@@ -35,12 +34,24 @@ class Join extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         console.log('submitted: ',  this.state.userInfo);
+        const projectId = localStorage.getItem('ideaId')
 
-        localStorage.setItem('name', this.state.userInfo.name)
-        localStorage.setItem('intro', this.state.userInfo.identity)
-        localStorage.setItem('role', this.state.userInfo.role)
-        localStorage.setItem('linkedin', this.state.userInfo.linkedin)
-        localStorage.setItem('github', this.state.userInfo.github)
+        const member = {
+            project_id: projectId,
+            identity: this.state.userInfo.identity,
+            why: this.state.userInfo.why,
+            role: this.state.userInfo.role,
+            profileUrl: this.state.userInfo.profileUrl
+        }
+
+        axios.post('https://makers-app.herokuapp.com/api/members/', member)
+            .then(res => {
+                console.log('member created', res.data)
+                
+            })
+            .catch(err => {
+                console.log(err.message)
+            })
     }
 
     fetchProject(projectId){
@@ -203,27 +214,20 @@ class Join extends React.Component {
                                 <p>Who are you?</p>
                                 <form onSubmit={this.handleSubmit}>
                                     <input 
-                                            type="text" 
-                                            placeholder="Name"
-                                            name="name"
-                                            onChange={this.handleChange} 
-                                    />
-                                    <input 
                                             placeholder="Intro" 
                                             name="identity" 
                                             onChange={this.handleChange}
                                     />
                                     <input 
-                                        placeholder="Linkedin" 
-                                        name="linkedin" 
+                                        placeholder="Why you want to join this project" 
+                                        name="why"
                                         onChange={this.handleChange}
                                     />
                                     <input 
-                                        placeholder="Github" 
-                                        name="github"
+                                        placeholder="Your Linkedin/Github" 
+                                        name="profileUrl" 
                                         onChange={this.handleChange}
                                     />
-                                    
                                    <select  
                                             name="role"
                                             className="select-css"

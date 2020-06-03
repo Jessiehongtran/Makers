@@ -9,7 +9,7 @@ import Create from './components/create';
 import Nav from './components/navigation';
 import Banner from './components/banner';
 import SignUp from './components/signup';
-import SignIn from './components/signin';
+import SignIn from './components/signin'
 
 // Material-UI imports
 import { ThemeProvider } from '@material-ui/core/styles'
@@ -82,6 +82,7 @@ render(){
             props => {
               return (
                 <> 
+                  <Nav {...props} />
                   <Create {...props}/>
                 </>
               )}}
