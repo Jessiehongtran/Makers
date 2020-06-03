@@ -148,7 +148,7 @@ class Create extends React.Component {
                 {this.state.project_created? 
                     <div class="created">
                         <h3 className="announce">Project created successfully</h3> 
-                        <a>back</a>
+                        <a href="/">back</a>
                     </div>
                 : 
                 <div className="info">
