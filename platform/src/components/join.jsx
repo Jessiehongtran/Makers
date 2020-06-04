@@ -15,6 +15,7 @@ class Join extends React.Component {
                 profileUrl: "",
                 role: "",
             },
+            countMembers: 0,
             member_submitted: false,
             value: '',
             comment: '',
@@ -49,6 +50,24 @@ class Join extends React.Component {
             .then(res => {
                 console.log('member created', res.data)
                 this.setState({member_submitted: true})
+
+                axios.get(`https://makers-app.herokuapp.com/api/members/${projectId}`)
+                    .then(res => {
+                        console.log('get members', res.data)
+                        this.setState({countMembers: res.data.length})
+
+                        axios.patch(`https://makers-app.herokuapp.com/api/projects/edit/${projectId}`, {join_count: this.state.countMembers})
+                            .then(res => {
+                                console.log('update joinCount', res.data)
+                                this.fetchProject(projectId)
+                            })
+                            .catch(err => {
+                            console.log(err.message)
+                        })
+                    })
+                    .catch(err => {
+                        console.log(err.message)
+                    })
                 
             })
             .catch(err => {
@@ -118,6 +137,8 @@ class Join extends React.Component {
              .catch(err => {
                  console.log(err.message)
              })
+
+        
     }
       
 
@@ -193,7 +214,7 @@ class Join extends React.Component {
                                         <i 
                                             class="fas fa-users"
                                         ></i>
-                                        <p>{this.state.project.join_count} <span> members</span></p>
+                                        <p>{this.state.project.join_count} <span> interested</span></p>
                                     </div>
                                     <div className="roles">
                                         <div className="title">
