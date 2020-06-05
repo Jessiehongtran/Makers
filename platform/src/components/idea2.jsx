@@ -21,7 +21,8 @@ class Idea extends React.Component {
                 })
     }
 
-    updateCount(thing){
+    updateCount(thing, e){
+        e.stopPropagation();
         if (thing === "join"){
             var new_join = this.state.join_count + 1
             this.setState({join_count: new_join})
@@ -75,11 +76,10 @@ class Idea extends React.Component {
                     <div className="icons">
                         <i class="fas fa-users"></i>
                         <p className="count">{this.state.join_count}</p>
-                        <i class="far fa-heart" onClick={() => this.updateCount("like")}></i>
+                        <i class="far fa-heart" onClick={e => this.updateCount("like", e)}></i>
                         <p className="count">{this.state.upvote}</p>
                     </div>
                 </div>
-                
             </>
         )
     }

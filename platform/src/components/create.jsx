@@ -18,6 +18,7 @@ class Create extends React.Component {
            projectId: 0,
            project_created: false,
            showOtherField: false,
+           roleFieldHasComma: false,
            colorHex: "#e66465",
            colorRGB: {
                red: 228,
@@ -75,6 +76,16 @@ class Create extends React.Component {
             var newfontSize = this.state.fontSize + 1
             this.setState({fontSize: newfontSize})
         }
+    }
+
+    roleHasComma(roleInput){
+        for (var i =0; i < roleInput.length; i++){
+            if (',' == roleInput[i]){
+                return true
+            }
+        }
+
+        return false
     }
 
     submitProject(e){
@@ -157,8 +168,9 @@ class Create extends React.Component {
                                 onChange={e => this.updateProject(e)}
                             />
                             <input 
-                                placeholder="What's your idea in short" 
+                                placeholder="*What's your idea in short" 
                                 name="idea"
+                                required
                                 onChange={e => this.updateProject(e)}
                             />
                         </div>
@@ -188,12 +200,13 @@ class Create extends React.Component {
 
 
                             <input 
-                                placeholder="Team includes" 
+                                placeholder="Team includes (separated by comma ',')" 
                                 name="team"
                                 onChange={e => this.updateProject(e)}
                                
                             />
                         </div>
+                        { this.state.project.team.length > 1 && this.roleHasComma(this.state.project.team) === false ? <p>Roles have to be separated by commas</p>: null}
                        
                         {this.state.showOtherField ? 
                                 <input

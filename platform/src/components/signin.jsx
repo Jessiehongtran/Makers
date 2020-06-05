@@ -71,7 +71,7 @@ class SignUp extends React.Component {
                                 onChange={this.handleChange}
                             />
                         </div>
-                        {this.state.errorMessage && !this.state.authorized ? <p className="errorMessage">Invalid email or password</p> : null}
+                        {this.state.errorMessage && !this.state.authorized ? <p className="errorMessage">*Invalid email or password</p> : null}
                         <button>Sign In</button>
                         <p>Not yet a member?  <a href="/signup">  Sign Up</a></p>
                         

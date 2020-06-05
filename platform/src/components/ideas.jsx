@@ -33,30 +33,12 @@ class Ideas extends React.Component {
                 console.log('res in Ideas', res)
                 this.setState({ideas: res.data})
                 this.setState({filteredIdeas: res.data})
-                // const otherCates = []
-                // for (var i=0; i< res.data.length; i++){
-                //     if (this.haveElement(res.data[i].category) === false){  
-                //             otherCates.push(res.data[i].category)
-                //         }
-                    
-                // }
-                // this.setState({otherCates: otherCates})
             })
             .catch(err => {
                 console.log(err.message)
             })
         
-    }
-
-    // haveElement(el){
-    //     const currentCates = ["Web dev", "Mobile", "Game dev", "Data science", "Machine learning"]
-    //     for  (var j=0; j< currentCates.length; j++){
-    //         if (el === currentCates[j]){
-    //             return true
-    //         }
-    //     }
-    //     return false
-    // }
+    } 
 
     rgbToHex(rgb) { 
         var hex = Number(rgb).toString(16);

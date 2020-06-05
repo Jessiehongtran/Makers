@@ -11,7 +11,8 @@ class SignUp extends React.Component {
                 lastName: "",
                 email: "",
                 password: ""
-            }
+            },
+            emailIsUnique: true
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -19,8 +20,20 @@ class SignUp extends React.Component {
     }
 
     handleChange(e){
-        console.log('changing')
+        this.setState({emailIsUnique: true})
         this.setState({user: {...this.state.user, [e.target.name]: e.target.value}})
+    }
+
+    isUnique(email){
+        
+        axios.get('https://makers-app.herokuapp.com/api/users')
+             .then(res => {
+                 for (var i =0; i <res.data.length; i++){
+                     if (res.data[i].email.toLowerCase() == email.toLowerCase()){
+                         this.setState({emailIsUnique: false})
+                     }
+                 }
+             })
     }
 
     handleSubmit(e){
@@ -56,6 +69,8 @@ class SignUp extends React.Component {
             this.props.history.goBack()
         }
 
+        this.isUnique(this.state.user.email)
+
         return (
             <div className="signUp">
                 <img src="https://i.pinimg.com/originals/d8/22/b9/d822b94012d78d2a2eb5e448e8f2d5a5.png"/>
@@ -84,6 +99,7 @@ class SignUp extends React.Component {
                                 onChange={this.handleChange}
                             />
                         </div>
+                        {this.state.emailIsUnique === false ? <p className="email-taken">*Email was already taken</p> : null}
                         <div>
                             <input 
                                 placeholder="Password"
