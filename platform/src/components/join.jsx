@@ -15,6 +15,7 @@ class Join extends React.Component {
                 profileUrl: "",
                 role: "",
             },
+            category: "",
             countMembers: 0,
             member_submitted: false,
             value: '',
@@ -79,6 +80,10 @@ class Join extends React.Component {
         axios.get(`https://makers-app.herokuapp.com/api/projects/${projectId}`)
              .then(res => {
                  this.setState({project: res.data})
+                 axios.get(`https://makers-app.herokuapp.com/api/category/${this.state.project.category_id}`)
+                      .then(res => {
+                          this.setState({category: res.data.category})
+                      })
              })
              .catch(err => {
                  console.log(err)
@@ -167,11 +172,18 @@ class Join extends React.Component {
 
         const bannerColor = localStorage.getItem('bannerColor')
 
-        const category = this.state.project.category || "Undefined category"
+        const category = this.state.category || "Undefined category"
 
-        // const roleList = ["Software engineers", "Product managers", "Backend"]
+        var placeholderForComment = ""
+        const token = localStorage.getItem('token')
+        if (token){
+            placeholderForComment = "leave a comment"
+        }
+        else {
+            placeholderForComment = "Log in or Sign up to leave a comment"
+        }
 
-        // turn string of roles into an array
+
         const roles = `${this.state.project.human_resources }`
 
         var j = 0
@@ -199,16 +211,16 @@ class Join extends React.Component {
                                         style={{
                                             backgroundColor: bannerColor
                                         }}
-                                    >{this.state.project.project_name}</p>
+                                    >{this.state.project.project_name || "Unnamed"}</p>
                                     <p className="project-cate">{category}</p>
                                 </div>
                                 <div className="more-info">
-                                    <p className="project-idea">{this.state.project.idea}</p>
+                                    <p className="project-idea">{this.state.project.idea || "Undefined idea"}</p>
                                     <div className="project-impact">
                                         <i 
                                             class="fas fa-hand-holding-heart"
                                         ></i>
-                                        <p>{this.state.project.impact}</p>
+                                        <p>{this.state.project.impact || "Unspecified impact"}</p>
                                     </div>
                                     <div className="join-members">
                                         <i 
@@ -219,7 +231,7 @@ class Join extends React.Component {
                                     <div className="roles">
                                         <div className="title">
                                             <i class="fas fa-user-tag"></i>
-                                            <p>Roles available</p>
+                                            <p><span>{roleList.length} </span>roles available</p>
                                         </div>
                                         <div class="list-role">
                                             {roleList.map(role => 
@@ -265,8 +277,6 @@ class Join extends React.Component {
                                                )}
         
                                     </select>
-                                 
-                                    
                                     <button type="submit">Ask to join</button>
                                 </form>
                                 </>
@@ -277,14 +287,21 @@ class Join extends React.Component {
                         <div className="expand-info">
                             <div className="thoughts">
                                 <p className="title">Thoughts</p>
-                                <form>
+                                <form onSubmit = {this.handleCommentSubmit}>
                                     {/* <img className="avatar" src={avatar}/> */}
                                     <input 
                                         type="text" 
                                         onChange={this.handleComment}
-                                        placeholder="leave a comment"
+                                        placeholder={placeholderForComment}
                                     />
-                                    <i class="fas fa-paper-plane" onClick={this.handleCommentSubmit}></i>
+                                    {token ? null :
+                                        <div className="sign">
+                                            <button className="signIn" onClick={() => this.props.history.push('/signin')}>Log in</button>
+                                            <button className="signUp" onClick={() => this.props.history.push('/signup')}>Sign up</button>
+                                        </div>
+                                    }
+                                    
+                                    <i class="fas fa-paper-plane"></i>
                                 </form>
                                 <div className="showComments">
                                 {this.state.comments.map(each => 
@@ -295,12 +312,8 @@ class Join extends React.Component {
                                 )}
                                 
                                 </div>
-                                
-                                {/* <img src="https://qph.fs.quoracdn.net/main-qimg-3234084c90912949b3136194769ebd72"/> */}
                             </div>
-                            {/* <div className="members">
-                                <p>Member List</p>
-                            </div> */}
+                            
                         </div>
                     </div>
                 </>

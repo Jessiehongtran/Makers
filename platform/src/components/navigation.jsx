@@ -17,7 +17,7 @@ class Nav extends React.Component {
                */}
                 <h1 className="logo">Makers</h1>
                 <div className="navigation">
-                    <a>Explore</a>
+                    <a href="/">Explore</a>
                     <a>Your projects</a>
                 </div>
                 

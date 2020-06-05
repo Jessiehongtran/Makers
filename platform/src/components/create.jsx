@@ -81,6 +81,8 @@ class Create extends React.Component {
         e.preventDefault()
         var roleList = this.state.project.team
 
+        const projectId = localStorage.getItem('project')
+
         console.log('roleList', roleList)
         const projectToPost = {
             idea: this.state.project.idea,
@@ -196,6 +198,7 @@ class Create extends React.Component {
                         {this.state.showOtherField ? 
                                 <input
                                 className="otherCate"
+                                name="category"
                                 placeholder="What's that other category?" 
                                 onChange={e => this.updateProject(e)}
                                 /> : null

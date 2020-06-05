@@ -8,20 +8,55 @@ class Ideas extends React.Component {
     constructor(){
         super();
         this.state = {
-            ideas: []
+            ideas: [],
+            filteredIdeas: [],
+            otherCates: [],
+            shownCates: []
 
         };
     }
     componentDidMount(){
-        axios.get(`https://makers-app.herokuapp.com/api/projects`)
+        axios.get('https://makers-app.herokuapp.com/api/category')
             .then(res => {
-                console.log('res in Ideas', res)
-                this.setState({ideas: res.data})
+                //slice to get data of 'other' categories
+                this.setState({shownCates: res.data.slice(0,5)})
+                if (res.data.length >5){
+                    this.setState({otherCates: res.data.slice(5)})
+                }
+
             })
             .catch(err => {
                 console.log(err.message)
             })
+        axios.get(`https://makers-app.herokuapp.com/api/projects`)
+            .then(res => {
+                console.log('res in Ideas', res)
+                this.setState({ideas: res.data})
+                this.setState({filteredIdeas: res.data})
+                // const otherCates = []
+                // for (var i=0; i< res.data.length; i++){
+                //     if (this.haveElement(res.data[i].category) === false){  
+                //             otherCates.push(res.data[i].category)
+                //         }
+                    
+                // }
+                // this.setState({otherCates: otherCates})
+            })
+            .catch(err => {
+                console.log(err.message)
+            })
+        
     }
+
+    // haveElement(el){
+    //     const currentCates = ["Web dev", "Mobile", "Game dev", "Data science", "Machine learning"]
+    //     for  (var j=0; j< currentCates.length; j++){
+    //         if (el === currentCates[j]){
+    //             return true
+    //         }
+    //     }
+    //     return false
+    // }
 
     rgbToHex(rgb) { 
         var hex = Number(rgb).toString(16);
@@ -44,19 +79,40 @@ class Ideas extends React.Component {
         return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
       }
 
+    filter(categoryId){
+        var ideaList = []
+        if (categoryId == 0){
+            ideaList = this.state.ideas
+        }
+        else {
+            for (var i =0; i<this.state.ideas.length; i++){
+                if (categoryId == this.state.ideas[i].category_id){
+                    ideaList.push(this.state.ideas[i])
+                }
+            }
+        }
+
+        this.setState({filteredIdeas: ideaList})
+    }
+
 
     render(){
+
+        console.log('otherCates', this.state.otherCates)
         return (
             <div className="ideas-frame">
                 <div className="category">
-                    <p>Web dev</p>
-                    <p>Mobile</p>
-                    <p>Game dev</p>
-                    <p>Data science</p>
-                    <p>Machine learning</p>
+                    <p onClick={() => this.filter(0)}>All</p>
+                    {this.state.shownCates.map(obj => 
+                    <p onClick={() => this.filter(obj.id)}>{obj.category}</p>
+                    )}
+                    <select onChange={e => this.filter(e.target.value)}>
+                        <option>Others</option>
+                        {this.state.otherCates.map(obj => <option value={obj.id}>{obj.category}</option>)}
+                    </select>
                 </div>
                 <div className="ideas">
-                    {this.state.ideas.map(project => 
+                    {this.state.filteredIdeas.map(project => 
                         <Idea 
                             project={project} 
                             bannerColor ={`#${this.fullColorHex(this.getRandomInt(200,255), this.getRandomInt(200,255), this.getRandomInt(200,255))}`}
