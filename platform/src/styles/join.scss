@@ -346,9 +346,15 @@
                     margin-top: 10px;
                     .avatar {
                         width: 3%;
-                        height: 3%;
+                        height: 30px;
                         border-radius: 50%;
-                        margin-right: 10px
+                        margin-right: 10px;
+                        // border: 1px solid #C8C8C8 ;
+                        text-align: center;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: white;
                     }
 
                     .comment-container {

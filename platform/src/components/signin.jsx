@@ -40,10 +40,6 @@ class SignUp extends React.Component {
                  console.log('message', err.message)
                  this.setState({errorMessage: err.message})
              })
-        
-        
-        
-        
     }
 
     render(){

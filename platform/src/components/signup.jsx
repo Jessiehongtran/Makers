@@ -39,6 +39,7 @@ class SignUp extends React.Component {
         axios.post(`https://makers-app.herokuapp.com/api/users`, userToPost)
              .then(res => {
                  console.log("user created successfully")
+                 localStorage.setItem('userId', res.data.id)
                  localStorage.setItem('token', res.data.token)
                  this.props.history.goBack()
              })

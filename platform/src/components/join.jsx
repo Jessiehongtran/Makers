@@ -122,10 +122,8 @@ class Join extends React.Component {
         event.preventDefault();
         //with current architecture, have to make sure a user exists before posting a comment
         //seed a user and give it id to 1 is a way to trick for anonymous
-        var userId = 1
-        if (this.state.avatar.length > 0){
-            userId = localStorage.getItem('userId')
-        }
+        const userId = localStorage.getItem('userId')
+
         const projectId = localStorage.getItem('ideaId')
 
         const comment_to_post = {
@@ -149,26 +147,8 @@ class Join extends React.Component {
 
 
     render(){
-        console.log('userInfo', this.state.userInfo)
-        console.log('project in Join', this.state.project)
-        console.log('HR', `1 ${this.state.project.human_resources}` )
         var titleRandomColor = Math.floor(Math.random()*16777215).toString(16);
         const avatar = this.state.avatar || "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTNWvAlntajQ9uki4_E508d7cB1qdQtc_UngZ2A5mJArKpontMT&usqp=CAU"
-        const profileImages = [
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSFD1Ofi7-DsfgVE7CojIqMuNGYEN1N4dGyec3hJQebtISancyF&usqp=CAU",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQMl6NTlCzCCbsGYUM6UL20gHLtNf78lW8BjVl4a1EeQDoSlSQS&usqp=CAU",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTdYFX7Pl4vLFV83iJ5MUsDCpMC6AABe98QoiIjArq_upOhRKfa&usqp=CAU",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSTEqJ07Y1GCvnoWd76ffZwIyKleI2Y-UZrWrfxgldtXzyy1YU8&usqp=CAU",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcShGctjfurkFe-BYgtExvOCLH_JzgHucN2-X7F2Y431nicgcfPW&usqp=CAU",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQJo3Fn6BEXivjOV5TmZpRwLg_fznF876zunwRez-CKba0EEdoP&usqp=CAU",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSdvsUvxV4_gkBisReH_2b-b-aPONPGVODQ08g6byuz4DV1q7sy&usqp=CAU",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSli_BLm0Wgk5nIjJipTJYeBrRjgzKMASnlKBTlhP1AUkOn3yfM&usqp=CAU",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQZjIBeDa-waFYq5olrYXtyhM3WBZ_nAmgBTUkvLTzVyDlr5wGX&usqp=CAU"
-        ]
-
-        const randomInd = Math.floor(Math.random()*profileImages.length)
-
-        const tempAvatar = profileImages[randomInd]
 
         const bannerColor = localStorage.getItem('bannerColor')
 
@@ -288,7 +268,6 @@ class Join extends React.Component {
                             <div className="thoughts">
                                 <p className="title">Thoughts</p>
                                 <form onSubmit = {this.handleCommentSubmit}>
-                                    {/* <img className="avatar" src={avatar}/> */}
                                     <input 
                                         type="text" 
                                         onChange={this.handleComment}
@@ -306,7 +285,8 @@ class Join extends React.Component {
                                 <div className="showComments">
                                 {this.state.comments.map(each => 
                                     <div className="each-comment">
-                                        <img className="avatar" src={tempAvatar}/>
+                                        {/* <img className="avatar" src={tempAvatar}/> */}
+                                        <p className="avatar">{each.first_last_name[0]}</p>
                                         <p className="comment-container">{each.comment}</p>
                                     </div>
                                 )}
