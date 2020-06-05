@@ -32,19 +32,26 @@ class SignUp extends React.Component {
              .then(res => {
                  console.log('res', res)
                  this.setState({authorized: true})
-                 localStorage.setItem('userId', res.data.userId.id)
+                 localStorage.setItem('userId', res.data.id)
                  localStorage.setItem('token', res.data.token)
+                 this.props.history.goBack()
              })
              .catch(err => {
                  console.log('message', err.message)
                  this.setState({errorMessage: err.message})
              })
         
-        this.props.history.push('/create')
+        
+        
         
     }
 
     render(){
+
+        const token = localStorage.getItem('token')
+        if (token){
+            this.props.history.goBack()
+        }
 
         return (
             <div className="signUp">

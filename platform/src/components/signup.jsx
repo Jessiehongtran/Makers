@@ -40,15 +40,20 @@ class SignUp extends React.Component {
              .then(res => {
                  console.log("user created successfully")
                  localStorage.setItem('token', res.data.token)
+                 this.props.history.goBack()
              })
              .catch(err => {
                  console.log(err.message)
              })
-
-        this.props.history.push('/create')
+        
     }
 
     render(){
+
+        const token = localStorage.getItem('token')
+        if (token){
+            this.props.history.goBack()
+        }
 
         return (
             <div className="signUp">
