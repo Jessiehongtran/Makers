@@ -28,7 +28,12 @@ class SignUp extends React.Component {
         console.log('submitted')
         console.log(this.state.user)
 
-        axios.post(`https://makers-app.herokuapp.com/api/users/login`, this.state.user)
+        const user = {
+            email: this.state.user.email.toLowerCase(),
+            password: this.state.user.password
+        }
+
+        axios.post(`https://makers-app.herokuapp.com/api/users/login`, user)
              .then(res => {
                  console.log('res', res)
                  this.setState({authorized: true})

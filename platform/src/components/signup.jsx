@@ -44,8 +44,8 @@ class SignUp extends React.Component {
         //make a post request to submit user
         const userToPost = {
             first_last_name : this.state.user.firstName + " " + this.state.user.lastName,
-            email: this.state.user.email,
-            password: this.state.user.firstName
+            email: this.state.user.email.toLowerCase(),
+            password: this.state.user.password
         }
 
         console.log("userToPost", userToPost)
