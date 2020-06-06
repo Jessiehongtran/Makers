@@ -9,12 +9,15 @@ class Create extends React.Component {
            project: {
               idea: "",
               project_name: "",
-              category: "",
+              category_id: "",
+              other_category: "",
               target: "",
               impact: "",
               team: "",
               description: "",
            },
+           categories: [],
+           otherCateId: 0,
            projectId: 0,
            project_created: false,
            showOtherField: false,
@@ -33,49 +36,20 @@ class Create extends React.Component {
         
     }
 
+    componentDidMount(){
+        axios.get(`https://makers-app.herokuapp.com/api/category`)
+             .then(res => {
+                const cates = res.data
+                cates.push({id: 0, category: "Others"})
+                 this.setState({categories: cates})
+             })
+             .catch(err => {
+                 console.log(err.message)
+             })
+    }
+
     updateProject(event){
         this.setState({project: {...this.state.project, [event.target.name]: event.target.value}})
-    }
-
-    colorChange(event){
-        alert("are you sure you want this color?")
-        console.log('color', event.target.value)
-        this.setState({colorHex: event.target.value})
-    }
-
-
-    handleColorChange(event){
-        this.setState({colorRGB: {...this.state.colorRGB, [event.target.name]: event.target.value}})
-    }
-
-    rgbToHex(rgb) { 
-        var hex = Number(rgb).toString(16);
-        if (hex.length < 2) {
-             hex = "0" + hex;
-        }
-        return hex;
-      };
-
-    fullColorHex(r,g,b) { 
-        var red = this.rgbToHex(r); 
-        var green = this.rgbToHex(g); 
-        var blue = this.rgbToHex(b); 
-        return red+green+blue; 
-    }
-
-    updateFont(event){
-        this.setState({font: event.target.value})
-    }
-
-    updateFontSize(toDo){
-        if (toDo === "down"){
-            var newfontSize = this.state.fontSize - 1
-            this.setState({fontSize: newfontSize})
-        }
-        else if (toDo === "up"){
-            var newfontSize = this.state.fontSize + 1
-            this.setState({fontSize: newfontSize})
-        }
     }
 
     roleHasComma(roleInput){
@@ -90,18 +64,40 @@ class Create extends React.Component {
 
     submitProject(e){
         e.preventDefault()
-        var roleList = this.state.project.team
 
-        const projectId = localStorage.getItem('project')
+        //POST category if chose Others field
+        if (this.state.showOtherField && this.state.project.other_category.length > 0){
+            console.log('halo')
+            const newCate = {
+                category: this.state.project.other_category,
+                count_projects: 0
+            }
+            console.log('newCate', newCate)
+            axios.post(`https://makers-app.herokuapp.com/api/category`, newCate )
+                 .then(res => {
+                     console.log('supposed', res.data.id)
+                     this.postProject(res.data.id)
+                 })
+                 .catch(err => {
+                     console.log(err.message)
+                 })
 
-        console.log('roleList', roleList)
+        }
+        else {
+            const cateId = parseInt(this.state.category_id)
+            this.postProject(cateId)
+        }
+
+    }
+
+    postProject(id){
         const projectToPost = {
             idea: this.state.project.idea,
             project_name: this.state.project.project_name,
-            category: this.state.project.category,
+            category_id: id,
             target_user: this.state.project.target,
             impact: this.state.project.impact,
-            human_resources: roleList,
+            human_resources: this.state.project.team,
             join_count: 0,
             description: this.state.project.description,
             upvote: 0
@@ -110,43 +106,38 @@ class Create extends React.Component {
 
         //Post to project table
         axios.post(`https://makers-app.herokuapp.com/api/projects`, projectToPost)
-             .then(res => {
+            .then(res => {
                  console.log("posted successfully", res.data)
                  this.setState({projectId: res.data.id})
                  this.setState({project_created: true})
-             })
-             .catch(err => {
-                 console.log(err.message)
-             })
-        
 
-        //Post to user_project table
-        const userId = localStorage.getItem('userId')
-
-        console.log('userId', userId)
-        console.log('projectId', this.state.projectId)
-        const projectHost = {
-            user_id: userId,
-            project_id: this.state.projectId,
-            is_host: true,
-            is_member: false
-        }
-        axios.post(`https://makers-app.herokuapp.com/api/user_project`, projectHost)
-             .then(res => {
-                 console.log(res.data)
-             })
-             .catch(err => {
+                 //Post to user_project table
+                const userId = localStorage.getItem('userId')
+                const projectHost = {
+                    user_id: userId,
+                    project_id: res.data.id,
+                    is_host: true,
+                    is_member: false
+                }
+                axios.post(`https://makers-app.herokuapp.com/api/user_project`, projectHost)
+                    .then(res => {
+                        console.log(res.data)
+                    })
+                    .catch(err => {
+                        console.log(err.message)
+                    })
+            })
+            .catch(err => {
                 console.log(err.message)
             })
-
     }
 
 
     render(){
 
-        const cates = ["Web dev", "Mobile", "Game dev", "Data science", "Machine learning", "Others"]
+        console.log('category_di', this.state.project.category_id)
 
-        if (this.state.project.category === "Others"){
+        if (this.state.project.category_id === "0"){
             this.state.showOtherField = true
         }
 
@@ -160,7 +151,7 @@ class Create extends React.Component {
                 : 
                 <div className="info">
                     <h1>So what's on your mind?</h1>
-                    <form>
+                    <form onSubmit={e => this.submitProject(e)}>
                         <div className="name">
                             <input 
                                 placeholder="Project name" 
@@ -188,30 +179,27 @@ class Create extends React.Component {
                         </div>
                         <div className="cate-team">
                             <select  
-                                name="category"
+                                name="category_id"
                                 className="cate"
                                 onChange={e => this.updateProject(e)}>
                                 <option>Select a category</option>
-                                {cates.map(cate => 
-                                    <option value={cate}>{cate}</option>
+                                {this.state.categories.map(cate => 
+                                    <option value={cate.id}>{cate.category}</option>
                                     )}
 
                             </select>
-
-
                             <input 
-                                placeholder="Team includes (separated by comma ',')" 
+                                placeholder="Team includes" 
                                 name="team"
                                 onChange={e => this.updateProject(e)}
                                
                             />
                         </div>
-                        { this.state.project.team.length > 1 && this.roleHasComma(this.state.project.team) === false ? <p>Roles have to be separated by commas</p>: null}
-                       
+                        { this.state.project.team.length > 1 && this.roleHasComma(this.state.project.team) === false ? <p className="role-remind">*Roles have to be separated by comma</p>: null}
                         {this.state.showOtherField ? 
                                 <input
                                 className="otherCate"
-                                name="category"
+                                name="other_category"
                                 placeholder="What's that other category?" 
                                 onChange={e => this.updateProject(e)}
                                 /> : null
@@ -228,8 +216,7 @@ class Create extends React.Component {
 
                         
 
-                        <button 
-                            onClick={e => this.submitProject(e)}>
+                        <button>
                                 Create
                         </button>
                         {/* Lead to sign in/sign up/create profile */}

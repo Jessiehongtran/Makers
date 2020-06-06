@@ -15,10 +15,13 @@
     .navigation {
         display: flex;
         justify-content: space-around;
+        align-items: flex-end;
 
         a {
             margin-right: 20px;
-            font-family: 'Poppins', sans-serif
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            color: #322F2E
         }
     }
 }
