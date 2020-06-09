@@ -196,13 +196,15 @@ class Create extends React.Component {
                             />
                         </div>
                         { this.state.project.team.length > 1 && this.roleHasComma(this.state.project.team) === false ? <p className="role-remind">*Roles have to be separated by comma</p>: null}
+                        
                         {this.state.showOtherField ? 
+                                <div className="otherCate">
                                 <input
-                                className="otherCate"
+                                
                                 name="other_category"
                                 placeholder="What's that other category?" 
                                 onChange={e => this.updateProject(e)}
-                                /> : null
+                                /> </div>: null
                             }   
 
                         <div className="details">

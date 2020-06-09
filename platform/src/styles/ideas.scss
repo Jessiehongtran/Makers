@@ -12,7 +12,20 @@
 
     p {
       color: grey;
-      padding: 5px
+      padding: 5px;
+      text-align: center;
+
+      @media (max-width: 1000px) {
+        font-size: 12px;
+        margin-right: 15px
+        
+      }
+      
+      @media (max-width: 500px) {
+        font-size: 10px;
+        margin-right: 0px
+          
+      }
     }
 
     p:hover {
@@ -20,6 +33,19 @@
       background-color: grey;
       border-radius: 4px;
       padding: 5px
+    }
+
+    select {
+      @media (max-width: 1000px) {
+        font-size: 14px;
+        
+      }
+      
+      @media (max-width: 500px) {
+        font-size: 10px;
+        
+          
+      } 
     }
   }
 
