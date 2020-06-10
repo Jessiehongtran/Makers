@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import '../styles/ideas.scss';
-import Idea from './idea2'
+import Idea from './idea2';
+import '../styles/yourProject.scss'
 
 class Mine extends React.Component {
     constructor(props){
@@ -65,15 +66,9 @@ class Mine extends React.Component {
 
     render(){
         return (
-            <div>
+            <div className="mine">
                 {this.state.projects.length > 0
-                ? <div 
-                    className="ideas" 
-                    style={{
-                        display: 'flex', 
-                        flexWrap: 'wrap', 
-                        justifyContent: 'center'
-                    }}>
+                ? <div className="projects" >
                         {this.state.projects.map(project => 
                             <Idea 
                                 project={project} 
@@ -83,9 +78,19 @@ class Mine extends React.Component {
                                 toRefresh = {this.toRefresh}
                             />)}
                   </div>
-                : <div>
+                : <div className="message">
                     <h3>You have not created any project</h3>
-                    <button>Create project</button>
+                    <div className="btns">
+                        <button 
+                            className="home-btn"
+                            onClick={() => this.props.history.push('/')}
+                        >Home</button>
+                        <button
+                            className="create-btn"
+                            onClick={() => this.props.history.push('/create')}
+                        >Create project</button>
+                    </div>
+                    
                   </div>
                 }
             </div>
