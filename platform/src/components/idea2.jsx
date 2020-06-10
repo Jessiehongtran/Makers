@@ -21,6 +21,21 @@ class Idea extends React.Component {
                 })
     }
 
+    removeProject(projectId, e){
+        e.stopPropagation();
+        console.log('toremove')
+        axios.delete(`https://makers-app.herokuapp.com/api/projects/delete/${projectId}`)
+             .then(res => {
+                 console.log(res.data)
+                 this.props.toRefresh()
+             })
+             .catch(err => {
+                 console.log(err.message)
+             })
+
+        
+    }
+
     updateCount(thing, e){
         e.stopPropagation();
         if (thing === "join"){
@@ -44,7 +59,7 @@ class Idea extends React.Component {
 
     render(){
 
-        console.log('project', this.props.project.idea)
+        console.log('props in Idea', this.props)
 
         var idea = "";
         if (this.props.project.idea != null){
@@ -68,7 +83,11 @@ class Idea extends React.Component {
                     style={{backgroundColor: this.props.bannerColor}}
                     onClick={() => this.getIntoProject()}
                 >
-                
+                    {this.props.host
+                    ? <div className="remove">
+                        <i class="fas fa-trash-alt" onClick={e => this.removeProject(this.props.project.id, e)}></i>
+                      </div>
+                    : null}
                     <div className="project-headers">
                         <p className="project-name">{this.props.project.project_name || "Unnamed"}</p>
                         <p className="project-idea">{idea}</p>

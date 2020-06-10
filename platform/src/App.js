@@ -10,6 +10,7 @@ import Nav from './components/navigation';
 import Banner from './components/banner';
 import SignUp from './components/signup';
 import SignIn from './components/signin';
+import Mine from './components/yourProject';
 
 // Material-UI imports
 import { ThemeProvider } from '@material-ui/core/styles'
@@ -82,7 +83,19 @@ render(){
             props => {
               return (
                 <> 
+                  <Nav {...props} />
                   <Create {...props}/>
+                </>
+              )}}
+        />
+        <Route
+          exact path="/myprojects" 
+          render = {
+            props => {
+              return (
+                <> 
+                  <Nav {...props} />
+                  <Mine {...props}/>
                 </>
               )}}
         />

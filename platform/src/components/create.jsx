@@ -121,7 +121,7 @@ class Create extends React.Component {
                 }
                 axios.post(`https://makers-app.herokuapp.com/api/user_project`, projectHost)
                     .then(res => {
-                        console.log(res.data)
+                        console.log('user', res.data)
                     })
                     .catch(err => {
                         console.log(err.message)
