@@ -131,6 +131,8 @@ class Join extends React.Component {
             project_id: projectId,
             comment: this.state.comment
         }
+
+        console.log(comment_to_post)
         
         axios.post('https://makers-app.herokuapp.com/api/comments', comment_to_post)
              .then(res => {
