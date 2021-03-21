@@ -44,7 +44,13 @@ class Create extends React.Component {
 
 
     render(){
-        
+
+        console.log('category_di', this.state.project.category_id)
+
+        if (this.state.project.category_id === "0"){
+            this.state.showOtherField = true
+        }
+
         return (
             <div>
                 <h1>So what's on your mind?</h1>

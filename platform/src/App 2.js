@@ -9,8 +9,7 @@ import Create from './components/create';
 import Nav from './components/navigation';
 import Banner from './components/banner';
 import SignUp from './components/signup';
-import SignIn from './components/signin';
-import Mine from './components/yourProject';
+import SignIn from './components/signin'
 
 // Material-UI imports
 import { ThemeProvider } from '@material-ui/core/styles'
@@ -21,7 +20,8 @@ class App extends React.Component {
   constructor(){
     super();
     this.state = {
-     
+        
+
     };
 }
 
@@ -84,17 +84,6 @@ render(){
                 <> 
                   <Nav {...props} />
                   <Create {...props}/>
-                </>
-              )}}
-        />
-        <Route
-          exact path="/myprojects" 
-          render = {
-            props => {
-              return (
-                <> 
-                  <Nav {...props} />
-                  <Mine {...props}/>
                 </>
               )}}
         />
