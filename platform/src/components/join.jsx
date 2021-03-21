@@ -1,8 +1,7 @@
 import React from 'react';
-// import {IdeaData} from '../data/ideaData';
-import axios from 'axios';
-import '../styles/join.scss';
-import Nav from '../components/navigation'
+import {IdeaData} from '../data/ideaData';
+import Comments from '../components/comments';
+import '../styles/join.scss'
 
 class Join extends React.Component {
     constructor(props) {
@@ -268,32 +267,11 @@ class Join extends React.Component {
                         </div>
                         <div className="expand-info">
                             <div className="thoughts">
-                                <p className="title">Thoughts</p>
-                                <form onSubmit = {this.handleCommentSubmit}>
-                                    <input 
-                                        type="text" 
-                                        onChange={this.handleComment}
-                                        placeholder={placeholderForComment}
-                                    />
-                                    {token ? null :
-                                        <div className="sign">
-                                            <button className="signIn" onClick={() => this.props.history.push('/signin')}>Log in</button>
-                                            <button className="signUp" onClick={() => this.props.history.push('/signup')}>Sign up</button>
-                                        </div>
-                                    }
-                                    
-                                    <i class="fas fa-paper-plane"></i>
-                                </form>
-                                <div className="showComments">
-                                {this.state.comments.map(each => 
-                                    <div className="each-comment">
-                                        {/* <img className="avatar" src={tempAvatar}/> */}
-                                        <p className="avatar">{each.first_last_name[0]}</p>
-                                        <p className="comment-container">{each.comment}</p>
-                                    </div>
-                                )}
-                                
-                                </div>
+                                <p>Thoughts</p>
+                                <Comments /> 
+                            </div>
+                            <div className="members">
+                                <p>Member List</p>
                             </div>
                             
                         </div>

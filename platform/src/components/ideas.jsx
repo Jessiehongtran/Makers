@@ -1,17 +1,14 @@
 import React from 'react';
 import '../styles/ideas.scss';
-import Idea from './idea2';
-import {IdeaData} from '../data/ideaData';
-import axios from 'axios';
+import Idea from './idea';
+import Axios from 'axios';
+// import {IdeaData} from '../data/ideaData';
 
 class Ideas extends React.Component {
     constructor(){
         super();
         this.state = {
-            ideas: [],
-            filteredIdeas: [],
-            otherCates: [],
-            shownCates: []
+            ideas: []
 
         };
     }
@@ -75,6 +72,17 @@ class Ideas extends React.Component {
         }
 
         this.setState({filteredIdeas: ideaList})
+    }
+
+    componentDidMount(){
+        Axios.get('https://makers-app.herokuapp.com/api/projects')
+             .then(res => {
+                 console.log('res in ideas', res)
+                 this.setState({ideas: res.data})
+             })
+             .catch(err => {
+                 console.log(err.message)
+             })
     }
 
 
