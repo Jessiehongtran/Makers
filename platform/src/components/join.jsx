@@ -1,7 +1,9 @@
 import React from 'react';
 import {IdeaData} from '../data/ideaData';
 import Comments from '../components/comments';
-import '../styles/join.scss'
+import '../styles/join.scss';
+import axios from 'axios';
+import { API_URL } from '../APIconfig'
 
 class Join extends React.Component {
     constructor(props) {
@@ -46,17 +48,17 @@ class Join extends React.Component {
             profileUrl: this.state.userInfo.profileUrl
         }
 
-        axios.post('https://makers-app.herokuapp.com/api/members/', member)
+        axios.post(`${API_URL}/api/members/`, member)
             .then(res => {
                 console.log('member created', res.data)
                 this.setState({member_submitted: true})
 
-                axios.get(`https://makers-app.herokuapp.com/api/members/${projectId}`)
+                axios.get(`${API_URL}/api/members/${projectId}`)
                     .then(res => {
                         console.log('get members', res.data)
                         this.setState({countMembers: res.data.length})
 
-                        axios.patch(`https://makers-app.herokuapp.com/api/projects/edit/${projectId}`, {join_count: this.state.countMembers})
+                        axios.patch(`${API_URL}/api/projects/edit/${projectId}`, {join_count: this.state.countMembers})
                             .then(res => {
                                 console.log('update joinCount', res.data)
                                 this.fetchProject(projectId)
@@ -76,10 +78,10 @@ class Join extends React.Component {
     }
 
     fetchProject(projectId){
-        axios.get(`https://makers-app.herokuapp.com/api/projects/${projectId}`)
+        axios.get(`${API_URL}/api/projects/${projectId}`)
              .then(res => {
                  this.setState({project: res.data})
-                 axios.get(`https://makers-app.herokuapp.com/api/category/${this.state.project.category_id}`)
+                 axios.get(`${API_URL}/api/category/${this.state.project.category_id}`)
                       .then(res => {
                           this.setState({category: res.data.category})
                       })
@@ -91,7 +93,7 @@ class Join extends React.Component {
 
     fetchComments(){
         const projectId = localStorage.getItem('ideaId')
-        axios.get(`https://makers-app.herokuapp.com/api/comments/${projectId}`)
+        axios.get(`${API_URL}/api/comments/${projectId}`)
              .then(res => {
                  let arr = res.data
                  for (let i = 0; i < (arr.length/2); i++){
@@ -133,7 +135,7 @@ class Join extends React.Component {
 
         console.log(comment_to_post)
         
-        axios.post('https://makers-app.herokuapp.com/api/comments', comment_to_post)
+        axios.post(`${API_URL}/api/comments`, comment_to_post)
              .then(res => {
                  console.log('res in posting comment', res)
                  this.fetchComments()

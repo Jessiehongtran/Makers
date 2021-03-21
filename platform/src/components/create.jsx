@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import "../styles/create.scss"
+import "../styles/create.scss";
+import { API_URL } from '../APIconfig'
 
 class Create extends React.Component {
     constructor(){
@@ -32,7 +33,7 @@ class Create extends React.Component {
         e.preventDefault()
         console.log(this.state)
         
-        axios.post('https://makers-app.herokuapp.com/api/projects', this.state)
+        axios.post( `${API_URL}/api/projects`, this.state)
              .then(id => {
                  console.log('id', id)
                  // this.props.history.push('/join')

@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/signUp.scss'
 import axios from 'axios';
+import { API_URL } from '../APIconfig'
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -33,7 +34,7 @@ class SignUp extends React.Component {
             password: this.state.user.password
         }
 
-        axios.post(`https://makers-app.herokuapp.com/api/users/login`, user)
+        axios.post(`${API_URL}/api/users/login`, user)
              .then(res => {
                  console.log('res', res)
                  this.setState({authorized: true})

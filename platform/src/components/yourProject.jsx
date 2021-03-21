@@ -2,7 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import '../styles/ideas.scss';
 import Idea from './idea2';
-import '../styles/yourProject.scss'
+import '../styles/yourProject.scss';
+import { API_URL } from '../APIconfig'
 
 class Mine extends React.Component {
     constructor(props){
@@ -16,7 +17,7 @@ class Mine extends React.Component {
     }
 
     getProjects(userId){
-        axios.get(`https://makers-app.herokuapp.com/api/user_project/projects/${userId}`)
+        axios.get(`${API_URL}/api/user_project/projects/${userId}`)
              .then(res => {
                 this.setState({projects: res.data})
              })
