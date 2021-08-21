@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/join2.scss';
 import axios from 'axios';
+import Member from './member';
 import { API_URL } from '../APIconfig'
 
 class Join2 extends React.Component {
@@ -56,6 +57,18 @@ class Join2 extends React.Component {
             }
         }
 
+        //member list
+        let members = [
+            {
+                profile_pic: "https://res.cloudinary.com/dfulxq7so/image/upload/v1629419249/IMG_1723_puavyj.jpg",
+                name: "Hong Tran"
+            },
+            {
+                profile_pic: "https://res.cloudinary.com/dfulxq7so/image/upload/v1629492313/IMG_7892_j6apap.jpg",
+                name: "Kristal Lien"
+            }
+        ]
+
         return (
             <div>
                 <div className="join">
@@ -92,14 +105,25 @@ class Join2 extends React.Component {
                                     <div class="list-role">
                                         {roleList.map(role => 
                                             <p 
-                                            className="each-role"
-                                            style={{
-                                            backgroundColor: bannerColor
-                                            }}
+                                                className="each-role"
+                                                style={{
+                                                    backgroundColor: bannerColor
+                                                }}
                                             >{role}</p>)}
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div className="members">
+                            <div className="members-intro">Who have joined</div>
+                            <div className="members-list">
+                                {members.map(eachMember => <Member member={eachMember}/> )}
+                            </div>
+                        </div>
+                        <div className="join-action">
+                            <div className="join-intro">Interested in joining?</div>
+                            {/* Mail to host */}
+                            <button className="email-btn">Email us</button>
                         </div>
                     </div>
                 </div>
