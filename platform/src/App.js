@@ -4,7 +4,7 @@ import './App.css';
 
 // Component imports
 import Ideas from './components/ideas';
-import Join from './components/join';
+import Join from './components/join2';
 import Create from './components/create';
 import Nav from './components/navigation';
 import Banner from './components/banner';
