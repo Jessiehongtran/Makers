@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/ideas.scss';
-import Idea from './idea';
+import Idea from './idea2';
 import axios from 'axios';
 import { API_URL } from '../APIconfig';
 // import {IdeaData} from '../data/ideaData';
@@ -78,8 +78,6 @@ class Ideas extends React.Component {
 
         this.setState({filteredIdeas: ideaList})
     }
-
-   
 
 
     render(){
