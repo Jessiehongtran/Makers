@@ -60,12 +60,16 @@ class Join2 extends React.Component {
         //member list
         let members = [
             {
-                profile_pic: "https://res.cloudinary.com/dfulxq7so/image/upload/v1629419249/IMG_1723_puavyj.jpg",
+                profile_pic: "https://res.cloudinary.com/dfulxq7so/image/upload/v1617918536/bobAva-dark_eyxtnd.svg",
                 name: "Hong Tran"
             },
             {
-                profile_pic: "https://res.cloudinary.com/dfulxq7so/image/upload/v1629492313/IMG_7892_j6apap.jpg",
+                profile_pic: "https://res.cloudinary.com/dfulxq7so/image/upload/v1617918534/yangAva_m2zi3q.svg",
                 name: "Kristal Lien"
+            },
+            {
+                profile_pic: "https://res.cloudinary.com/dfulxq7so/image/upload/v1617918536/bobAva-dark_eyxtnd.svg",
+                name: "Mike Han"
             }
         ]
 
