@@ -74,7 +74,7 @@ class Join2 extends React.Component {
         ]
 
         return (
-            <div>
+            <div className="join-wrapper">
                 <div className="join">
                     <div className="info">
                         <div className="project-info">
