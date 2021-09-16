@@ -5,8 +5,6 @@
     padding: 0 6%;
     background-color: white;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    // border: 1px solid blue;
-    margin-bottom: 50px;
 
     .logo {
         margin-right: 20px;
@@ -22,11 +20,12 @@
         justify-content: space-around;
         align-items: flex-end;
 
-        a {
+        .nav-item {
             margin-right: 20px;
             font-family: 'Poppins', sans-serif;
             text-decoration: none;
-            color: #322F2E
+            color: #322F2E;
+            margin-bottom: -10px;
         }
     }
 }
