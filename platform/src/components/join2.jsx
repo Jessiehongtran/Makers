@@ -129,6 +129,9 @@ class Join2 extends React.Component {
                             {/* Mail to host */}
                             <button className="email-btn">Email us</button>
                         </div>
+                        <div className="progress">
+                            <div className="progress-intro">Project Progress</div>
+                        </div>
                     </div>
                 </div>
             </div>
