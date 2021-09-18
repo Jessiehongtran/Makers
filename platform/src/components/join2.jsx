@@ -131,6 +131,8 @@ class Join2 extends React.Component {
                         </div>
                         <div className="progress">
                             <div className="progress-intro">Project Progress</div>
+                            <li>Number of commits</li>
+                            <li></li>
                         </div>
                     </div>
                 </div>
