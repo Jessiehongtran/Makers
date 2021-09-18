@@ -9,13 +9,17 @@ class Join2 extends React.Component {
         super(props);
         this.state = {
             category: "",
-            project: {}
+            project: {},
+            contributions: 0
         }
+        this.fetchProject = this.fetchProject.bind(this)
+        this.getContributions = this.getContributions.bind(this)
     }
 
     componentDidMount(){
         const projectId = localStorage.getItem('ideaId')
         this.fetchProject(projectId)
+        this.getContributions()
      }
 
     fetchProject(projectId){
@@ -30,6 +34,23 @@ class Join2 extends React.Component {
              .catch(err => {
                  console.log(err)
              })
+    }
+
+    async getContributions(){
+        let owner = "Jessiehongtran"
+        let projectGitName = "Makers"
+        try {
+            const res = await axios.get(`https://api.github.com/repos/${owner}/${projectGitName}/contributors`)
+            let total = 0
+            const contributionList = res.data
+            for (let i = 0; i < contributionList.length; i++){
+                total += contributionList[i].contributions
+            }
+            console.log('contributionList', contributionList, 'total', total)
+            this.setState({contributions: total})
+        } catch (err){
+            console.log(err.message)
+        }
     }
 
 
@@ -130,9 +151,22 @@ class Join2 extends React.Component {
                             <button className="email-btn">Email us</button>
                         </div>
                         <div className="progress">
-                            <div className="progress-intro">Project Progress</div>
-                            <li>Number of commits</li>
-                            <li></li>
+                            <div className="progress-intro" style={{ marginBottom: '20px' }}>Project Progress</div>
+                            <div className="progress-wrapper">
+                                <div className="git" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                                    <div className="icon" style={{ display: 'flex', justifyContent: 'center' }}>
+                                        <img src="github icon.png" style={{ width: '50px', marginBottom: '10px' }}/>
+                                    </div>
+                                    <div style={{ display: 'flex', alignItems: 'center', fontSize: '18px'}}>
+                                        <div className="number">
+                                            {this.state.contributions}
+                                        </div>
+                                        <div style={{marginLeft: '5px'}}>
+                                            contributions
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
