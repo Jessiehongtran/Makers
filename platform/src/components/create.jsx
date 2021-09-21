@@ -51,6 +51,7 @@ class Create extends React.Component {
         // if (this.state.project.category_id === "0"){
         //     this.state.showOtherField = true
         // }
+        
 
         return (
             <div>
