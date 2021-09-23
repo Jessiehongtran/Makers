@@ -277,6 +277,34 @@
                 padding: 0 60px 40px 60px;
             }
 
+            .thoughts {
+                margin-top: 0px;
+                font-size: 22px;
+                // display: flex;
+                align-items: center;
+                padding: 0 60px 40px 60px;
+
+                .row {
+                    display: flex;
+                    align-items: center;
+
+                    .thought-input {
+                        height: 40px;
+                        margin-top: 10px;
+                        border: 1px solid silver;
+                        border-radius: 6px;
+                        min-width: 500px;
+                    }
+
+                    .thought-submit {
+                        color: #ff4d2e;
+                        margin-left: 10px;
+                        font-size: 26px;
+                    }
+
+                }
+            }
+
         }
     }
 }

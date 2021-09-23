@@ -2,7 +2,9 @@ import React from 'react';
 import '../styles/join2.scss';
 import axios from 'axios';
 import Member from './member';
-import { API_URL } from '../APIconfig'
+import { API_URL } from '../APIconfig';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPaperPlane } from '@fortawesome/fontawesome-free-solid'
 
 class Join2 extends React.Component {
     constructor(props){
@@ -167,6 +169,14 @@ class Join2 extends React.Component {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div className="thoughts">
+                                <div className="">Thoughts</div>
+                                <div className="row">
+                                    <input className="thought-input"/>
+                                    <FontAwesomeIcon className="thought-submit" icon={faPaperPlane} />
+                                    {/* <button className="thought-submit">Send</button> */}
+                                </div>
                         </div>
                     </div>
                 </div>
