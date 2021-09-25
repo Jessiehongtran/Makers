@@ -3,8 +3,9 @@ import '../styles/join2.scss';
 import axios from 'axios';
 import Member from './member';
 import { API_URL } from '../APIconfig';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaperPlane } from '@fortawesome/fontawesome-free-solid'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane } from '@fortawesome/fontawesome-free-solid';
+import Comment from './comment';
 
 class Join2 extends React.Component {
     constructor(props){
@@ -12,10 +13,14 @@ class Join2 extends React.Component {
         this.state = {
             category: "",
             project: {},
-            contributions: 0
+            contributions: 0,
+            thought: "",
+            thoughtList: []
         }
         this.fetchProject = this.fetchProject.bind(this)
         this.getContributions = this.getContributions.bind(this)
+        this.handleChangeThought = this.handleChangeThought.bind(this)
+        this.handleSubmitThought = this.handleSubmitThought.bind(this)
     }
 
     componentDidMount(){
@@ -53,6 +58,20 @@ class Join2 extends React.Component {
         } catch (err){
             console.log(err.message)
         }
+    }
+
+    handleChangeThought(e){
+        this.setState({ thought: e.target.value })
+    }
+
+    handleSubmitThought(e){
+        e.preventDefault()
+        const { thoughtList } = this.state;
+        thoughtList.push({
+            name: "Hong Tran",
+            thought: this.state.thought
+        })
+        this.setState({ thoughtList: thoughtList })
     }
 
 
@@ -95,6 +114,8 @@ class Join2 extends React.Component {
                 name: "Mike Han"
             }
         ]
+
+        const { thoughtList } = this.state;
 
         return (
             <div className="join-wrapper">
@@ -173,9 +194,13 @@ class Join2 extends React.Component {
                         <div className="thoughts">
                                 <div className="">Thoughts</div>
                                 <div className="row">
-                                    <input className="thought-input"/>
-                                    <FontAwesomeIcon className="thought-submit" icon={faPaperPlane} />
-                                    {/* <button className="thought-submit">Send</button> */}
+                                    <input className="thought-input" onChange={(e) => this.handleChangeThought(e)} />
+                                    <FontAwesomeIcon className="thought-submit" icon={faPaperPlane} onClick={(e) => this.handleSubmitThought(e)} />
+                                </div>
+                                <div className="thoughts-timeline">
+                                    {thoughtList.length > 0
+                                    ? thoughtList.map(each => <Comment name={each.name} comment={each.thought}/>)
+                                    : null}
                                 </div>
                         </div>
                     </div>
