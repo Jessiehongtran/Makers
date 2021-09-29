@@ -15,19 +15,35 @@ class Join2 extends React.Component {
             project: {},
             contributions: 0,
             thought: "",
-            thoughtList: []
+            thoughtList: [],
+            user: {}
         }
         this.fetchProject = this.fetchProject.bind(this)
         this.getContributions = this.getContributions.bind(this)
         this.handleChangeThought = this.handleChangeThought.bind(this)
         this.handleSubmitThought = this.handleSubmitThought.bind(this)
+        this.getUserbyUserID = this.getUserbyUserID.bind(this)
     }
 
     componentDidMount(){
         const projectId = localStorage.getItem('ideaId')
         this.fetchProject(projectId)
         this.getContributions()
+        this.getUserbyUserID()
      }
+
+    async getUserbyUserID(){
+        const userID = localStorage.getItem('userId')
+        if (userID){
+            try {
+                const response = await axios.get(`${API_URL}/api/users/${userID}`)
+                console.log('user', response.data)
+                this.setState({user: response.data})
+            } catch(err){
+                console.log(err.message)
+            }
+        }
+    }
 
     fetchProject(projectId){
         axios.get(`${API_URL}/api/projects/${projectId}`)
@@ -68,7 +84,6 @@ class Join2 extends React.Component {
         e.preventDefault()
         const { thoughtList } = this.state;
         thoughtList.push({
-            name: "Hong Tran",
             thought: this.state.thought
         })
         this.setState({ thoughtList: thoughtList })
@@ -199,7 +214,7 @@ class Join2 extends React.Component {
                                 </div>
                                 <div className="thoughts-timeline">
                                     {thoughtList.length > 0
-                                    ? thoughtList.map(each => <Comment name={each.name} comment={each.thought}/>)
+                                    ? thoughtList.map(each => <Comment name={this.state.user.first_last_name} comment={each.thought}/>)
                                     : null}
                                 </div>
                         </div>
