@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import "../styles/create.scss";
+import "../styles/create2.scss";
 import { API_URL } from '../APIconfig'
 
 class Create extends React.Component {
@@ -54,41 +54,45 @@ class Create extends React.Component {
         
 
         return (
-            <div>
-                <h1>So what's on your mind?</h1>
-               <form onSubmit = {this.handleSubmit}>
-                   <input 
-                        placeholder="What's your idea in short" 
-                        onChange={this.handleChange}
-                        name="project_name"
-                    />
-                   {/* dropdown */}
-                   <input 
-                        placeholder="Category"
-                        onChange={this.handleChange}
-                        name="category"
-                    /> 
-                   <input 
-                        placeholder="Target users"
-                        onChange={this.handleChange}
-                        name="target_user"
+            <div className="create-frame">
+                <div className="wrapper">
+                    <h1>So what's on your mind?</h1>
+                    <div className="info">
+                        <form onSubmit = {this.handleSubmit}>
+                            <input 
+                                    placeholder="What's your idea in short" 
+                                    onChange={this.handleChange}
+                                    name="project_name"
+                                />
+                            {/* dropdown */}
+                            <input 
+                                    placeholder="Category"
+                                    onChange={this.handleChange}
+                                    name="category"
+                                /> 
+                            <input 
+                                    placeholder="Target users"
+                                    onChange={this.handleChange}
+                                    name="target_user"
 
-                    /> 
-                   <input 
-                        placeholder="Impact"
-                        onChange={this.handleChange}
-                        name="impact"
+                                /> 
+                            <input 
+                                    placeholder="Impact"
+                                    onChange={this.handleChange}
+                                    name="impact"
 
-                    /> 
-                   <input 
-                        placeholder="Team includes"
-                        onChange={this.handleChange}
-                        name="human_resources"
+                                /> 
+                            <input 
+                                    placeholder="Team includes"
+                                    onChange={this.handleChange}
+                                    name="human_resources"
 
-                    />
-                   <button>Create</button>
-                   {/* Lead to sign in/sign up/create profile */}
-               </form>
+                                />
+                            <button className="create-btn">Create</button>
+                            {/* Lead to sign in/sign up/create profile */}
+                        </form>
+                    </div>
+               </div>
             </div>
         )
     }
