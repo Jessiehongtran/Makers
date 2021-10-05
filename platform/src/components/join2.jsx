@@ -23,6 +23,7 @@ class Join2 extends React.Component {
         this.handleChangeThought = this.handleChangeThought.bind(this)
         this.handleSubmitThought = this.handleSubmitThought.bind(this)
         this.getUserbyUserID = this.getUserbyUserID.bind(this)
+        this.handleKey = this.handleKey.bind(this)
     }
 
     componentDidMount(){
@@ -87,6 +88,12 @@ class Join2 extends React.Component {
             thought: this.state.thought
         })
         this.setState({ thoughtList: thoughtList })
+    }
+
+    handleKey(e){
+        if (e.key === "Enter"){
+            this.handleSubmitThought(e)
+        }
     }
 
 
@@ -209,7 +216,7 @@ class Join2 extends React.Component {
                         <div className="thoughts">
                                 <div className="">Thoughts</div>
                                 <div className="row">
-                                    <input className="thought-input" onChange={(e) => this.handleChangeThought(e)} />
+                                    <input className="thought-input" onChange={(e) => this.handleChangeThought(e)}  onKeyPress={(e) => this.handleKey(e)}/>
                                     <FontAwesomeIcon className="thought-submit" icon={faPaperPlane} onClick={(e) => this.handleSubmitThought(e)} />
                                 </div>
                                 <div className="thoughts-timeline">
