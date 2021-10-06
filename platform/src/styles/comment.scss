@@ -1,12 +1,15 @@
-.reply-btn {
-    position: absolute;
-    top: 85%;
-    left: 10px;
-    border-radius: 6px;
-    padding: 3px 12px;
-    background-color: #ff4d2e;
-    color: white;
-    font-size: 10px;
-    border: 1px solid #ff4d2e;
-    font-family: 'Poppins', sans-serif;
+
+.comment-text {
+    background: #EFEFEF;
+    border-radius: 8px;
+    padding: 6px 15px
+}
+
+.reply {
+    margin-left: 15px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #3B3A3A;
+    cursor: pointer;  
+    margin-top: 3px;
 }
