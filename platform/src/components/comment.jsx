@@ -10,6 +10,9 @@ export default class Comment extends React.Component {
     }
 
     render(){
+
+        console.log('props in comment', this.props)
+
         return (
             <div style={{ display: 'flex',  fontSize: '14px', marginTop: '50px' }}>
                 <div style={{ width: '35px', height: '35px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '10px', border: '1px solid #DFE1E3', borderRadius: '50%' }}>{this.props.name[0].toUpperCase()}</div>

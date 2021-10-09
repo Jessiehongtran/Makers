@@ -35,6 +35,7 @@ class Join2 extends React.Component {
 
     async getUserbyUserID(){
         const userID = localStorage.getItem('userId')
+        console.log('userId', userID)
         if (userID){
             try {
                 const response = await axios.get(`${API_URL}/api/users/${userID}`)
