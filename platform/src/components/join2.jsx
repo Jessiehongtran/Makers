@@ -14,14 +14,14 @@ class Join2 extends React.Component {
             category: "",
             project: {},
             contributions: 0,
-            thought: "",
-            thoughtList: [],
+            comment: "",
+            commentList: [],
             user: {}
         }
         this.fetchProject = this.fetchProject.bind(this)
         this.getContributions = this.getContributions.bind(this)
-        this.handleChangeThought = this.handleChangeThought.bind(this)
-        this.handleSubmitThought = this.handleSubmitThought.bind(this)
+        this.handleChangeComment = this.handleChangeComment.bind(this)
+        this.handleSubmitComment = this.handleSubmitComment.bind(this)
         this.getUserbyUserID = this.getUserbyUserID.bind(this)
         this.handleKey = this.handleKey.bind(this)
     }
@@ -31,6 +31,7 @@ class Join2 extends React.Component {
         this.fetchProject(projectId)
         this.getContributions()
         this.getUserbyUserID()
+        this.getCommentsOfAProject()
      }
 
     async getUserbyUserID(){
@@ -42,6 +43,38 @@ class Join2 extends React.Component {
                 console.log('user', response.data)
                 this.setState({user: response.data})
             } catch(err){
+                console.log(err.message)
+            }
+        }
+    }
+
+    async postCommentForAProject(){
+        const projectId = localStorage.getItem('ideaId')
+        const userID = localStorage.getItem('userId')
+        if (projectId && userID && this.state.comment.length > 0){
+            const newComment = {
+                user_id: userID,
+                project_id: projectId,
+                comment: this.state.comment,
+                created_at: new Date().getTime()
+            }
+            try {
+                await axios.post(`${API_URL}/api/comments`, newComment)
+                this.getCommentsOfAProject()
+            } catch (err){
+                console.log(err.message)
+            }
+        }
+    }
+
+    async getCommentsOfAProject(){
+        const projectId = localStorage.getItem('ideaId')
+        if (projectId){
+            try {
+                const comments = await axios.get(`${API_URL}/api/comments/${projectId}`)
+                console.log('commentList', comments.data)
+                this.setState({commentList: comments.data})
+            } catch (err){
                 console.log(err.message)
             }
         }
@@ -78,22 +111,23 @@ class Join2 extends React.Component {
         }
     }
 
-    handleChangeThought(e){
-        this.setState({ thought: e.target.value })
+    handleChangeComment(e){
+        this.setState({ comment: e.target.value })
     }
 
-    handleSubmitThought(e){
+    handleSubmitComment(e){
         e.preventDefault()
-        const { thoughtList } = this.state;
-        thoughtList.push({
-            thought: this.state.thought
+        const { commentList } = this.state;
+        commentList.push({
+            comment: this.state.comment
         })
-        this.setState({ thoughtList: thoughtList })
+        this.setState({ commentList: commentList })
+        this.postCommentForAProject()
     }
 
     handleKey(e){
         if (e.key === "Enter"){
-            this.handleSubmitThought(e)
+            this.handleSubmitComment(e)
         }
     }
 
@@ -138,7 +172,7 @@ class Join2 extends React.Component {
             }
         ]
 
-        const { thoughtList } = this.state;
+        const { commentList } = this.state;
 
         return (
             <div className="join-wrapper">
@@ -217,12 +251,12 @@ class Join2 extends React.Component {
                         <div className="thoughts">
                                 <div className="">Thoughts</div>
                                 <div className="row">
-                                    <input className="thought-input" onChange={(e) => this.handleChangeThought(e)}  onKeyPress={(e) => this.handleKey(e)}/>
-                                    <FontAwesomeIcon className="thought-submit" icon={faPaperPlane} onClick={(e) => this.handleSubmitThought(e)} />
+                                    <input className="thought-input" onChange={(e) => this.handleChangeComment(e)}  onKeyPress={(e) => this.handleKey(e)}/>
+                                    <FontAwesomeIcon className="thought-submit" icon={faPaperPlane} onClick={(e) => this.handleSubmitComment(e)} />
                                 </div>
                                 <div className="thoughts-timeline">
-                                    {thoughtList.length > 0
-                                    ? thoughtList.map(each => <Comment name={this.state.user.first_last_name} comment={each.thought}/>)
+                                    {commentList.length > 0
+                                    ? commentList.map(each => <Comment name={this.state.user.first_last_name} comment={each.comment}/>)
                                     : null}
                                 </div>
                         </div>
