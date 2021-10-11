@@ -16,7 +16,7 @@ class Join2 extends React.Component {
             contributions: 0,
             comment: "",
             commentList: [],
-            user: {}
+            user: {},
         }
         this.fetchProject = this.fetchProject.bind(this)
         this.getContributions = this.getContributions.bind(this)
@@ -53,11 +53,12 @@ class Join2 extends React.Component {
         const userID = localStorage.getItem('userId')
         if (projectId && userID && this.state.comment.length > 0){
             const newComment = {
-                user_id: userID,
-                project_id: projectId,
+                user_id: parseInt(userID),
+                project_id: parseInt(projectId),
                 comment: this.state.comment,
                 created_at: new Date().getTime()
             }
+            console.log('new comment', newComment)
             try {
                 await axios.post(`${API_URL}/api/comments`, newComment)
                 this.getCommentsOfAProject()
@@ -117,11 +118,6 @@ class Join2 extends React.Component {
 
     handleSubmitComment(e){
         e.preventDefault()
-        const { commentList } = this.state;
-        commentList.push({
-            comment: this.state.comment
-        })
-        this.setState({ commentList: commentList })
         this.postCommentForAProject()
     }
 
@@ -256,7 +252,7 @@ class Join2 extends React.Component {
                                 </div>
                                 <div className="thoughts-timeline">
                                     {commentList.length > 0
-                                    ? commentList.map(each => <Comment name={this.state.user.first_last_name} comment={each.comment}/>)
+                                    ? commentList.map(each => <Comment data={each} userID={localStorage.getItem('userId')} />)
                                     : null}
                                 </div>
                         </div>
