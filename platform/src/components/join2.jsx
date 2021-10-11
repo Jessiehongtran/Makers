@@ -127,7 +127,6 @@ class Join2 extends React.Component {
         }
     }
 
-
     render(){
 
         //bannerColor

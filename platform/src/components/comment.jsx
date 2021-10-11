@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React from 'react';
+import { API_URL } from '../APIconfig';
 import '../styles/comment.scss'
 
 export default class Comment extends React.Component {
@@ -9,7 +11,7 @@ export default class Comment extends React.Component {
             reply: {
                 subcomment: "",
                 comment_ID: 0,
-                user_ID: this.props.userID
+                user_ID: 0
             },
             subComments: []
 
@@ -27,6 +29,11 @@ export default class Comment extends React.Component {
         if (this.props.data.commentID){
             try {   
                 //need a route for this
+                const res = await axios.get(`${API_URL}/api/subcomments/comment/${this.props.data.commentID}`)
+                console.log('res in get subcomments', res.data)
+                if (res.data.length > 0){
+                    this.setState({subComments: res.data})
+                }
             } catch (err){
                 console.log(err.message)
             }
@@ -34,25 +41,32 @@ export default class Comment extends React.Component {
     }
 
     async postSubComment(){
-        if (this.props.data.commentID){
-            try {
-                //need a route for this, post the reply from state
-                this.getSubComments()
-            } catch (err){
-                console.log(err.message)
-            }
+        try {
+            //need a route for this, post the reply from state
+            const res = await axios.post(`${API_URL}/api/subcomments`, this.state.reply)
+            console.log(res.data)
+            this.getSubComments()
+            this.setState({showReplyInput: false})
+        } catch (err){
+            console.log(err.message)
         }
+        
     }
 
     handleReply(){
-        this.setState({showReplyInput: true})
+        if (this.props.userID){
+            this.setState({showReplyInput: true})
+        } else {
+            alert("Please sign in to reply")
+        }
     }
 
     handleChangeReply(e, commentID){
-        this.setState({
+        this.setState({...this.state.reply,
             reply: {
                 subcomment: e.target.value,
-                comment_ID: commentID
+                comment_ID: commentID,
+                user_ID: parseInt(this.props.userID)
             }
         })
     }
@@ -64,6 +78,8 @@ export default class Comment extends React.Component {
 
     render(){
 
+        console.log('props in comment', this.props)
+
         return (
             <div style={{ display: 'flex',  fontSize: '14px', marginTop: '25px' }}>
                 <div style={{ width: '35px', height: '35px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '10px', border: '1px solid #DFE1E3', borderRadius: '50%' }}>{this.props.data.first_last_name[0].toUpperCase()}</div>
@@ -74,9 +90,27 @@ export default class Comment extends React.Component {
                         {this.state.showReplyInput
                         ? <div style={{ marginLeft: '15px', marginTop: '20px', display: 'flex'}}>
                             <input className="sub-reply" placeholder="Add a reply" onChange={(e) => this.handleChangeReply(e, this.props.data.commentID)} />
-                            <button className="sub-reply-btn" onClick={(e) => this.handleSubmitReply()}>Reply</button>
+                            <button className="sub-reply-btn" onClick={(e) => this.handleSubmitReply(e)}>Reply</button>
                           </div>
-                        : <div className="reply" onClick={() => this.handleReply()}>Reply</div>}
+                        : <div>
+                            <div className="reply" onClick={() => this.handleReply()}>Reply</div>
+                            <div className="subcomments" style={{ marginLeft: '13px', marginTop: '7px' }}>
+                                {this.state.subComments.length > 0
+                                ? this.state.subComments.map(each => 
+                                    <div style={{ display: 'flex' }}>
+                                        <div style={{ width: '35px', marginTop: '12px', height: '35px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '10px', border: '1px solid #DFE1E3', borderRadius: '50%' }}>{each.first_last_name[0].toUpperCase()}</div>
+                                        <div>
+                                            <div style={{ fontSize: '10px', color: 'grey', marginLeft: '3px'}}>{each.first_last_name}</div>
+                                            <div className="comment-text">
+                                                {each.subcomment}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                                : null}
+                            </div>
+                         </div>
+                        }
                     </div>
                 </div>
             </div>
