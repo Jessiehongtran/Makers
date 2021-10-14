@@ -26,7 +26,8 @@ class App extends React.Component {
 }
 
 render(){
-  
+  //clear application
+  localStorage.clear()
 
   return (
     <ThemeProvider theme={theme}>
