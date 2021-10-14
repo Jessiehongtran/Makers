@@ -57,7 +57,7 @@ export default class Comment extends React.Component {
         if (this.props.userID){
             this.setState({showReplyInput: true})
         } else {
-            alert("Please sign in to reply")
+            this.props.history.push('/signin')
         }
     }
 

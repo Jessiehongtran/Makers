@@ -117,7 +117,7 @@ class Join2 extends React.Component {
         if (userID){
             this.setState({ comment: e.target.value })
         } else {
-            alert("Please sign in to comment")
+            this.props.history.push('/signin')
         }
     }
 
@@ -256,7 +256,7 @@ class Join2 extends React.Component {
                                 </div>
                                 <div className="thoughts-timeline">
                                     {commentList.length > 0
-                                    ? commentList.map(each => <Comment data={each} userID={localStorage.getItem('userId')} />)
+                                    ? commentList.map(each => <Comment data={each} userID={localStorage.getItem('userId')} history={this.props.history} />)
                                     : null}
                                 </div>
                         </div>
