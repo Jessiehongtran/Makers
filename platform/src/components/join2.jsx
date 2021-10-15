@@ -114,16 +114,17 @@ class Join2 extends React.Component {
 
     handleChangeComment(e){
         const userID = localStorage.getItem('userId')
-        if (userID){
-            this.setState({ comment: e.target.value })
-        } else {
-            this.props.history.push('/signin')
-        }
+        this.setState({ comment: e.target.value })
     }
 
     handleSubmitComment(e){
         e.preventDefault()
-        this.postCommentForAProject()
+        const userID = localStorage.getItem('userId')
+        if (userID){
+            this.postCommentForAProject()
+        } else {
+            this.props.history.push('/signin')
+        }
     }
 
     handleKey(e){

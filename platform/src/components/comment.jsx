@@ -54,11 +54,7 @@ export default class Comment extends React.Component {
     }
 
     handleReply(){
-        if (this.props.userID){
-            this.setState({showReplyInput: true})
-        } else {
-            this.props.history.push('/signin')
-        }
+        this.setState({showReplyInput: true})
     }
 
     handleChangeReply(e, commentID){
@@ -73,7 +69,12 @@ export default class Comment extends React.Component {
 
     handleSubmitReply(e){
         e.preventDefault()
-        this.postSubComment()
+        const userID = this.props.userID
+        if (userID){
+            this.postSubComment()
+        } else {
+            this.props.history.push('/signin')
+        }
     }
 
     render(){
