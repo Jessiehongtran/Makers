@@ -5,7 +5,7 @@ import './App.css';
 // Component imports
 import Ideas from './components/ideas';
 import Join from './components/join2';
-import Create from './components/create';
+import Create from './components/create2';
 import Nav from './components/navigation';
 import Banner from './components/banner';
 import SignUp from './components/signup';

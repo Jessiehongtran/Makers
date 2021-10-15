@@ -48,7 +48,7 @@
         
     }
 
-    button {
+    .create-btn {
         width: 140px;
         border-radius: 14px;
         padding: 10px;
@@ -58,6 +58,7 @@
         font-weight: bold;
         border: 1px solid #ff4d2e;
         margin-bottom: 40px;
+        cursor: pointer;
 
         @media (max-width: 1000px) {
             width: 120px;

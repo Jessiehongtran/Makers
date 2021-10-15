@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import "../styles/create2.scss";
+import "../styles/create.scss";
 import { API_URL } from '../APIconfig'
 
 class Create extends React.Component {
