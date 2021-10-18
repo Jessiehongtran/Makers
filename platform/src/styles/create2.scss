@@ -27,7 +27,7 @@
 }
 
 .icon {
-    border: 1px solid #FCBCBC ;
+    border: 1px solid #FCBCBC;
     width: 25px;
     margin: 0 5px 5px 0;
     padding: 3px;
@@ -36,4 +36,9 @@
     color: grey;
     display: flex;
     justify-content: center;
+    cursor: pointer;
+}
+
+.icon:hover {
+    color: #000
 }
