@@ -88,14 +88,16 @@ export default class Comment extends React.Component {
                     <div style={{ fontSize: '10px', color: 'grey', marginLeft: '3px'}}>{this.props.data.first_last_name}</div>
                     <div style={{ position: 'relative'}} >
                         <div className="comment-text">{this.props.data.comment}</div>        
-                        {this.state.showReplyInput
+                        {/* {this.state.showReplyInput
                         ? <div style={{ marginLeft: '15px', marginTop: '20px', display: 'flex'}}>
                             <input className="sub-reply" placeholder="Add a reply" onChange={(e) => this.handleChangeReply(e, this.props.data.commentID)} />
                             <button className="sub-reply-btn" onClick={(e) => this.handleSubmitReply(e)}>Reply</button>
                           </div>
-                        : <div>
+                        :  */}
+                        <div>
                             <div className="reply" onClick={() => this.handleReply()}>Reply</div>
                             <div className="subcomments" style={{ marginLeft: '13px', marginTop: '7px' }}>
+                                <div>
                                 {this.state.subComments.length > 0
                                 ? this.state.subComments.map(each => 
                                     <div style={{ display: 'flex' }}>
@@ -109,9 +111,16 @@ export default class Comment extends React.Component {
                                     </div>
                                 )
                                 : null}
+                                {this.state.showReplyInput
+                                    ? <div style={{ marginLeft: '15px', marginTop: '20px', display: 'flex'}}>
+                                        <input className="sub-reply" placeholder="Add a reply" onChange={(e) => this.handleChangeReply(e, this.props.data.commentID)} />
+                                        <button className="sub-reply-btn" onClick={(e) => this.handleSubmitReply(e)}>Reply</button>
+                                    </div>
+                                    : null}
+                                </div>
                             </div>
                          </div>
-                        }
+                        {/* } */}
                     </div>
                 </div>
             </div>
