@@ -75,7 +75,6 @@ class SignUp extends React.Component {
         return (
             <div className="signUp">
                 <img src="https://i.pinimg.com/originals/d8/22/b9/d822b94012d78d2a2eb5e448e8f2d5a5.png"/>
-                
                     <form onSubmit={this.handleSubmit}>
                         <h3>Sign up to make stuff</h3>
                         <div className="name">
