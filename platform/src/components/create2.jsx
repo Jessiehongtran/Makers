@@ -32,10 +32,10 @@ export default class Create2 extends React.Component {
                     <div className="info">
                         <div className="title">IDEA</div>
                         <div className="icons">
-                            <div className="icon pencil" onClick={() => this.switchPlatform('text')}>
+                            <div className="create-icon pencil" onClick={() => this.switchPlatform('text')}>
                                 <FontAwesomeIcon icon={faPencilAlt}  />
                             </div>
-                            <div className="icon paint">
+                            <div className="create-icon paint">
                                 <FontAwesomeIcon icon={faPaintBrush}  onClick={() => this.switchPlatform('sketch')}/>
                             </div>
                         </div>
