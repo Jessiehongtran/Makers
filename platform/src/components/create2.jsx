@@ -9,7 +9,12 @@ export default class Create2 extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            action: <></>,
+            action: {
+                idea: <></>,
+                target_user: <></>,
+                human_resources: <></>,
+                impact: <></>,
+            },
             new_project: {
                 idea: "",
                 project_name: "",
@@ -29,12 +34,12 @@ export default class Create2 extends React.Component {
         this.turnAttentionToIcons = this.turnAttentionToIcons.bind(this)
     }
 
-    switchPlatform(command, tag){
+    switchPlatform(command, tag, placeholder){
         if (command === "text"){
-            this.setState({ action: <Text updateNewProject={this.updateNewProject} tag={tag} />})
+            this.setState({ action:{...this.state.action, [tag]: <Text updateNewProject={this.updateNewProject} tag={tag} placeholder={placeholder} />}})
         }
         if (command === "sketch"){
-            this.setState({ action: <Sketch updateNewProject={this.updateNewProject} tag={tag} />})
+            this.setState({ action: {...this.state.action, [tag]: <Sketch updateNewProject={this.updateNewProject} tag={tag} />}})
         }
     }
 
@@ -57,7 +62,7 @@ export default class Create2 extends React.Component {
                     <div className="info">
                         <div className="title">IDEA</div>
                         <div className="icons">
-                            <div className="create-icon pencil" onClick={() => this.switchPlatform('text', 'idea')} style={{backgroundColor: `${this.state.bgColors[0].color}`}}>
+                            <div className="create-icon pencil" onClick={() => this.switchPlatform('text', 'idea', 'What if..')} style={{backgroundColor: `${this.state.bgColors[0].color}`}}>
                                 <FontAwesomeIcon icon={faPencilAlt}  />
                             </div>
                             <div className="create-icon paint" onClick={() => this.switchPlatform('sketch', 'idea')} style={{backgroundColor: `${this.state.bgColors[0].color}`}}>
@@ -66,55 +71,55 @@ export default class Create2 extends React.Component {
                         </div>
                     </div>
                     <div className="space" >
-                        {this.state.action}
+                        {this.state.action.idea}
                     </div>
                 </div>
                 <div className="piece" onMouseOver={() => this.turnAttentionToIcons(2)}>
                     <div className="info">
                         <div className="title">TARGET USER</div>
                         <div className="icons">
-                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'target_user')} style={{backgroundColor: `${this.state.bgColors[1].color}`}}>
+                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'target_user', 'To serve..')} style={{backgroundColor: `${this.state.bgColors[1].color}`}}>
                                 <FontAwesomeIcon icon={faPencilAlt}  />
                             </div>
-                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'target_user')} style={{backgroundColor: `${this.state.bgColors[1].color}`}}>
+                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('sketch', 'target_user')} style={{backgroundColor: `${this.state.bgColors[1].color}`}}>
                                 <FontAwesomeIcon icon={faPaintBrush}  />
                             </div>
                         </div>
                     </div>
                     <div className="space" >
-                        {this.state.action}
+                        {this.state.action.target_user}
                     </div>
                 </div>
                 <div className="piece" onMouseOver={() => this.turnAttentionToIcons(3)} >
                     <div className="info">
                         <div className="title">PEOPLE</div>
                         <div className="icons">
-                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'human_resources')} style={{backgroundColor: `${this.state.bgColors[2].color}`}}>
+                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'human_resources', 'For those..')} style={{backgroundColor: `${this.state.bgColors[2].color}`}}>
                                 <FontAwesomeIcon icon={faPencilAlt}  />
                             </div>
-                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'human_resources')} style={{backgroundColor: `${this.state.bgColors[2].color}`}}>
+                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('sketch', 'human_resources')} style={{backgroundColor: `${this.state.bgColors[2].color}`}}>
                                 <FontAwesomeIcon icon={faPaintBrush}  />
                             </div>
                         </div>
                     </div>
                     <div className="space" >
-                        {this.state.action}
+                        {this.state.action.human_resources}
                     </div>
                 </div>
                 <div className="piece" onMouseMove={() => this.turnAttentionToIcons(4)}>
                     <div className="info">
                         <div className="title">IMPACT</div>
                         <div className="icons">
-                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'impact')} style={{backgroundColor: `${this.state.bgColors[3].color}`}}>
+                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'impact', 'I dream to..')} style={{backgroundColor: `${this.state.bgColors[3].color}`}}>
                                 <FontAwesomeIcon icon={faPencilAlt}  />
                             </div>
-                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'impact')} style={{backgroundColor: `${this.state.bgColors[3].color}`}}>
+                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('sketch', 'impact')} style={{backgroundColor: `${this.state.bgColors[3].color}`}}>
                                 <FontAwesomeIcon icon={faPaintBrush}  />
                             </div>
                         </div>
                     </div>
                     <div className="space" >
-                        {this.state.action}
+                        {this.state.action.impact}
                     </div>
                 </div>
             </div>
