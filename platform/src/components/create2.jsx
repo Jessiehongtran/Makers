@@ -57,7 +57,7 @@ export default class Create2 extends React.Component {
 
 
         return (
-            <div style={{width: '100%', minHeight: '100vh', display: 'flex', flexWrap: 'wrap', padding: '20px 100px'}}>
+            <div style={{width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', flexWrap: 'wrap', padding: '20px 100px'}}>
                 <div className="piece" onMouseOver={() => this.turnAttentionToIcons(1)}>
                     <div className="info">
                         <div className="title">IDEA</div>
@@ -78,7 +78,7 @@ export default class Create2 extends React.Component {
                     <div className="info">
                         <div className="title">TARGET USER</div>
                         <div className="icons">
-                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'target_user', 'To serve..')} style={{backgroundColor: `${this.state.bgColors[1].color}`}}>
+                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'target_user', 'For people who..')} style={{backgroundColor: `${this.state.bgColors[1].color}`}}>
                                 <FontAwesomeIcon icon={faPencilAlt}  />
                             </div>
                             <div className="create-icon pencil"  onClick={() => this.switchPlatform('sketch', 'target_user')} style={{backgroundColor: `${this.state.bgColors[1].color}`}}>
@@ -94,7 +94,7 @@ export default class Create2 extends React.Component {
                     <div className="info">
                         <div className="title">PEOPLE</div>
                         <div className="icons">
-                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'human_resources', 'For those..')} style={{backgroundColor: `${this.state.bgColors[2].color}`}}>
+                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'human_resources', 'My team are..')} style={{backgroundColor: `${this.state.bgColors[2].color}`}}>
                                 <FontAwesomeIcon icon={faPencilAlt}  />
                             </div>
                             <div className="create-icon pencil"  onClick={() => this.switchPlatform('sketch', 'human_resources')} style={{backgroundColor: `${this.state.bgColors[2].color}`}}>
