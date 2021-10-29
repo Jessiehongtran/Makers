@@ -39,7 +39,7 @@ export default class Create2 extends React.Component {
             this.setState({ action:{...this.state.action, [tag]: <Text updateNewProject={this.updateNewProject} tag={tag} placeholder={placeholder} />}})
         }
         if (command === "sketch"){
-            this.setState({ action: {...this.state.action, [tag]: <Sketch updateNewProject={this.updateNewProject} tag={tag} />}})
+            this.setState({ action: {...this.state.action, [tag]: <Sketch updateNewProject={this.updateNewProject} tag={tag} width={500} height={650} />}})
         }
     }
 
@@ -70,7 +70,7 @@ export default class Create2 extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="space" >
+                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}} >
                         {this.state.action.idea}
                     </div>
                 </div>
@@ -86,7 +86,7 @@ export default class Create2 extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="space" >
+                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                         {this.state.action.target_user}
                     </div>
                 </div>
@@ -102,7 +102,7 @@ export default class Create2 extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="space" >
+                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                         {this.state.action.human_resources}
                     </div>
                 </div>
@@ -118,7 +118,7 @@ export default class Create2 extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="space" >
+                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                         {this.state.action.impact}
                     </div>
                 </div>
