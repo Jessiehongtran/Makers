@@ -1,16 +1,21 @@
 import React from 'react';
+import { FontAwesomeIcon  } from '@fortawesome/react-fontawesome';
+import { faPaintBrush } from '@fortawesome/fontawesome-free-solid';
 
 export default class Sketch extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             grid: [],
-            squareSize: 5,
+            squareSize: 10,
+            penX: 0,
+            penY: 0,
             mouseDown: false
         }
         this.handleMouseDown = this.handleMouseDown.bind(this)
         this.handleMouseOver = this.handleMouseOver.bind(this)
         this.handleMouseUp = this.handleMouseUp.bind(this)
+        this.handleMouseMove = this.handleMouseMove.bind(this)
         this.fillGrid = this.fillGrid.bind(this)
     }
 
@@ -64,26 +69,46 @@ export default class Sketch extends React.Component {
         }
     }
 
+    handleMouseMove(e){
+        this.setState({
+            penX: e.clientX,
+            penY: e.clientY
+        })
+    }
+
     render(){
 
-        //divide the canvas into small squares and whenever onmousemove, pain it, 
+        //add pen icon (not realistic)
+        //add color option 
         //allow to screenshot the shape into picture
+
         
         const size = this.state.squareSize
-        const { width, height} = this.props;
-        const { grid } = this.state
+        const { width, height } = this.props;
+        const { grid, penX, penY } = this.state
         
         return (
-            <div style={{ position: 'relative', width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6'}} >
-                {grid.map(row => 
-                    <div>
-                        {row.map(col => <div 
-                                style={{ backgroundColor: `${col.bgColor}`, width: `${size}px`, height: `${size}px`, top: `${col.y}px`, left: `${col.x}px`, position: 'absolute'}}
-                                onMouseDown={() => this.handleMouseDown()}
-                                onMouseOver={() => this.handleMouseOver(col.id)}
-                                onMouseUp= {() => this.handleMouseUp()}
-                            ></div>)}
-                    </div>)}
+            <div>
+                <div 
+                    style={{ position: 'relative', width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6'}} 
+                    onMouseMove={(e) => this.handleMouseMove(e)}
+                >
+                    {grid.map(row => 
+                        <div>
+                            {row.map(col => <div 
+                                    style={{ backgroundColor: `${col.bgColor}`, width: `${size}px`, height: `${size}px`, top: `${col.y}px`, left: `${col.x}px`, position: 'absolute'}}
+                                    onMouseDown={() => this.handleMouseDown()}
+                                    onMouseOver={() => this.handleMouseOver(col.id)}
+                                    onMouseUp= {() => this.handleMouseUp()}
+                                ></div>)}
+                        </div>)}
+                    {/* <div style={{ position: 'absolute', top: `calc(${penY}px - 33%)`, left: `calc(${penX}px - 88%)`, zIndex: 4 }}>
+                        <FontAwesomeIcon icon={faPaintBrush} /> 
+                    </div> */}
+                </div>
+                <div className="colors">
+                    
+                </div>
             </div>
         )
     }
