@@ -10,6 +10,7 @@ export default class Sketch extends React.Component {
             squareSize: 10,
             penX: 0,
             penY: 0,
+            cursorColor: "#000",
             mouseDown: false
         }
         this.handleMouseDown = this.handleMouseDown.bind(this)
@@ -78,21 +79,21 @@ export default class Sketch extends React.Component {
 
     render(){
 
-        //add pen icon (not realistic)
-        //add color option 
+        //add color option, update cursor accordingly
         //allow to screenshot the shape into picture
 
         
         const size = this.state.squareSize
         const { width, height } = this.props;
-        const { grid, penX, penY } = this.state
+        const { cursorColor, grid, penX, penY } = this.state
         
         return (
-            <div>
+            <div style={{ cursor: "none"}}>
                 <div 
-                    style={{ position: 'relative', width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6'}} 
+                    style={{  width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6'}} 
                     onMouseMove={(e) => this.handleMouseMove(e)}
                 >
+                    <div style={{position: 'relative', width: `${height}px`, height: `${width}px`,}}>
                     {grid.map(row => 
                         <div>
                             {row.map(col => <div 
@@ -102,9 +103,9 @@ export default class Sketch extends React.Component {
                                     onMouseUp= {() => this.handleMouseUp()}
                                 ></div>)}
                         </div>)}
-                    {/* <div style={{ position: 'absolute', top: `calc(${penY}px - 33%)`, left: `calc(${penX}px - 88%)`, zIndex: 4 }}>
-                        <FontAwesomeIcon icon={faPaintBrush} /> 
-                    </div> */}
+                    </div>
+                    <div className="cursor-icon" style={{ position: 'absolute', top: `${penY}px`, left: `${penX}px`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
+                    </div>
                 </div>
                 <div className="colors">
                     
