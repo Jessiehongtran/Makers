@@ -11,13 +11,15 @@ export default class Sketch extends React.Component {
             penX: 0,
             penY: 0,
             cursorColor: "#000",
-            mouseDown: false
+            mouseDown: false,
+            colors: ["red", "blue", "green", "yellow", "orange", "brown", "black"]
         }
         this.handleMouseDown = this.handleMouseDown.bind(this)
         this.handleMouseOver = this.handleMouseOver.bind(this)
         this.handleMouseUp = this.handleMouseUp.bind(this)
         this.handleMouseMove = this.handleMouseMove.bind(this)
         this.fillGrid = this.fillGrid.bind(this)
+        this.updateColor = this.updateColor.bind(this)
     }
 
     componentDidMount(){
@@ -62,7 +64,7 @@ export default class Sketch extends React.Component {
             for (let r = 0; r < grid.length; r++){
                 for (let c = 0; c < grid[0].length; c++){
                     if (grid[r][c].id === squareId){
-                        grid[r][c].bgColor = '#000'
+                        grid[r][c].bgColor = this.state.cursorColor
                     }
                 }
             }
@@ -77,6 +79,10 @@ export default class Sketch extends React.Component {
         })
     }
 
+    updateColor(ind){
+        this.setState({ cursorColor: this.state.colors[ind] })
+    }
+
     render(){
 
         //add color option, update cursor accordingly
@@ -85,13 +91,14 @@ export default class Sketch extends React.Component {
         
         const size = this.state.squareSize
         const { width, height } = this.props;
-        const { cursorColor, grid, penX, penY } = this.state
+        const { cursorColor, grid, penX, penY, colors } = this.state
         
         return (
-            <div style={{ cursor: "none"}}>
+            <div style={{  }}>
                 <div 
-                    style={{  width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6'}} 
+                    style={{  cursor: "none", width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6'}} 
                     onMouseMove={(e) => this.handleMouseMove(e)}
+                    
                 >
                     <div style={{position: 'relative', width: `${height}px`, height: `${width}px`,}}>
                     {grid.map(row => 
@@ -107,8 +114,12 @@ export default class Sketch extends React.Component {
                     <div className="cursor-icon" style={{ position: 'absolute', top: `${penY}px`, left: `${penX}px`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
                     </div>
                 </div>
-                <div className="colors">
-                    
+                <div className="colors" style={{maxWidth: '80px', display: 'flex', flexWrap: 'wrap' }}>
+                    {colors.map((color,i) => 
+                        <div 
+                            style={{ width: '20px', height: '20px', backgroundColor: `${color}` }}
+                            onClick={() => this.updateColor(i)}
+                        ></div>)}
                 </div>
             </div>
         )
