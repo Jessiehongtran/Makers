@@ -1,4 +1,5 @@
 import React from 'react';
+import html2canvas from 'html2canvas';
 import { FontAwesomeIcon  } from '@fortawesome/react-fontawesome';
 import { faPaintBrush } from '@fortawesome/fontawesome-free-solid';
 
@@ -83,9 +84,12 @@ export default class Sketch extends React.Component {
         this.setState({ cursorColor: this.state.colors[ind] })
     }
 
+    getScreenShot(){
+        html2canvas(document.getElementById("sketch")).then(canvas => console.log(canvas.toDataURL()))
+    }
+
     render(){
 
-        //add color option, update cursor accordingly
         //allow to screenshot the shape into picture
 
         
@@ -98,9 +102,8 @@ export default class Sketch extends React.Component {
                 <div 
                     style={{  cursor: "none", width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6'}} 
                     onMouseMove={(e) => this.handleMouseMove(e)}
-                    
                 >
-                    <div style={{position: 'relative', width: `${height}px`, height: `${width}px`,}}>
+                    <div id="sketch" style={{position: 'relative', width: `${height}px`, height: `${width}px`,}}>
                     {grid.map(row => 
                         <div>
                             {row.map(col => <div 
@@ -111,15 +114,18 @@ export default class Sketch extends React.Component {
                                 ></div>)}
                         </div>)}
                     </div>
-                    <div className="cursor-icon" style={{ position: 'absolute', top: `${penY}px`, left: `${penX}px`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
+                    <div className="cursor-icon" style={{ position: 'absolute', top: `${penY + 60}px`, left: `${penX}px`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
                     </div>
                 </div>
-                <div className="colors" style={{maxWidth: '80px', display: 'flex', flexWrap: 'wrap' }}>
-                    {colors.map((color,i) => 
-                        <div 
-                            style={{ width: '20px', height: '20px', backgroundColor: `${color}` }}
-                            onClick={() => this.updateColor(i)}
-                        ></div>)}
+                <div>
+                    <div className="colors" style={{width: '100%', display: 'flex', flexWrap: 'wrap' }}>
+                        {colors.map((color,i) => 
+                            <div 
+                                style={{ width: '20px', height: '20px', backgroundColor: `${color}` }}
+                                onClick={() => this.updateColor(i)}
+                            ></div>)}
+                    </div>
+                    <button onClick={() => this.getScreenShot()}>Save</button>
                 </div>
             </div>
         )
