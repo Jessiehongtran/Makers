@@ -114,10 +114,10 @@ export default class Sketch extends React.Component {
                                 ></div>)}
                         </div>)}
                     </div>
-                    <div className="cursor-icon" style={{ position: 'absolute', top: `${penY + 60}px`, left: `${penX}px`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
+                    <div className="cursor-icon" style={{ position: 'absolute', top: `${penY }px`, left: `${penX}px`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
                     </div>
                 </div>
-                <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between'}}>
                     <div className="colors" style={{width: '100%', display: 'flex', flexWrap: 'wrap' }}>
                         {colors.map((color,i) => 
                             <div 
