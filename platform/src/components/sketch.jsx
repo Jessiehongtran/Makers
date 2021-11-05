@@ -91,6 +91,7 @@ export default class Sketch extends React.Component {
     render(){
 
         //allow to screenshot the shape into picture
+        //why moving mouse in small screen is not smooth?
 
         
         const size = this.state.squareSize
@@ -114,7 +115,7 @@ export default class Sketch extends React.Component {
                                 ></div>)}
                         </div>)}
                     </div>
-                    <div className="cursor-icon" style={{ position: 'absolute', top: `${penY }px`, left: `${penX}px`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
+                    <div className="cursor-icon" style={{ position: 'absolute', top: `${penY + 100 }px`, left: `${penX}px`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
                     </div>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between'}}>
