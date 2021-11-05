@@ -59,6 +59,21 @@ export default class Sketch extends React.Component {
         this.setState({mouseDown: false })
     }
 
+    uploadImageToCloudinary(imageUrl){
+        const formData = new FormData();
+        formData.append('file', imageUrl);
+        formData.append('upload_preset', 'ml_default');
+        const options = {
+            method: 'POST',
+            body: formData
+        }
+
+        return fetch('https://api.Cloudinary.com/v1_1/dchyongyd/image/upload', options)
+                .then(res => res.json())
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
+    }
+
     handleMouseOver(squareId){
         if (this.state.mouseDown){
             const { grid } = this.state
@@ -85,7 +100,7 @@ export default class Sketch extends React.Component {
     }
 
     getScreenShot(){
-        html2canvas(document.getElementById("sketch")).then(canvas => console.log(canvas.toDataURL()))
+        html2canvas(document.getElementById("sketch")).then(canvas =>  this.uploadImageToCloudinary(canvas.toDataURL()))
     }
 
     render(){
