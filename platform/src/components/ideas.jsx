@@ -1,20 +1,25 @@
 import React from 'react';
 import '../styles/ideas.scss';
-import Idea from './idea';
-import Axios from 'axios';
+import Idea from './idea2';
+import axios from 'axios';
+import { API_URL } from '../APIconfig';
 // import {IdeaData} from '../data/ideaData';
 
 class Ideas extends React.Component {
     constructor(){
         super();
         this.state = {
-            ideas: []
+            ideas: [],
+            shownCates: [],
+            otherCates: [],
+            filteredIdeas: []
 
         };
     }
     componentDidMount(){
-        axios.get('https://makers-app.herokuapp.com/api/category')
+        axios.get(`${API_URL}/api/category`)
             .then(res => {
+                console.log('res in getting category', res.data)
                 //slice to get data of 'other' categories
                 this.setState({shownCates: res.data.slice(0,5)})
                 if (res.data.length >5){
@@ -25,7 +30,7 @@ class Ideas extends React.Component {
             .catch(err => {
                 console.log(err.message)
             })
-        axios.get(`https://makers-app.herokuapp.com/api/projects`)
+        axios.get(`${API_URL}/api/projects`)
             .then(res => {
                 console.log('res in Ideas', res)
                 this.setState({ideas: res.data})
@@ -74,35 +79,29 @@ class Ideas extends React.Component {
         this.setState({filteredIdeas: ideaList})
     }
 
-    componentDidMount(){
-        Axios.get('https://makers-app.herokuapp.com/api/projects')
-             .then(res => {
-                 console.log('res in ideas', res)
-                 this.setState({ideas: res.data})
-             })
-             .catch(err => {
-                 console.log(err.message)
-             })
-    }
-
 
     render(){
 
-        console.log('otherCates', this.state.otherCates)
+        const { shownCates, otherCates, filteredIdeas } = this.state;
+        
         return (
             <div className="ideas-frame">
                 <div className="category">
                     <p onClick={() => this.filter(0)}>All</p>
-                    {this.state.shownCates.map(obj => 
-                    <p onClick={() => this.filter(obj.id)}>{obj.category}</p>
-                    )}
+                    {shownCates.length >0
+                    ? shownCates.map(obj => 
+                        <p onClick={() => this.filter(obj.id)}>{obj.category}</p>
+                        )
+                    : null}
                     <select onChange={e => this.filter(e.target.value)}>
                         <option>Others</option>
-                        {this.state.otherCates.map(obj => <option value={obj.id}>{obj.category}</option>)}
+                        { otherCates.length >0 
+                        ? this.state.otherCates.map(obj => <option value={obj.id}>{obj.category}</option>)
+                        : null }
                     </select>
                 </div>
                 <div className="ideas">
-                    {this.state.filteredIdeas.map(project => 
+                    {filteredIdeas.map(project => 
                         <Idea 
                             project={project} 
                             bannerColor ={`#${this.fullColorHex(this.getRandomInt(200,255), this.getRandomInt(200,255), this.getRandomInt(200,255))}`}

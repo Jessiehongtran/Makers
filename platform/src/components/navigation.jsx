@@ -13,10 +13,10 @@ class Nav extends React.Component {
             <div className="nav-frame">
                 <h1 className="logo">Makers</h1>
                 <div className="navigation">
-                    <a href="/">Explore</a>
+                    <a href="/" className="nav-item">Explore</a>
                     {localStorage.getItem('token')
-                    ? <a href="/myprojects">My projects</a>
-                    : <a href="/signup">My projects</a>
+                    ? <a href="/myprojects" className="nav-item">My projects</a>
+                    : <a href="/signup" className="nav-item">Sign up</a>
                     }
                 </div>
                 

@@ -6,9 +6,9 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin: 20px;
+    margin: 0 40px 40px 0 ;
     border-radius: 20px;
-    padding: 0 15px 0 15px;
+    padding: 10px 20px;
 
     @media (max-width: 1000px) {
         margin: 10px;
@@ -45,9 +45,11 @@
 
         
         .project-name {
-            font-size: 25px;
+            font-size: 23px;
+            line-height: 28px;
             display: inline-block;
             margin-bottom: 0;
+            height: 30%;
 
             @media (max-width: 1000px) {
                 font-size: 20px;
@@ -65,6 +67,7 @@
         .project-idea {
             margin-bottom: 0;
             visibility: hidden;
+            height: 50%;
 
             @media (max-width: 1000px) {
                 font-size: 12px;

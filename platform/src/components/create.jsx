@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import "../styles/create.scss"
+import "../styles/create.scss";
+import { API_URL } from '../APIconfig'
 
 class Create extends React.Component {
     constructor(){
@@ -32,7 +33,7 @@ class Create extends React.Component {
         e.preventDefault()
         console.log(this.state)
         
-        axios.post('https://makers-app.herokuapp.com/api/projects', this.state)
+        axios.post( `${API_URL}/api/projects`, this.state)
              .then(id => {
                  console.log('id', id)
                  // this.props.history.push('/join')
@@ -45,48 +46,53 @@ class Create extends React.Component {
 
     render(){
 
-        console.log('category_di', this.state.project.category_id)
+        // console.log('category_di', this.state.project.category_id)
 
-        if (this.state.project.category_id === "0"){
-            this.state.showOtherField = true
-        }
+        // if (this.state.project.category_id === "0"){
+        //     this.state.showOtherField = true
+        // }
+        
 
         return (
-            <div>
-                <h1>So what's on your mind?</h1>
-               <form onSubmit = {this.handleSubmit}>
-                   <input 
-                        placeholder="What's your idea in short" 
-                        onChange={this.handleChange}
-                        name="project_name"
-                    />
-                   {/* dropdown */}
-                   <input 
-                        placeholder="Category"
-                        onChange={this.handleChange}
-                        name="category"
-                    /> 
-                   <input 
-                        placeholder="Target users"
-                        onChange={this.handleChange}
-                        name="target_user"
+            <div className="create-frame">
+                <div className="wrapper">
+                    <h1>So what's on your mind?</h1>
+                    <div className="info">
+                        <form onSubmit = {this.handleSubmit}>
+                            <input 
+                                    placeholder="What's your idea in short" 
+                                    onChange={this.handleChange}
+                                    name="project_name"
+                                />
+                            {/* dropdown */}
+                            <input 
+                                    placeholder="Category"
+                                    onChange={this.handleChange}
+                                    name="category"
+                                /> 
+                            <input 
+                                    placeholder="Target users"
+                                    onChange={this.handleChange}
+                                    name="target_user"
 
-                    /> 
-                   <input 
-                        placeholder="Impact"
-                        onChange={this.handleChange}
-                        name="impact"
+                                /> 
+                            <input 
+                                    placeholder="Impact"
+                                    onChange={this.handleChange}
+                                    name="impact"
 
-                    /> 
-                   <input 
-                        placeholder="Team includes"
-                        onChange={this.handleChange}
-                        name="human_resources"
+                                /> 
+                            <input 
+                                    placeholder="Team includes"
+                                    onChange={this.handleChange}
+                                    name="human_resources"
 
-                    />
-                   <button>Create</button>
-                   {/* Lead to sign in/sign up/create profile */}
-               </form>
+                                />
+                            <button className="create-btn">Create</button>
+                            {/* Lead to sign in/sign up/create profile */}
+                        </form>
+                    </div>
+               </div>
             </div>
         )
     }

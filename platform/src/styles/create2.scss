@@ -1,0 +1,45 @@
+.piece {
+    margin: 20px;
+    border-radius: 10px;
+    width: 60%;
+    height: 100%;
+    min-height: 50vh;
+    border: 1px solid #DFDEDE;
+    padding: 30px;
+    background: #fff;
+  
+}
+
+.title {
+    font-weight: bold;
+    color: #ff4d2e;
+    margin-right: 20px;
+    font-size: 16px;
+}
+
+.info {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.icons {
+    display: flex
+}
+
+.create-icon {
+    border: 1px solid #FCBCBC;
+    width: 25px;
+    margin: 0 5px 5px 0;
+    padding: 3px;
+    font-size: 14px;
+    border-radius: 4px;
+    color: grey;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.create-icon:hover {
+    color: #000
+}

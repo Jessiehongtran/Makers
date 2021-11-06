@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/signUp.scss'
 import axios from 'axios';
+import { API_URL } from '../APIconfig'
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -26,7 +27,7 @@ class SignUp extends React.Component {
 
     isUnique(email){
         
-        axios.get('https://makers-app.herokuapp.com/api/users')
+        axios.get(`${API_URL}/api/users`)
              .then(res => {
                  for (var i =0; i <res.data.length; i++){
                      if (res.data[i].email.toLowerCase() == email.toLowerCase()){
@@ -49,7 +50,7 @@ class SignUp extends React.Component {
         }
 
         console.log("userToPost", userToPost)
-        axios.post(`https://makers-app.herokuapp.com/api/users`, userToPost)
+        axios.post(`${API_URL}/api/users`, userToPost)
              .then(res => {
                  console.log("user created successfully")
                  localStorage.setItem('userId', res.data.id)
@@ -74,7 +75,6 @@ class SignUp extends React.Component {
         return (
             <div className="signUp">
                 <img src="https://i.pinimg.com/originals/d8/22/b9/d822b94012d78d2a2eb5e448e8f2d5a5.png"/>
-                
                     <form onSubmit={this.handleSubmit}>
                         <h3>Sign up to make stuff</h3>
                         <div className="name">

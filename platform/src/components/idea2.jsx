@@ -59,8 +59,6 @@ class Idea extends React.Component {
 
     render(){
 
-        console.log('props in Idea', this.props)
-
         var idea = "";
         if (this.props.project.idea != null){
             if (this.props.project.idea.length > 65){

@@ -1,0 +1,311 @@
+.join-wrapper {
+    width: 100%;
+    // background-color: white;
+    display: flex;
+    justify-content: center;
+    .join {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height: auto;
+        max-width: 1000px;
+        width: 100%;
+        padding: 30px 60px 60px 30px;
+        height: 100%;
+        overflow: hidden;
+        min-height: 100vh;
+        
+    
+
+        @media (max-width: 1000px) {
+                    
+        }
+
+        @media (max-width: 500px) {
+            padding: 15px;
+            
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: white;
+            border-radius: 6px;
+            width: 100%;
+            color: black;
+
+            @media (max-width: 1000px) {
+                    
+            }
+
+            @media (max-width: 500px) {
+                display: flex;
+                flex-direction: column;
+                
+            }
+            
+            
+
+            .project-info {
+                // box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+                display: flex;
+                width: 100%;
+                justify-content: space-around;
+                align-items: center;
+                padding: 20px;
+
+                @media (max-width: 1000px) {
+                    
+                }
+        
+                @media (max-width: 500px) {
+                    border-right: none;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 100%;
+                    
+                }
+
+
+                .name-cate{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+
+                    
+
+                    .project-name {
+                        border-radius: 50%;
+                        width: 200px;
+                        height: 200px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 25px;
+                        padding: 20px;
+                        text-align: center;
+                        font-family: 'Poppins', sans-serif;
+                        
+                    }
+
+                    .project-cate{
+                        border-radius: 8px;
+                        background-color: grey;
+                        color: white;
+                        padding: 5px 10px 5px 10px;
+                    }
+                }
+
+                .more-info{
+                    width: 50%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                    font-family: 'Poppins', sans-serif;
+
+                    @media (max-width: 1000px) {
+                    
+                    }
+            
+                    @media (max-width: 500px) {
+                        width: 100%;
+                        align-items: center;
+                        
+                    }
+
+                    .project-idea {
+                        font-size: 20px;
+                        width: 80%;
+                        margin-bottom: 15px;
+                        color: black;
+
+                        @media (max-width: 1000px) {
+                    
+                        }
+                
+                        @media (max-width: 500px) {
+                            text-align: center;
+                            width: 100%;
+                        }
+                        
+                    }
+
+                    .project-impact{
+                        width: 80%;
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        margin-bottom: 0;
+                        margin-top: 0;
+                        padding: 0;
+                        
+
+                        i {
+                            font-size: 20px;
+                            color: grey;
+                            margin-right: 10px
+                        }
+
+                        p {
+                            margin-top: 5px;
+                            margin-bottom: 0;
+                        }
+                    }
+
+                    .join-members {
+                        width: 80%;
+                        display: flex;
+                        justify-content: flex-start;
+                        padding: 0;
+                        margin-top: 10px;
+
+                        i {
+                            font-size: 20px;
+                            color: #ff4d2e;
+                            margin-right: 10px
+                        }
+
+                        p {
+                            
+                            margin-top: 0;
+                            font-size: 14px;
+                            color: #ff4d2e
+                        }
+                    }
+
+                    .roles {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-start;
+
+                        @media (max-width: 1000px) {
+                    
+                        }
+                
+                        @media (max-width: 500px) {
+                            align-items: center;
+                            width: 100%;
+                        }
+
+                        .title {
+                        width: 80%;
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        padding: 0;
+                        margin-top: -15px;
+
+                        i {
+                            font-size: 20px;
+                            color: grey;
+                            margin-right: 10px
+                        }
+                        }
+
+                        .list-role {
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: center;
+                            align-items: flex-start;
+
+
+                            .each-role {
+                                border-radius: 10px;
+                                padding: 5px 10px 5px 10px;
+                                margin-right: 5px;
+                                font-size: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .members {
+                margin-top: 30px;
+                padding: 40px 60px 0px 60px;
+
+                .members-intro {
+                    font-size: 22px;
+                    margin-bottom: 10px;
+                }
+
+                .members-list {
+                    display: flex;
+
+                }
+            }
+            .join-action {
+                margin-top: 30px;
+                font-size: 22px;
+                display: flex;
+                align-items: center;
+                padding: 0 60px 20px 60px;
+
+                .join-intro {
+                    margin-right: 15px;
+                }
+
+                .email-btn {
+                    width: 100px;
+                    border-radius: 10px;
+                    padding: 5px;
+                    background-color: #ff4d2e;
+                    color: white;
+                    font-size: 14px;
+                    border: 1px solid #ff4d2e;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    font-family: 'Poppins', sans-serif;
+
+                    a {
+                        text-decoration: none;
+                        color: inherit
+                    }
+                }
+            }
+
+            .progress {
+                margin-top: 0px;
+                font-size: 22px;
+                // display: flex;
+                align-items: center;
+                padding: 0 60px 40px 60px;
+            }
+
+            .thoughts {
+                margin-top: 0px;
+                font-size: 22px;
+                // display: flex;
+                align-items: center;
+                padding: 0 60px 40px 60px;
+
+                .row {
+                    display: flex;
+                    align-items: center;
+
+                    .thought-input {
+                        height: 40px;
+                        margin-top: 10px;
+                        border: 1px solid silver;
+                        border-radius: 6px;
+                        min-width: 500px;
+                        padding-left: 20px
+                    }
+
+                    .thought-submit {
+                        color: #ff4d2e;
+                        margin-left: 10px;
+                        font-size: 26px;
+                    }
+
+                }
+            }
+
+        }
+    }
+}
