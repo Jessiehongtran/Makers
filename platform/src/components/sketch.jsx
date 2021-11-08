@@ -60,9 +60,12 @@ export default class Sketch extends React.Component {
     }
 
     uploadImageToCloudinary(imageUrl){
+
         const formData = new FormData();
         formData.append('file', imageUrl);
         formData.append('upload_preset', 'ml_default');
+        // formData.append('cloud_name', 'dchyongyd')
+
         const options = {
             method: 'POST',
             body: formData
@@ -130,7 +133,7 @@ export default class Sketch extends React.Component {
                                 ></div>)}
                         </div>)}
                     </div>
-                    <div className="cursor-icon" style={{ position: 'absolute', top: `${penY + 100 }px`, left: `${penX}px`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
+                    <div className="cursor-icon" style={{ position: 'absolute', top: `${penY }px`, left: `${penX}px`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
                     </div>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between'}}>
