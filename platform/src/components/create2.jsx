@@ -3,7 +3,9 @@ import '../styles/create2.scss';
 import { FontAwesomeIcon  } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faPaintBrush } from '@fortawesome/fontawesome-free-solid';
 import Text from './text';
-import Sketch from './sketch'
+import Sketch from './sketch';
+import axios from 'axios';
+import { API_URL } from '../APIconfig';
 
 export default class Create2 extends React.Component {
     constructor(props){
@@ -52,6 +54,24 @@ export default class Create2 extends React.Component {
         let { bgColors } = this.state
         bgColors.forEach(bg => bg.id === ind ? bg.color = '#FBD6D6' : bg.color= '#fff')
         this.setState({ bgColors: bgColors })
+    }
+
+    updateProject(projectId, update){
+        try {
+            const response = axios.patch(`${API_URL}/api/projects/${projectId}`, update)
+            console.log('response', response)
+        } catch (err){
+            console.log(err.message)
+        }
+    }
+
+    postProject(){
+        try {
+            const response = axios.post(`${API_URL}/api/projects`, this.state.new_project)
+            console.log('response', response)
+        } catch (err){
+            console.log(err.message)
+        }
     }
 
     render(){
