@@ -13,6 +13,8 @@ export default class Sketch extends React.Component {
             penY: 0,
             cursorColor: "#000",
             mouseDown: false,
+            shoot: false,
+            url: "",
             colors: ["red", "blue", "green", "yellow", "orange", "brown", "black"]
         }
         this.handleMouseDown = this.handleMouseDown.bind(this)
@@ -21,6 +23,8 @@ export default class Sketch extends React.Component {
         this.handleMouseMove = this.handleMouseMove.bind(this)
         this.fillGrid = this.fillGrid.bind(this)
         this.updateColor = this.updateColor.bind(this)
+        this.uploadImageToCloudinary = this.uploadImageToCloudinary.bind(this)
+        this.enableEditSketch = this.enableEditSketch.bind(this)
     }
 
     componentDidMount(){
@@ -77,6 +81,10 @@ export default class Sketch extends React.Component {
                 .then(res => {
                     console.log(res)
                     this.props.updateNewProject(this.props.tag, res.url)
+                    this.setState({ 
+                        shoot: true,
+                        url: res.url
+                    })
                 })
                 .catch(err => console.log(err))
     }
@@ -110,46 +118,60 @@ export default class Sketch extends React.Component {
         html2canvas(document.getElementById("sketch")).then(canvas =>  this.uploadImageToCloudinary(canvas.toDataURL()))
     }
 
+    enableEditSketch(){
+        this.setState({ 
+            shoot: false,
+            url: ""
+        })
+    }
+
     render(){
 
         //allow to screenshot the shape into picture
         //why moving mouse in small screen is not smooth?
 
-        
         const size = this.state.squareSize
         const { width, height } = this.props;
-        const { cursorColor, grid, penX, penY, colors } = this.state
+        const { cursorColor, grid, penX, penY, colors, shoot, url } = this.state
         
         return (
             <div style={{  }}>
-                <div 
-                    style={{  cursor: "none", width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6'}} 
-                    onMouseMove={(e) => this.handleMouseMove(e)}
-                >
-                    <div id="sketch" style={{position: 'relative', width: `${height}px`, height: `${width}px`,}}>
-                    {grid.map(row => 
-                        <div>
-                            {row.map(col => <div 
-                                    style={{ backgroundColor: `${col.bgColor}`, width: `${size}px`, height: `${size}px`, top: `${col.y}px`, left: `${col.x}px`, position: 'absolute'}}
-                                    onMouseDown={() => this.handleMouseDown()}
-                                    onMouseOver={() => this.handleMouseOver(col.id)}
-                                    onMouseUp= {() => this.handleMouseUp()}
+                {shoot & url.length > 0
+                ? <div style={{ width: '100%' }}>
+                    <img src={url} style={{ width: '100%' }} />
+                    <button onClick={() => this.enableEditSketch()}>Edit</button>
+                  </div>
+                :<div>
+                    <div 
+                        style={{  cursor: "none", width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6'}} 
+                        onMouseMove={(e) => this.handleMouseMove(e)}
+                    >
+                        <div id="sketch" style={{position: 'relative', width: `${height}px`, height: `${width}px`,}}>
+                        {grid.map(row => 
+                            <div>
+                                {row.map(col => <div 
+                                        style={{ backgroundColor: `${col.bgColor}`, width: `${size}px`, height: `${size}px`, top: `${col.y}px`, left: `${col.x}px`, position: 'absolute'}}
+                                        onMouseDown={() => this.handleMouseDown()}
+                                        onMouseOver={() => this.handleMouseOver(col.id)}
+                                        onMouseUp= {() => this.handleMouseUp()}
+                                    ></div>)}
+                            </div>)}
+                        </div>
+                        <div className="cursor-icon" style={{ position: 'absolute', top: `${penY }px`, left: `${penX}px`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
+                        </div>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between'}}>
+                        <div className="colors" style={{width: '100%', display: 'flex', flexWrap: 'wrap' }}>
+                            {colors.map((color,i) => 
+                                <div 
+                                    style={{ width: '20px', height: '20px', backgroundColor: `${color}` }}
+                                    onClick={() => this.updateColor(i)}
                                 ></div>)}
-                        </div>)}
-                    </div>
-                    <div className="cursor-icon" style={{ position: 'absolute', top: `${penY }px`, left: `${penX}px`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
+                        </div>
+                        <button onClick={() => this.getScreenShot()}>Save</button>
                     </div>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-                    <div className="colors" style={{width: '100%', display: 'flex', flexWrap: 'wrap' }}>
-                        {colors.map((color,i) => 
-                            <div 
-                                style={{ width: '20px', height: '20px', backgroundColor: `${color}` }}
-                                onClick={() => this.updateColor(i)}
-                            ></div>)}
-                    </div>
-                    <button onClick={() => this.getScreenShot()}>Save</button>
-                </div>
+                }
             </div>
         )
     }
