@@ -45,6 +45,7 @@ export default class Create2 extends React.Component {
 
     updateNewProject(tag, update){
         this.setState({new_project: {...this.state.new_project, [tag]: update }})
+        console.log('new_project', this.state.new_project)
     }
 
     turnAttentionToIcons(ind){

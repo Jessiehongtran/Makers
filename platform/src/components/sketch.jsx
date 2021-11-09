@@ -51,6 +51,8 @@ export default class Sketch extends React.Component {
         this.setState({ grid: grid})
     }
 
+
+
     handleMouseDown(){
        this.setState({mouseDown: true })
     }
@@ -64,8 +66,7 @@ export default class Sketch extends React.Component {
         const formData = new FormData();
         formData.append('file', imageUrl);
         formData.append('upload_preset', 'ml_default');
-        // formData.append('cloud_name', 'dchyongyd')
-
+       
         const options = {
             method: 'POST',
             body: formData
@@ -73,7 +74,10 @@ export default class Sketch extends React.Component {
 
         return fetch('https://api.Cloudinary.com/v1_1/dchyongyd/image/upload', options)
                 .then(res => res.json())
-                .then(res => console.log(res))
+                .then(res => {
+                    console.log(res)
+                    this.props.updateNewProject(this.props.tag, res.url)
+                })
                 .catch(err => console.log(err))
     }
 
