@@ -41,7 +41,7 @@ export default class Create2 extends React.Component {
             this.setState({ action:{...this.state.action, [tag]: <Text updateNewProject={this.updateNewProject} tag={tag} placeholder={placeholder} />}})
         }
         if (command === "sketch"){
-            this.setState({ action: {...this.state.action, [tag]: <Sketch updateNewProject={this.updateNewProject} tag={tag} width={500} height={650} />}})
+            this.setState({ action: {...this.state.action, [tag]: <Sketch updateNewProject={this.updateNewProject} tag={tag} width={370} height={650} />}})
         }
     }
 
@@ -76,7 +76,7 @@ export default class Create2 extends React.Component {
 
     render(){
 
-
+        
         return (
             <div style={{width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', flexWrap: 'wrap', padding: '20px 100px'}}>
                 <div className="piece" onMouseOver={() => this.turnAttentionToIcons(1)}>
@@ -91,7 +91,7 @@ export default class Create2 extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}} >
+                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative'}} >
                         {this.state.action.idea}
                     </div>
                 </div>

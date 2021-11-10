@@ -125,17 +125,25 @@ export default class Sketch extends React.Component {
         })
     }
 
+    relativeCoords(e){
+        let bounds = e.target.getBoundingClientRect();
+        let x = e.clientX - bounds.left;
+        let y = e.clientY - bounds.top;
+        return { x:x, y:y}
+    }
+
     render(){
 
-        //allow to screenshot the shape into picture
         //why moving mouse in small screen is not smooth?
+        //why the mouse cursor does not appear the second time or third time I am sketching even thought it is still working, because penY is not correct, it does not get relative
+
 
         const size = this.state.squareSize
         const { width, height } = this.props;
         const { cursorColor, grid, penX, penY, colors, shoot, url } = this.state
         
         return (
-            <div style={{  }}>
+            <div style={{ }}>
                 {shoot & url.length > 0
                 ? <div style={{ width: '100%' }}>
                     <img src={url} style={{ width: '100%' }} />
@@ -143,7 +151,7 @@ export default class Sketch extends React.Component {
                   </div>
                 :<div>
                     <div 
-                        style={{  cursor: "none", width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6'}} 
+                        style={{  cursor: "none", width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6', position: 'absolute', top: 0, left: 0, width: '100%', height: 'auto'}} 
                         onMouseMove={(e) => this.handleMouseMove(e)}
                     >
                         <div id="sketch" style={{position: 'relative', width: `${height}px`, height: `${width}px`,}}>
