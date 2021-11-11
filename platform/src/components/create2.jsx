@@ -107,7 +107,7 @@ export default class Create2 extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative'}}>
                         {this.state.action.target_user}
                     </div>
                 </div>
@@ -123,7 +123,7 @@ export default class Create2 extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative'}}>
                         {this.state.action.human_resources}
                     </div>
                 </div>
@@ -139,7 +139,7 @@ export default class Create2 extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative'}}>
                         {this.state.action.impact}
                     </div>
                 </div>

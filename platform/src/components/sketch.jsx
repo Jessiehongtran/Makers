@@ -104,6 +104,7 @@ export default class Sketch extends React.Component {
     }
 
     handleMouseMove(e){
+         console.log('clientX', e.clientX, 'clientY', e.clientY)
         this.setState({
             penX: e.clientX,
             penY: e.clientY
@@ -143,7 +144,7 @@ export default class Sketch extends React.Component {
         const { cursorColor, grid, penX, penY, colors, shoot, url } = this.state
         
         return (
-            <div style={{ }}>
+            <div style={{ width: '100%' }}>
                 {shoot & url.length > 0
                 ? <div style={{ width: '100%' }}>
                     <img src={url} style={{ width: '100%' }} />
@@ -151,10 +152,13 @@ export default class Sketch extends React.Component {
                   </div>
                 :<div>
                     <div 
-                        style={{  cursor: "none", width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6', position: 'absolute', top: 0, left: 0, width: '100%', height: 'auto'}} 
+                        style={{  cursor: "none", width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6',  width: '100%'}} 
                         onMouseMove={(e) => this.handleMouseMove(e)}
                     >
-                        <div id="sketch" style={{position: 'relative', width: `${height}px`, height: `${width}px`,}}>
+                        <div 
+                            id="sketch" 
+                            style={{position: 'relative'}}
+                        >
                         {grid.map(row => 
                             <div>
                                 {row.map(col => <div 
@@ -165,10 +169,10 @@ export default class Sketch extends React.Component {
                                     ></div>)}
                             </div>)}
                         </div>
-                        <div className="cursor-icon" style={{ position: 'absolute', top: `${penY }px`, left: `${penX}px`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
+                        <div className="cursor-icon" style={{ position: 'absolute', top: `${penY -100}px`, left: `${penX - 445}px`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
                         </div>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between'}}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', zIndex: 20, }}>
                         <div className="colors" style={{width: '100%', display: 'flex', flexWrap: 'wrap' }}>
                             {colors.map((color,i) => 
                                 <div 
