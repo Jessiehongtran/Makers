@@ -67,6 +67,8 @@ export default class Sketch extends React.Component {
 
     uploadImageToCloudinary(imageUrl){
 
+        console.log('imageUrl', imageUrl)
+
         const formData = new FormData();
         formData.append('file', imageUrl);
         formData.append('upload_preset', 'ml_default');
@@ -104,10 +106,9 @@ export default class Sketch extends React.Component {
     }
 
     handleMouseMove(e){
-         console.log('clientX', e.clientX, 'clientY', e.clientY)
         this.setState({
-            penX: e.clientX,
-            penY: e.clientY
+            penX: (e.clientX -500)/this.props.height*100,
+            penY: (e.clientY -150)/this.props.width*100
         })
     }
 
@@ -116,7 +117,11 @@ export default class Sketch extends React.Component {
     }
 
     getScreenShot(){
-        html2canvas(document.getElementById("sketch")).then(canvas =>  this.uploadImageToCloudinary(canvas.toDataURL()))
+        html2canvas(document.getElementById("sketch")).then(canvas =>  {
+                console.log(canvas.toDataURL()) //url is not proper
+                this.uploadImageToCloudinary(canvas.toDataURL())
+            }
+        )
     }
 
     enableEditSketch(){
@@ -142,10 +147,10 @@ export default class Sketch extends React.Component {
         const size = this.state.squareSize
         const { width, height } = this.props;
         const { cursorColor, grid, penX, penY, colors, shoot, url } = this.state
-        
+
         return (
             <div style={{ width: '100%' }}>
-                {shoot & url.length > 0
+                {shoot & url 
                 ? <div style={{ width: '100%' }}>
                     <img src={url} style={{ width: '100%' }} />
                     <button onClick={() => this.enableEditSketch()}>Edit</button>
@@ -169,7 +174,7 @@ export default class Sketch extends React.Component {
                                     ></div>)}
                             </div>)}
                         </div>
-                        <div className="cursor-icon" style={{ position: 'absolute', top: `${penY -100}px`, left: `${penX - 445}px`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
+                        <div className="cursor-icon" style={{ position: 'absolute', top: `${penY}%`, left: `${penX}%`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
                         </div>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', zIndex: 20, }}>
