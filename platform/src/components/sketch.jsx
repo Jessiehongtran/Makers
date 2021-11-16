@@ -81,7 +81,7 @@ export default class Sketch extends React.Component {
         return fetch('https://api.Cloudinary.com/v1_1/dchyongyd/image/upload', options)
                 .then(res => res.json())
                 .then(res => {
-                    console.log(res)
+                    console.log('res for url', res)
                     this.props.updateNewProject(this.props.tag, res.url)
                     this.setState({ 
                         shoot: true,
@@ -108,7 +108,7 @@ export default class Sketch extends React.Component {
     handleMouseMove(e){
         this.setState({
             penX: (e.clientX -500)/this.props.height*100,
-            penY: (e.clientY -150)/this.props.width*100
+            penY: (e.clientY -150)/this.props.width*100,
         })
     }
 
@@ -117,12 +117,8 @@ export default class Sketch extends React.Component {
     }
 
     getScreenShot(){
-        console.log('getting screenshot')
         const sketch = document.getElementById("sketch")
-        console.log(sketch)
         html2canvas(sketch).then(canvas =>  {
-                console.log('canvas', canvas)
-                console.log(canvas.toDataURL()) //url is not proper
                 this.uploadImageToCloudinary(canvas.toDataURL())
             }
         )
@@ -147,19 +143,18 @@ export default class Sketch extends React.Component {
         //why moving mouse in small screen is not smooth?
         //why the mouse cursor does not appear the second time or third time I am sketching even thought it is still working, because penY is not correct, it does not get relative
 
-
         const size = this.state.squareSize
         const { width, height } = this.props;
         const { cursorColor, grid, penX, penY, colors, shoot, url } = this.state
 
         return (
             <div style={{ width: '100%' }}>
-                {shoot & url 
+                {shoot 
                 ? <div style={{ width: '100%' }}>
                     <img src={url} style={{ width: '100%' }} />
                     <button onClick={() => this.enableEditSketch()}>Edit</button>
                   </div>
-                :<div>
+                : <div>
                     <div 
                         style={{  cursor: "none", width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6',  width: '100%'}} 
                         onMouseMove={(e) => this.handleMouseMove(e)}
