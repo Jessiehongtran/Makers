@@ -117,7 +117,11 @@ export default class Sketch extends React.Component {
     }
 
     getScreenShot(){
-        html2canvas(document.getElementById("sketch")).then(canvas =>  {
+        console.log('getting screenshot')
+        const sketch = document.getElementById("sketch")
+        console.log(sketch)
+        html2canvas(sketch).then(canvas =>  {
+                console.log('canvas', canvas)
                 console.log(canvas.toDataURL()) //url is not proper
                 this.uploadImageToCloudinary(canvas.toDataURL())
             }
@@ -162,7 +166,7 @@ export default class Sketch extends React.Component {
                     >
                         <div 
                             id="sketch" 
-                            style={{position: 'relative'}}
+                            style={{position: 'relative', width: `${height}px`, height: `${width}px`}}
                         >
                         {grid.map(row => 
                             <div>
