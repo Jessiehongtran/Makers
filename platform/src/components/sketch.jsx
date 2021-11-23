@@ -156,7 +156,9 @@ export default class Sketch extends React.Component {
                   </div>
                 : <div>
                     <div 
-                        style={{  cursor: "none", width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6',  width: '100%'}} 
+                        style={{  
+                            // cursor: "none", 
+                            width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6',  width: '100%'}} 
                         onMouseMove={(e) => this.handleMouseMove(e)}
                     >
                         <div 
@@ -173,8 +175,8 @@ export default class Sketch extends React.Component {
                                     ></div>)}
                             </div>)}
                         </div>
-                        <div className="cursor-icon" style={{ position: 'absolute', top: `${penY}%`, left: `${penX}%`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
-                        </div>
+                        {/* <div className="cursor-icon" style={{ position: 'absolute', top: `${penY}%`, left: `${penX}%`, borderRadius: '50%', width: '15px', height: '15px', backgroundColor: `${cursorColor}`, zIndex: 100}}>
+                        </div> */}
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', zIndex: 20, }}>
                         <div className="colors" style={{width: '100%', display: 'flex', flexWrap: 'wrap' }}>
