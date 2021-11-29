@@ -151,7 +151,7 @@ export default class Sketch extends React.Component {
             <div style={{ width: '100%' }}>
                 {shoot 
                 ? <div style={{ width: '100%' }}>
-                    <img alt="sketch image" src={url} style={{ width: '100%' }} />
+                    <img alt="sketch" src={url} style={{ width: '100%' }} />
                     <button onClick={() => this.enableEditSketch()}>Edit</button>
                   </div>
                 : <div>
