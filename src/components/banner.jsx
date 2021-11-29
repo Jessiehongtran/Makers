@@ -2,9 +2,6 @@ import React from 'react';
 import '../styles/banner.scss';
 
 class Banner extends React.Component {
-    constructor(props){
-        super(props)
-    }
 
     handleClick(){
         const token = localStorage.getItem('token')

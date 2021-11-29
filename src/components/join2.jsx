@@ -113,7 +113,7 @@ class Join2 extends React.Component {
     }
 
     handleChangeComment(e){
-        const userID = localStorage.getItem('userId')
+        localStorage.getItem('userId')
         this.setState({ comment: e.target.value })
     }
 
@@ -147,7 +147,7 @@ class Join2 extends React.Component {
         var j = 0
         const roleList = []
         for (var i =0; i< roles.length; i++){
-            if (roles[i]== "," && j < roles.length){
+            if (roles[i]=== "," && j < roles.length){
                 roleList.push(roles.slice(j,i))
                 j = i+ 1
             }
@@ -236,7 +236,7 @@ class Join2 extends React.Component {
                             <div className="progress-wrapper">
                                 <div className="git" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                                     <div className="icon" style={{ display: 'flex', justifyContent: 'center' }}>
-                                        <img src="github icon.png" style={{ width: '50px', marginBottom: '10px' }}/>
+                                        <img alt="github icon" src="github icon.png" style={{ width: '50px', marginBottom: '10px' }}/>
                                     </div>
                                     <div style={{ display: 'flex', alignItems: 'center', fontSize: '18px'}}>
                                         <div className="number">
