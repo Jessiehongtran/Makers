@@ -81,8 +81,7 @@ export default class Sketch extends React.Component {
         return fetch('https://api.Cloudinary.com/v1_1/dchyongyd/image/upload', options)
                 .then(res => res.json())
                 .then(res => {
-                    console.log('res for url', res)
-                    this.props.updateNewProject(this.props.tag, res.url)
+                    this.props.updateNewProject(this.props.tag, res.url, 'sketch')
                     this.setState({ 
                         shoot: true,
                         url: res.url
@@ -135,13 +134,16 @@ export default class Sketch extends React.Component {
         let bounds = e.target.getBoundingClientRect();
         let x = e.clientX - bounds.left;
         let y = e.clientY - bounds.top;
-        return { x:x, y:y}
+        return {x:x, y:y}
     }
 
     render(){
 
         //why moving mouse in small screen is not smooth?
         //why the mouse cursor does not appear the second time or third time I am sketching even thought it is still working, because penY is not correct, it does not get relative
+
+        //update image into project and display in shortcut
+        
 
         const size = this.state.squareSize
         const { width, height } = this.props;
