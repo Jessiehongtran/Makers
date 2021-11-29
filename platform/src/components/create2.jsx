@@ -3,7 +3,9 @@ import '../styles/create2.scss';
 import { FontAwesomeIcon  } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faPaintBrush } from '@fortawesome/fontawesome-free-solid';
 import Text from './text';
-import Sketch from './sketch'
+import Sketch from './sketch';
+import axios from 'axios';
+import { API_URL } from '../APIconfig';
 
 export default class Create2 extends React.Component {
     constructor(props){
@@ -36,15 +38,16 @@ export default class Create2 extends React.Component {
 
     switchPlatform(command, tag, placeholder){
         if (command === "text"){
-            this.setState({ action:{...this.state.action, [tag]: <Text updateNewProject={this.updateNewProject} tag={tag} placeholder={placeholder} />}})
+            this.setState({ action:{...this.state.action, [tag]: <Text updateNewProject={this.updateNewProject} tag={tag} placeholder={placeholder} new_project={this.state.new_project} />}})
         }
         if (command === "sketch"){
-            this.setState({ action: {...this.state.action, [tag]: <Sketch updateNewProject={this.updateNewProject} tag={tag} width={500} height={650} />}})
+            this.setState({ action: {...this.state.action, [tag]: <Sketch updateNewProject={this.updateNewProject} tag={tag} width={370} height={650} new_project={this.state.new_project} />}})
         }
     }
 
-    updateNewProject(tag, update){
+    updateNewProject(tag, update, curPlatform){
         this.setState({new_project: {...this.state.new_project, [tag]: update }})
+        this.switchPlatform(curPlatform, tag)
     }
 
     turnAttentionToIcons(ind){
@@ -53,9 +56,25 @@ export default class Create2 extends React.Component {
         this.setState({ bgColors: bgColors })
     }
 
+    updateProject(projectId, update){
+        try {
+            const response = axios.patch(`${API_URL}/api/projects/${projectId}`, update)
+        } catch (err){
+            console.log(err.message)
+        }
+    }
+
+    postProject(){
+        try {
+            const response = axios.post(`${API_URL}/api/projects`, this.state.new_project)
+        } catch (err){
+            console.log(err.message)
+        }
+    }
+
     render(){
 
-
+        
         return (
             <div style={{width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', flexWrap: 'wrap', padding: '20px 100px'}}>
                 <div className="piece" onMouseOver={() => this.turnAttentionToIcons(1)}>
@@ -70,7 +89,7 @@ export default class Create2 extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}} >
+                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative'}} >
                         {this.state.action.idea}
                     </div>
                 </div>
@@ -86,7 +105,7 @@ export default class Create2 extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative'}}>
                         {this.state.action.target_user}
                     </div>
                 </div>
@@ -102,7 +121,7 @@ export default class Create2 extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative'}}>
                         {this.state.action.human_resources}
                     </div>
                 </div>
@@ -118,7 +137,7 @@ export default class Create2 extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative'}}>
                         {this.state.action.impact}
                     </div>
                 </div>
