@@ -3,7 +3,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 7%;
+    padding: 7%;
+
 
     @media (max-width: 1000px) {
         padding-left: 100px;

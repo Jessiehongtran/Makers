@@ -16,13 +16,9 @@ class Banner extends React.Component {
     render(){
         return (
             <div className="banner">
-                <h1></h1>
-                <h1></h1>
                 <h3>Make projects happen</h3>
                 <p>Makers is the pioneering community to connect people from all walks of life to do projects together</p>
                 <button className="create-btn" onClick={() => this.handleClick()}>Create project</button>
-                <h1></h1>
-                <h1></h1>
             </div>
         )
     }
