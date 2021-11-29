@@ -1,7 +1,5 @@
 import React from 'react';
 import html2canvas from 'html2canvas';
-import { FontAwesomeIcon  } from '@fortawesome/react-fontawesome';
-import { faPaintBrush } from '@fortawesome/fontawesome-free-solid';
 
 export default class Sketch extends React.Component {
     constructor(props){
@@ -147,20 +145,20 @@ export default class Sketch extends React.Component {
 
         const size = this.state.squareSize
         const { width, height } = this.props;
-        const { cursorColor, grid, penX, penY, colors, shoot, url } = this.state
+        const { grid, colors, shoot, url } = this.state
 
         return (
             <div style={{ width: '100%' }}>
                 {shoot 
                 ? <div style={{ width: '100%' }}>
-                    <img src={url} style={{ width: '100%' }} />
+                    <img alt="sketch image" src={url} style={{ width: '100%' }} />
                     <button onClick={() => this.enableEditSketch()}>Edit</button>
                   </div>
                 : <div>
                     <div 
                         style={{  
                             // cursor: "none", 
-                            width: `${height}px`, height: `${width}px`, backgroundColor: '#F7F6F6',  width: '100%'}} 
+                             height: `${width}px`, backgroundColor: '#F7F6F6',  width: '100%'}} 
                         onMouseMove={(e) => this.handleMouseMove(e)}
                     >
                         <div 

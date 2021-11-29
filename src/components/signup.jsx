@@ -30,7 +30,7 @@ class SignUp extends React.Component {
         axios.get(`${API_URL}/api/users`)
              .then(res => {
                  for (var i =0; i <res.data.length; i++){
-                     if (res.data[i].email.toLowerCase() == email.toLowerCase()){
+                     if (res.data[i].email.toLowerCase() === email.toLowerCase()){
                          this.setState({emailIsUnique: false})
                      }
                  }
@@ -74,7 +74,7 @@ class SignUp extends React.Component {
 
         return (
             <div className="signUp">
-                <img src="https://i.pinimg.com/originals/d8/22/b9/d822b94012d78d2a2eb5e448e8f2d5a5.png"/>
+                <img alt="signup icon" src="https://i.pinimg.com/originals/d8/22/b9/d822b94012d78d2a2eb5e448e8f2d5a5.png"/>
                     <form onSubmit={this.handleSubmit}>
                         <h3>Sign up to make stuff</h3>
                         <div className="name">

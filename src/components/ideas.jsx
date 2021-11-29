@@ -65,12 +65,12 @@ class Ideas extends React.Component {
 
     filter(categoryId){
         var ideaList = []
-        if (categoryId == 0){
+        if (categoryId === 0){
             ideaList = this.state.ideas
         }
         else {
             for (var i =0; i<this.state.ideas.length; i++){
-                if (categoryId == this.state.ideas[i].category_id){
+                if (categoryId === this.state.ideas[i].category_id){
                     ideaList.push(this.state.ideas[i])
                 }
             }

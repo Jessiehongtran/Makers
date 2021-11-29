@@ -58,7 +58,7 @@ export default class Create2 extends React.Component {
 
     updateProject(projectId, update){
         try {
-            const response = axios.patch(`${API_URL}/api/projects/${projectId}`, update)
+            axios.patch(`${API_URL}/api/projects/${projectId}`, update)
         } catch (err){
             console.log(err.message)
         }
@@ -66,7 +66,7 @@ export default class Create2 extends React.Component {
 
     postProject(){
         try {
-            const response = axios.post(`${API_URL}/api/projects`, this.state.new_project)
+            axios.post(`${API_URL}/api/projects`, this.state.new_project)
         } catch (err){
             console.log(err.message)
         }
