@@ -20,7 +20,7 @@ export default class Create2 extends React.Component {
             new_project: {
                 idea: "",
                 project_name: "",
-                category_id: 0,
+                category_id: this.props.history.location.state.category_id || 0,
                 target_user: "",
                 human_resources: "",
                 impact: "",
@@ -74,7 +74,6 @@ export default class Create2 extends React.Component {
 
     render(){
 
-        
         return (
             <div style={{width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', flexWrap: 'wrap', padding: '20px 100px'}}>
                 <div className="piece" onMouseOver={() => this.turnAttentionToIcons(1)}>
@@ -141,6 +140,7 @@ export default class Create2 extends React.Component {
                         {this.state.action.impact}
                     </div>
                 </div>
+                <button class="done-create-btn" onclick={() => this.postProject()}>Done</button>
             </div>
         )
     }
