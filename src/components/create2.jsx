@@ -56,17 +56,19 @@ export default class Create2 extends React.Component {
         this.setState({ bgColors: bgColors })
     }
 
-    updateProject(projectId, update){
+    async updateProject(projectId, update){
         try {
-            axios.patch(`${API_URL}/api/projects/${projectId}`, update)
+            await axios.patch(`${API_URL}/api/projects/${projectId}`, update)
         } catch (err){
             console.log(err.message)
         }
     }
 
-    postProject(){
+    async postProject(){
+        console.log('posting')
         try {
-            axios.post(`${API_URL}/api/projects`, this.state.new_project)
+            const response = await axios.post(`${API_URL}/api/projects`, this.state.new_project)
+            console.log('res from posting project', response)
         } catch (err){
             console.log(err.message)
         }
@@ -140,7 +142,7 @@ export default class Create2 extends React.Component {
                         {this.state.action.impact}
                     </div>
                 </div>
-                <button class="done-create-btn" onclick={() => this.postProject()}>Done</button>
+                <button class="done-create-btn" onClick={() => this.postProject()}>Done</button>
             </div>
         )
     }

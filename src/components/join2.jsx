@@ -181,16 +181,19 @@ class Join2 extends React.Component {
                     <div className="info">
                         <div className="project-info">
                             <div className="name-cate">
-                                <p 
+                                {<img src={this.state.project.idea}  /> 
+                                ? <img src={this.state.project.idea} style={{ width: '400px'}} /> 
+                                : <p 
                                     className="project-name"
                                     style={{
                                         backgroundColor: bannerColor
                                     }}
                                 >{this.state.project.project_name || "Unnamed"}</p>
+                                }
                                 <p className="project-cate">{category}</p>
                             </div>
                             <div className="more-info">
-                                <p className="project-idea">{this.state.project.idea || "Undefined idea"}</p>
+                                { <img src={this.state.project.idea} /> ? null : <p className="project-idea">{this.state.project.idea || "Undefined idea"}</p>}
                                 <div className="project-impact">
                                     <i 
                                         class="fas fa-hand-holding-heart"
