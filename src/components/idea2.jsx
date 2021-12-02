@@ -82,12 +82,20 @@ class Idea extends React.Component {
         } 
 
         const { ideaAsText } = this.state;
+
+        let { bannerColor } = this.props;
+        let borderColor = 'transparent'
+
+        if (!ideaAsText ){
+            bannerColor = '#fff'
+            borderColor = '#EFEFEF'
+        }
         
         return (
             <>
                 <div 
                     className="each-project" 
-                    style={{backgroundColor: this.props.bannerColor}}
+                    style={{backgroundColor: bannerColor, border: `1px solid ${borderColor}`}}
                     onClick={() => this.getIntoProject()}
                 >
                     {this.props.host
