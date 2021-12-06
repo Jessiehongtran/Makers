@@ -12,6 +12,7 @@ import SignUp from './components/signup';
 import SignIn from './components/signin';
 import Mine from './components/yourProject';
 import Categories from './components/categories';
+import Loader from './components/loader';
 
 // Material-UI imports
 import { ThemeProvider } from '@material-ui/core/styles'
@@ -42,6 +43,16 @@ render(){
                   <Nav {...props} />
                   <Banner {...props}/>
                   <Ideas {...props}/>
+                </>
+              )}}
+        />
+        <Route
+          exact path="/loader" 
+          render = {
+            props => {
+              return (
+                <> 
+                  <Loader {...props} />
                 </>
               )}}
         />

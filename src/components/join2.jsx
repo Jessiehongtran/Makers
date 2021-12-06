@@ -112,6 +112,14 @@ class Join2 extends React.Component {
         }
     }
 
+    async getMembersOfProject(){
+        try {
+
+        } catch (err){
+            console.log(err.message)
+        }
+    }
+
     handleChangeComment(e){
         localStorage.getItem('userId')
         this.setState({ comment: e.target.value })
@@ -134,6 +142,11 @@ class Join2 extends React.Component {
     }
 
     render(){
+
+        //Things to do:
+        //Project needs to have a Git repo when creating or users can update it later
+        //'Who have joined' should have exact those people >> found that API is not correct to retrieve members of a project
+        //User should be able to create a profile/update avatar
 
         //bannerColor
         const bannerColor = localStorage.getItem('bannerColor')
