@@ -66,7 +66,7 @@ export default class Create2 extends React.Component {
 
     async postProject(){
         try {
-            const response = await axios.post(`${API_URL}/api/projects`, this.state.new_project)
+            await axios.post(`${API_URL}/api/projects`, this.state.new_project)
             this.props.history.push('/')
 
         } catch (err){
