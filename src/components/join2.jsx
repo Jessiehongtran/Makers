@@ -112,6 +112,14 @@ class Join2 extends React.Component {
         }
     }
 
+    async getMembersOfProject(){
+        try {
+
+        } catch (err){
+            console.log(err.message)
+        }
+    }
+
     handleChangeComment(e){
         localStorage.getItem('userId')
         this.setState({ comment: e.target.value })
@@ -134,6 +142,11 @@ class Join2 extends React.Component {
     }
 
     render(){
+
+        //Things to do:
+        //Project needs to have a Git repo when creating or users can update it later
+        //'Who have joined' should have exact those people >> found that API is not correct to retrieve members of a project
+        //User should be able to create a profile/update avatar
 
         //bannerColor
         const bannerColor = localStorage.getItem('bannerColor')
@@ -181,16 +194,19 @@ class Join2 extends React.Component {
                     <div className="info">
                         <div className="project-info">
                             <div className="name-cate">
-                                <p 
+                                {<img src={this.state.project.idea}  /> 
+                                ? <img src={this.state.project.idea} style={{ width: '400px'}} /> 
+                                : <p 
                                     className="project-name"
                                     style={{
                                         backgroundColor: bannerColor
                                     }}
                                 >{this.state.project.project_name || "Unnamed"}</p>
+                                }
                                 <p className="project-cate">{category}</p>
                             </div>
                             <div className="more-info">
-                                <p className="project-idea">{this.state.project.idea || "Undefined idea"}</p>
+                                { <img src={this.state.project.idea} /> ? null : <p className="project-idea">{this.state.project.idea || "Undefined idea"}</p>}
                                 <div className="project-impact">
                                     <i 
                                         class="fas fa-hand-holding-heart"

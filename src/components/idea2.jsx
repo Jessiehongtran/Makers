@@ -7,8 +7,10 @@ class Idea extends React.Component {
         super(props);
         this.state = {
             join_count: this.props.project.join_count,
-            upvote: this.props.project.upvote
+            upvote: this.props.project.upvote,
+            ideaAsText: false
         };
+        this.showIdeaAsText = this.showIdeaAsText.bind(this)
     }
 
     updateInProject(toChange){
@@ -56,6 +58,11 @@ class Idea extends React.Component {
         localStorage.setItem('bannerColor', this.props.bannerColor)
     }
 
+    showIdeaAsText(){
+        console.log('showing')
+        this.setState({ideaAsText: true})
+    }
+
 
     render(){
 
@@ -73,12 +80,22 @@ class Idea extends React.Component {
                 idea = this.props.project.idea
             }
         } 
+
+        const { ideaAsText } = this.state;
+
+        let { bannerColor } = this.props;
+        let borderColor = 'transparent'
+
+        if (!ideaAsText ){
+            bannerColor = '#fff'
+            borderColor = '#EFEFEF'
+        }
         
         return (
             <>
                 <div 
                     className="each-project" 
-                    style={{backgroundColor: this.props.bannerColor}}
+                    style={{backgroundColor: bannerColor, border: `1px solid ${borderColor}`}}
                     onClick={() => this.getIntoProject()}
                 >
                     {this.props.host
@@ -86,9 +103,14 @@ class Idea extends React.Component {
                         <i class="fas fa-trash-alt" onClick={e => this.removeProject(this.props.project.id, e)}></i>
                       </div>
                     : null}
-                    <div className="project-headers">
-                        <p className="project-name">{this.props.project.project_name || "Unnamed"}</p>
-                        <p className="project-idea">{idea}</p>
+                    <div >
+                        { !ideaAsText 
+                        ? <img onError={() => this.showIdeaAsText()} src={this.props.project.idea} style={{ width: '100%', marginTop: '20px'}} /> 
+                        : <div className="project-headers">
+                            <p className="project-name">{this.props.project.project_name || "Unnamed"}</p>
+                            <p className="project-idea">{idea}</p>
+                          </div>
+                        }
                     </div>
                     <div className="icons">
                         <i class="fas fa-users"></i>

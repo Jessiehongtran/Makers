@@ -3,6 +3,7 @@ import '../styles/ideas.scss';
 import Idea from './idea2';
 import axios from 'axios';
 import { API_URL } from '../APIconfig';
+import Loader from '../components/loader';
 // import {IdeaData} from '../data/ideaData';
 
 class Ideas extends React.Component {
@@ -85,30 +86,34 @@ class Ideas extends React.Component {
         const { shownCates, otherCates, filteredIdeas } = this.state;
         
         return (
-            <div className="ideas-frame">
-                <div className="category">
-                    <p onClick={() => this.filter(0)}>All</p>
-                    {shownCates.length >0
-                    ? shownCates.map(obj => 
-                        <p onClick={() => this.filter(obj.id)}>{obj.category}</p>
-                        )
-                    : null}
-                    <select onChange={e => this.filter(e.target.value)}>
-                        <option>Others</option>
-                        { otherCates.length >0 
-                        ? this.state.otherCates.map(obj => <option value={obj.id}>{obj.category}</option>)
-                        : null }
-                    </select>
+            <>
+                {filteredIdeas.length >0
+                ? <div className="ideas-frame">
+                    <div className="category">
+                        <p onClick={() => this.filter(0)}>All</p>
+                        {shownCates.length >0
+                        ? shownCates.map(obj => 
+                            <p onClick={() => this.filter(obj.id)}>{obj.category}</p>
+                            )
+                        : null}
+                        <select onChange={e => this.filter(e.target.value)}>
+                            <option>Others</option>
+                            { otherCates.length >0 
+                            ? this.state.otherCates.map(obj => <option value={obj.id}>{obj.category}</option>)
+                            : null }
+                        </select>
+                    </div>
+                    <div className="ideas">
+                        {filteredIdeas.map(project => 
+                            <Idea 
+                                project={project} 
+                                bannerColor ={`#${this.fullColorHex(this.getRandomInt(200,255), this.getRandomInt(200,255), this.getRandomInt(200,255))}`}
+                                history={this.props.history}
+                            />)}
+                    </div>
                 </div>
-                <div className="ideas">
-                    {filteredIdeas.map(project => 
-                        <Idea 
-                            project={project} 
-                            bannerColor ={`#${this.fullColorHex(this.getRandomInt(200,255), this.getRandomInt(200,255), this.getRandomInt(200,255))}`}
-                            history={this.props.history}
-                        />)}
-                </div>
-            </div>
+                : <Loader />}
+            </>
         )
     }
 }

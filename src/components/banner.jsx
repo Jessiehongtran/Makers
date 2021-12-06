@@ -6,7 +6,7 @@ class Banner extends React.Component {
     handleClick(){
         const token = localStorage.getItem('token')
         if (token){
-            this.props.history.push('/create')
+            this.props.history.push('/categories')
         }
         else {
             this.props.history.push('/signup') 

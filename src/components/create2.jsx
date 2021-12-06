@@ -20,7 +20,7 @@ export default class Create2 extends React.Component {
             new_project: {
                 idea: "",
                 project_name: "",
-                category_id: 0,
+                category_id: this.props.history.location.state.category_id || 0,
                 target_user: "",
                 human_resources: "",
                 impact: "",
@@ -56,17 +56,19 @@ export default class Create2 extends React.Component {
         this.setState({ bgColors: bgColors })
     }
 
-    updateProject(projectId, update){
+    async updateProject(projectId, update){
         try {
-            axios.patch(`${API_URL}/api/projects/${projectId}`, update)
+            await axios.patch(`${API_URL}/api/projects/${projectId}`, update)
         } catch (err){
             console.log(err.message)
         }
     }
 
-    postProject(){
+    async postProject(){
         try {
-            axios.post(`${API_URL}/api/projects`, this.state.new_project)
+            const response = await axios.post(`${API_URL}/api/projects`, this.state.new_project)
+            this.props.history.push('/')
+
         } catch (err){
             console.log(err.message)
         }
@@ -74,7 +76,6 @@ export default class Create2 extends React.Component {
 
     render(){
 
-        
         return (
             <div style={{width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', flexWrap: 'wrap', padding: '20px 100px'}}>
                 <div className="piece" onMouseOver={() => this.turnAttentionToIcons(1)}>
@@ -111,13 +112,10 @@ export default class Create2 extends React.Component {
                 </div>
                 <div className="piece" onMouseOver={() => this.turnAttentionToIcons(3)} >
                     <div className="info">
-                        <div className="title">PEOPLE</div>
+                        <div className="title">TEAM</div>
                         <div className="icons">
-                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'human_resources', 'My team are..')} style={{backgroundColor: `${this.state.bgColors[2].color}`}}>
+                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'human_resources', 'I want a team of ... (seperate roles by comma)')} style={{backgroundColor: `${this.state.bgColors[2].color}`}}>
                                 <FontAwesomeIcon icon={faPencilAlt}  />
-                            </div>
-                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('sketch', 'human_resources')} style={{backgroundColor: `${this.state.bgColors[2].color}`}}>
-                                <FontAwesomeIcon icon={faPaintBrush}  />
                             </div>
                         </div>
                     </div>
@@ -132,15 +130,13 @@ export default class Create2 extends React.Component {
                             <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'impact', 'I dream to..')} style={{backgroundColor: `${this.state.bgColors[3].color}`}}>
                                 <FontAwesomeIcon icon={faPencilAlt}  />
                             </div>
-                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('sketch', 'impact')} style={{backgroundColor: `${this.state.bgColors[3].color}`}}>
-                                <FontAwesomeIcon icon={faPaintBrush}  />
-                            </div>
                         </div>
                     </div>
                     <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative'}}>
                         {this.state.action.impact}
                     </div>
                 </div>
+                <button class="done-create-btn" onClick={() => this.postProject()}>Done</button>
             </div>
         )
     }
