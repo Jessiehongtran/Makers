@@ -105,7 +105,7 @@ class Idea extends React.Component {
                     : null}
                     <div >
                         { !ideaAsText 
-                        ? <img onError={() => this.showIdeaAsText()} src={this.props.project.idea} style={{ width: '100%', marginTop: '20px'}} /> 
+                        ? <img alt="idea" onError={() => this.showIdeaAsText()} src={this.props.project.idea} style={{ width: '100%', marginTop: '20px'}} /> 
                         : <div className="project-headers">
                             <p className="project-name">{this.props.project.project_name || "Unnamed"}</p>
                             <p className="project-idea">{idea}</p>
