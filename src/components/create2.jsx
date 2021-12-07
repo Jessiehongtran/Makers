@@ -22,6 +22,7 @@ export default class Create2 extends React.Component {
                 project_name: "",
                 category_id: this.props.history.location.state.category_id || 0,
                 target_user: "",
+                dev_env: "",
                 human_resources: "",
                 impact: "",
                 join_count: 1,
@@ -134,6 +135,19 @@ export default class Create2 extends React.Component {
                     </div>
                     <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative'}}>
                         {this.state.action.impact}
+                    </div>
+                </div>
+                <div className="piece" onMouseMove={() => this.turnAttentionToIcons(4)}>
+                    <div className="info">
+                        <div className="title">DEVELOPMENT ENVIRONMENT</div>
+                        <div className="icons">
+                            <div className="create-icon pencil"  onClick={() => this.switchPlatform('text', 'dev_env', 'git repositoty/asana')} style={{backgroundColor: `${this.state.bgColors[3].color}`}}>
+                                <FontAwesomeIcon icon={faPencilAlt}  />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="space" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative'}}>
+                        {this.state.action.dev_env}
                     </div>
                 </div>
                 <button class="done-create-btn" onClick={() => this.postProject()}>Done</button>
