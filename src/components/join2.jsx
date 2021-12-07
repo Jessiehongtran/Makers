@@ -17,6 +17,7 @@ class Join2 extends React.Component {
             comment: "",
             commentList: [],
             user: {},
+            members: []
         }
         this.fetchProject = this.fetchProject.bind(this)
         this.getContributions = this.getContributions.bind(this)
@@ -32,11 +33,11 @@ class Join2 extends React.Component {
         this.getContributions()
         this.getUserbyUserID()
         this.getCommentsOfAProject()
+        this.getMembersOfProject(projectId)
      }
 
     async getUserbyUserID(){
         const userID = localStorage.getItem('userId')
-        console.log('userId', userID)
         if (userID){
             try {
                 const response = await axios.get(`${API_URL}/api/users/${userID}`)
@@ -112,9 +113,11 @@ class Join2 extends React.Component {
         }
     }
 
-    async getMembersOfProject(){
+    async getMembersOfProject(projectId){
         try {
-
+            const response = await axios.get(`${API_URL}/api/user_project/${projectId}/people`)
+            console.log('res in getting members of a project', response.data)
+            this.setState({ members: response.data })
         } catch (err){
             console.log(err.message)
         }
@@ -144,7 +147,7 @@ class Join2 extends React.Component {
     render(){
 
         //Things to do:
-        //Project needs to have a Git repo when creating or users can update it later
+        //Project needs to have a Git repo when creating or users can update it later >> added an input for that
         //'Who have joined' should have exact those people >> found that API is not correct to retrieve members of a project
         //User should be able to create a profile/update avatar
 
@@ -170,23 +173,7 @@ class Join2 extends React.Component {
             }
         }
 
-        //member list
-        let members = [
-            {
-                profile_pic: "https://res.cloudinary.com/dfulxq7so/image/upload/v1617918536/bobAva-dark_eyxtnd.svg",
-                name: "Hong Tran"
-            },
-            {
-                profile_pic: "https://res.cloudinary.com/dfulxq7so/image/upload/v1617918534/yangAva_m2zi3q.svg",
-                name: "Kristal Lien"
-            },
-            {
-                profile_pic: "https://res.cloudinary.com/dfulxq7so/image/upload/v1617918536/bobAva-dark_eyxtnd.svg",
-                name: "Mike Han"
-            }
-        ]
-
-        const { commentList } = this.state;
+        const { commentList, members } = this.state;
 
         return (
             <div className="join-wrapper">
