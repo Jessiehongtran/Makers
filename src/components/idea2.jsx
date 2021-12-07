@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon  } from '@fortawesome/react-fontawesome';
+import { faUsers, faHeart } from '@fortawesome/fontawesome-free-solid';
 import '../styles/idea.scss'
 
 class Idea extends React.Component {
@@ -113,9 +115,9 @@ class Idea extends React.Component {
                         }
                     </div>
                     <div className="icons">
-                        <i class="fas fa-users"></i>
+                        <FontAwesomeIcon icon={faUsers}  style={{ marginRight: '5px' }} />
                         <p className="count">{this.state.join_count}</p>
-                        <i class="far fa-heart" onClick={e => this.updateCount("like", e)}></i>
+                        <FontAwesomeIcon icon={faHeart} style={{ marginRight: '5px' }} onClick={e => this.updateCount("like", e)}/>
                         <p className="count">{this.state.upvote}</p>
                     </div>
                 </div>

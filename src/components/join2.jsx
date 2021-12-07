@@ -147,9 +147,8 @@ class Join2 extends React.Component {
     render(){
 
         //Things to do:
-        //Project needs to have a Git repo when creating or users can update it later >> added an input for that
-        //'Who have joined' should have exact those people >> found that API is not correct to retrieve members of a project
         //User should be able to create a profile/update avatar
+        //Icons for like and people join are not showing, not sure why
 
         //bannerColor
         const bannerColor = localStorage.getItem('bannerColor')
