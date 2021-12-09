@@ -17,7 +17,8 @@ class Join2 extends React.Component {
             comment: "",
             commentList: [],
             user: {},
-            members: []
+            members: [],
+            showIdeaAsImage: true
         }
         this.fetchProject = this.fetchProject.bind(this)
         this.getContributions = this.getContributions.bind(this)
@@ -25,6 +26,7 @@ class Join2 extends React.Component {
         this.handleSubmitComment = this.handleSubmitComment.bind(this)
         this.getUserbyUserID = this.getUserbyUserID.bind(this)
         this.handleKey = this.handleKey.bind(this)
+        this.checkImageError = this.checkImageError.bind(this)
     }
 
     componentDidMount(){
@@ -139,7 +141,14 @@ class Join2 extends React.Component {
         }
     }
 
+    checkImageError(){
+        console.log('checking image error')
+        this.setState({ showIdeaAsImage: false })
+    }
+
     render(){
+
+        const { showIdeaAsImage } = this.state;
 
         //Things to do:
         //User should be able to create a profile/update avatar
@@ -169,14 +178,17 @@ class Join2 extends React.Component {
 
         const { commentList, members } = this.state;
 
+        //what if idea is not an image
+        //Show correct category
+
         return (
             <div className="join-wrapper">
                 <div className="join">
                     <div className="info">
                         <div className="project-info">
                             <div className="name-cate">
-                                {<img alt="idea" src={this.state.project.idea}  /> 
-                                ? <img alt="idea" src={this.state.project.idea} style={{ width: '400px'}} /> 
+                                { showIdeaAsImage
+                                ? <img onError={this.checkImageError}  alt="idea" src={this.state.project.idea} style={{ width: '400px'}} /> 
                                 : <p 
                                     className="project-name"
                                     style={{
