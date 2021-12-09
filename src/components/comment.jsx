@@ -30,7 +30,6 @@ export default class Comment extends React.Component {
             try {   
                 //need a route for this
                 const res = await axios.get(`${API_URL}/api/subcomments/comment/${this.props.data.commentID}`)
-                console.log('res in get subcomments', res.data)
                 if (res.data.length > 0){
                     this.setState({subComments: res.data})
                 }
@@ -44,7 +43,6 @@ export default class Comment extends React.Component {
         try {
             //need a route for this, post the reply from state
             const res = await axios.post(`${API_URL}/api/subcomments`, this.state.reply)
-            console.log(res.data)
             this.getSubComments()
             this.setState({showReplyInput: false})
         } catch (err){
@@ -78,8 +76,6 @@ export default class Comment extends React.Component {
     }
 
     render(){
-
-        console.log('props in comment', this.props)
 
         return (
             <div style={{ display: 'flex',  fontSize: '14px', marginTop: '25px' }}>

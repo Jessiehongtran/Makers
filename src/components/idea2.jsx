@@ -27,10 +27,8 @@ class Idea extends React.Component {
 
     removeProject(projectId, e){
         e.stopPropagation();
-        console.log('toremove')
         axios.delete(`https://makers-app.herokuapp.com/api/projects/delete/${projectId}`)
              .then(res => {
-                 console.log(res.data)
                  this.props.toRefresh()
              })
              .catch(err => {
@@ -61,7 +59,6 @@ class Idea extends React.Component {
     }
 
     showIdeaAsText(){
-        console.log('showing')
         this.setState({ideaAsText: true})
     }
 

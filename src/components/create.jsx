@@ -30,13 +30,9 @@ class Create extends React.Component {
 
     handleSubmit(e){
         e.preventDefault()
-        console.log(this.state)
         
         axios.post( `${API_URL}/api/projects`, this.state)
-             .then(id => {
-                 console.log('id', id)
-                 // this.props.history.push('/join')
-             })
+             .then(id => id)
              .catch(err => {
                  console.log(err.message)
              })
@@ -44,13 +40,6 @@ class Create extends React.Component {
 
 
     render(){
-
-        // console.log('category_di', this.state.project.category_id)
-
-        // if (this.state.project.category_id === "0"){
-        //     this.state.showOtherField = true
-        // }
-        
 
         return (
             <div className="create-frame">

@@ -20,14 +20,11 @@ class SignUp extends React.Component {
     }
 
     handleChange(e){
-        console.log('changing')
         this.setState({user: {...this.state.user, [e.target.name]: e.target.value}})
     }
 
     handleSubmit(e){
         e.preventDefault()
-        console.log('submitted')
-        console.log(this.state.user)
 
         const user = {
             email: this.state.user.email.toLowerCase(),
@@ -36,14 +33,12 @@ class SignUp extends React.Component {
 
         axios.post(`${API_URL}/api/users/login`, user)
              .then(res => {
-                 console.log('res', res)
                  this.setState({authorized: true})
                  localStorage.setItem('userId', res.data.id)
                  localStorage.setItem('token', res.data.token)
                  this.props.history.goBack()
              })
              .catch(err => {
-                 console.log('message', err.message)
                  this.setState({errorMessage: err.message})
              })
     }

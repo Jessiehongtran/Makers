@@ -20,7 +20,6 @@ class Ideas extends React.Component {
     componentDidMount(){
         axios.get(`${API_URL}/api/category`)
             .then(res => {
-                console.log('res in getting category', res.data)
                 //slice to get data of 'other' categories
                 this.setState({shownCates: res.data.slice(0,5)})
                 if (res.data.length >5){
@@ -33,7 +32,6 @@ class Ideas extends React.Component {
             })
         axios.get(`${API_URL}/api/projects`)
             .then(res => {
-                console.log('res in Ideas', res)
                 this.setState({ideas: res.data})
                 this.setState({filteredIdeas: res.data})
             })

@@ -41,7 +41,6 @@ class Join2 extends React.Component {
         if (userID){
             try {
                 const response = await axios.get(`${API_URL}/api/users/${userID}`)
-                console.log('user', response.data)
                 this.setState({user: response.data})
             } catch(err){
                 console.log(err.message)
@@ -59,7 +58,6 @@ class Join2 extends React.Component {
                 comment: this.state.comment,
                 created_at: new Date().getTime()
             }
-            console.log('new comment', newComment)
             try {
                 await axios.post(`${API_URL}/api/comments`, newComment)
                 this.getCommentsOfAProject()
@@ -74,7 +72,6 @@ class Join2 extends React.Component {
         if (projectId){
             try {
                 const comments = await axios.get(`${API_URL}/api/comments/${projectId}`)
-                console.log('commentList', comments.data)
                 this.setState({commentList: comments.data})
             } catch (err){
                 console.log(err.message)
@@ -106,7 +103,6 @@ class Join2 extends React.Component {
             for (let i = 0; i < contributionList.length; i++){
                 total += contributionList[i].contributions
             }
-            console.log('contributionList', contributionList, 'total', total)
             this.setState({contributions: total})
         } catch (err){
             console.log(err.message)
@@ -116,7 +112,6 @@ class Join2 extends React.Component {
     async getMembersOfProject(projectId){
         try {
             const response = await axios.get(`${API_URL}/api/user_project/${projectId}/people`)
-            console.log('res in getting members of a project', response.data)
             this.setState({ members: response.data })
         } catch (err){
             console.log(err.message)

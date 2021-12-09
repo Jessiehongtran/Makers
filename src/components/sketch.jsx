@@ -65,8 +65,6 @@ export default class Sketch extends React.Component {
 
     uploadImageToCloudinary(imageUrl){
 
-        console.log('imageUrl', imageUrl)
-
         const formData = new FormData();
         formData.append('file', imageUrl);
         formData.append('upload_preset', 'ml_default');
