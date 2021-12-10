@@ -152,7 +152,6 @@ class Join2 extends React.Component {
 
         //Things to do:
         //User should be able to create a profile/update avatar
-        //Icons for like and people join are not showing, not sure why
 
         //bannerColor
         const bannerColor = localStorage.getItem('bannerColor')
@@ -178,8 +177,6 @@ class Join2 extends React.Component {
 
         const { commentList, members } = this.state;
 
-        //what if idea is not an image
-        //Show correct category
 
         return (
             <div className="join-wrapper">

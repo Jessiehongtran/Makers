@@ -67,10 +67,10 @@ class Idea extends React.Component {
 
         var idea = "";
         if (this.props.project.idea != null){
-            if (this.props.project.idea.length > 65){
+            if (this.props.project.idea.length > 50){
                 for (var i = 0;i<this.props.project.idea.length; i++){
-                    if (i <65){
-                    idea += this.props.project.idea[i]
+                    if (i <50){
+                        idea += this.props.project.idea[i]
                     }
                 }
                 idea += "..."
@@ -104,7 +104,7 @@ class Idea extends React.Component {
                     : null}
                     <div >
                         { !ideaAsText 
-                        ? <img alt="idea" onError={() => this.showIdeaAsText()} src={this.props.project.idea} style={{ width: '100%', marginTop: '20px'}} /> 
+                        ? <img alt="idea" onError={() => this.showIdeaAsText()} src={this.props.project.idea} style={{ width: '90%', marginTop: '20px'}} /> 
                         : <div className="project-headers">
                             <p className="project-name">{this.props.project.project_name || "Unnamed"}</p>
                             <p className="project-idea">{idea}</p>

@@ -1,5 +1,6 @@
 import React from 'react';
 import html2canvas from 'html2canvas';
+import '../styles/sketchtext.scss';
 
 export default class Sketch extends React.Component {
     constructor(props){
@@ -150,7 +151,7 @@ export default class Sketch extends React.Component {
                 {shoot 
                 ? <div style={{ width: '100%' }}>
                     <img alt="sketch" src={url} style={{ width: '100%' }} />
-                    <button onClick={() => this.enableEditSketch()}>Edit</button>
+                    <button className="btn"  onClick={() => this.enableEditSketch()}>Edit</button>
                   </div>
                 : <div>
                     <div 
@@ -184,7 +185,7 @@ export default class Sketch extends React.Component {
                                     onClick={() => this.updateColor(i)}
                                 ></div>)}
                         </div>
-                        <button onClick={() => this.getScreenShot()}>Save</button>
+                        <button className="btn" onClick={() => this.getScreenShot()}>Save</button>
                     </div>
                 </div>
                 }
