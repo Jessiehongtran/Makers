@@ -32,11 +32,6 @@ export default class UserProfile extends React.Component {
         formData.append('file', this.state.avatarUrl)
         formData.append('upload_preset', 'ml_default')
         const cloudName='dfulxq7so'
-        const config = {
-            headers: {
-                "content-type": "multipart/form-data"
-            }
-        }
         try {
             const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, formData)
             this.updateUserAvatar(response.data.url)
@@ -48,7 +43,7 @@ export default class UserProfile extends React.Component {
     async updateUserAvatar(url){
         const userId = localStorage.getItem('userId')
         try {
-            const res = await axios.patch(`${API_URL}/api/users/${userId}`, { profile_picture : url})
+            await axios.patch(`${API_URL}/api/users/${userId}`, { profile_picture : url})
             this.props.history.go(-2);
         } catch (err){
             console.log(err.message)
@@ -63,7 +58,7 @@ export default class UserProfile extends React.Component {
             <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100vh', justifyContent: 'center', alignItems: 'center'}}>
                 <div style={{ width: '300px', height: '300px', border: '1px dashed grey', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
                     {avatarUrl.length > 0
-                    ? < img src={avatarUrl} style={{ width: '100%' }} />
+                    ? < img alt="avatar" src={avatarUrl} style={{ width: '100%' }} />
                     : <input onChange={(e) => this.handleChangeUpload(e)} type="file" name="upload your photo" />
                     }
                 </div>

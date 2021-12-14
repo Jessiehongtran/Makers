@@ -67,9 +67,9 @@ class Idea extends React.Component {
 
         var idea = "";
         if (this.props.project.idea != null){
-            if (this.props.project.idea.length > 50){
+            if (this.props.project.idea.length > 40){
                 for (var i = 0;i<this.props.project.idea.length; i++){
-                    if (i <50){
+                    if (i <40){
                         idea += this.props.project.idea[i]
                     }
                 }

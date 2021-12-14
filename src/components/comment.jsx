@@ -42,7 +42,7 @@ export default class Comment extends React.Component {
     async postSubComment(){
         try {
             //need a route for this, post the reply from state
-            const res = await axios.post(`${API_URL}/api/subcomments`, this.state.reply)
+            await axios.post(`${API_URL}/api/subcomments`, this.state.reply)
             this.getSubComments()
             this.setState({showReplyInput: false})
         } catch (err){
