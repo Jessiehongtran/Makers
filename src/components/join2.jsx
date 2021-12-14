@@ -17,7 +17,8 @@ class Join2 extends React.Component {
             comment: "",
             commentList: [],
             user: {},
-            members: []
+            members: [],
+            showIdeaAsImage: true
         }
         this.fetchProject = this.fetchProject.bind(this)
         this.getContributions = this.getContributions.bind(this)
@@ -25,6 +26,7 @@ class Join2 extends React.Component {
         this.handleSubmitComment = this.handleSubmitComment.bind(this)
         this.getUserbyUserID = this.getUserbyUserID.bind(this)
         this.handleKey = this.handleKey.bind(this)
+        this.checkImageError = this.checkImageError.bind(this)
     }
 
     componentDidMount(){
@@ -41,7 +43,6 @@ class Join2 extends React.Component {
         if (userID){
             try {
                 const response = await axios.get(`${API_URL}/api/users/${userID}`)
-                console.log('user', response.data)
                 this.setState({user: response.data})
             } catch(err){
                 console.log(err.message)
@@ -59,7 +60,6 @@ class Join2 extends React.Component {
                 comment: this.state.comment,
                 created_at: new Date().getTime()
             }
-            console.log('new comment', newComment)
             try {
                 await axios.post(`${API_URL}/api/comments`, newComment)
                 this.getCommentsOfAProject()
@@ -74,7 +74,6 @@ class Join2 extends React.Component {
         if (projectId){
             try {
                 const comments = await axios.get(`${API_URL}/api/comments/${projectId}`)
-                console.log('commentList', comments.data)
                 this.setState({commentList: comments.data})
             } catch (err){
                 console.log(err.message)
@@ -106,7 +105,6 @@ class Join2 extends React.Component {
             for (let i = 0; i < contributionList.length; i++){
                 total += contributionList[i].contributions
             }
-            console.log('contributionList', contributionList, 'total', total)
             this.setState({contributions: total})
         } catch (err){
             console.log(err.message)
@@ -116,7 +114,6 @@ class Join2 extends React.Component {
     async getMembersOfProject(projectId){
         try {
             const response = await axios.get(`${API_URL}/api/user_project/${projectId}/people`)
-            console.log('res in getting members of a project', response.data)
             this.setState({ members: response.data })
         } catch (err){
             console.log(err.message)
@@ -144,12 +141,18 @@ class Join2 extends React.Component {
         }
     }
 
+    checkImageError(){
+        console.log('checking image error')
+        this.setState({ showIdeaAsImage: false })
+    }
+
     render(){
 
+        const { showIdeaAsImage } = this.state;
+
         //Things to do:
-        //Project needs to have a Git repo when creating or users can update it later >> added an input for that
-        //'Who have joined' should have exact those people >> found that API is not correct to retrieve members of a project
-        //User should be able to create a profile/update avatar
+        //User should be able to create a profile/update avatar (done)
+        //but avatar is not showing properly
 
         //bannerColor
         const bannerColor = localStorage.getItem('bannerColor')
@@ -175,14 +178,15 @@ class Join2 extends React.Component {
 
         const { commentList, members } = this.state;
 
+
         return (
             <div className="join-wrapper">
                 <div className="join">
                     <div className="info">
                         <div className="project-info">
                             <div className="name-cate">
-                                {<img alt="idea" src={this.state.project.idea}  /> 
-                                ? <img alt="idea" src={this.state.project.idea} style={{ width: '400px'}} /> 
+                                { showIdeaAsImage
+                                ? <img onError={this.checkImageError}  alt="idea" src={this.state.project.idea} style={{ width: '400px'}} /> 
                                 : <p 
                                     className="project-name"
                                     style={{

@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/sketchtext.scss';
 
 export default class Text extends React.Component {
     constructor(props){
@@ -31,7 +32,7 @@ export default class Text extends React.Component {
                 { done
                 ? <div>
                     <div>{this.props.new_project[this.props.tag]}</div>
-                    <button onClick={() => this.editTexting()}>Edit</button>
+                    <button className="btn"  onClick={() => this.editTexting()}>Edit</button>
                   </div>
                 : <div>
                     <textarea 
@@ -42,7 +43,7 @@ export default class Text extends React.Component {
                             console.log('texttt', e.target.value)
                             this.props.updateNewProject(this.props.tag, e.target.value, 'text') }}
                     ></textarea>
-                    <button onClick={() => this.doneTexting()}>Save</button>
+                    <button className="btn"  onClick={() => this.doneTexting()}>Save</button>
                   </div>}
             </div>
         )

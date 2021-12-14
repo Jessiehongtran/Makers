@@ -39,8 +39,6 @@ class SignUp extends React.Component {
 
     handleSubmit(e){
         e.preventDefault()
-        console.log('submitted')
-        console.log(this.state.user)
 
         //make a post request to submit user
         const userToPost = {
@@ -49,13 +47,11 @@ class SignUp extends React.Component {
             password: this.state.user.password
         }
 
-        console.log("userToPost", userToPost)
         axios.post(`${API_URL}/api/users`, userToPost)
              .then(res => {
-                 console.log("user created successfully")
                  localStorage.setItem('userId', res.data.id)
                  localStorage.setItem('token', res.data.token)
-                 this.props.history.goBack()
+                 this.props.history.push('/profile')
              })
              .catch(err => {
                  console.log(err.message)

@@ -13,6 +13,7 @@ import SignIn from './components/signin';
 import Mine from './components/yourProject';
 import Categories from './components/categories';
 import Loader from './components/loader';
+import UserProfile from './components/userprofile';
 
 // Material-UI imports
 import { ThemeProvider } from '@material-ui/core/styles'
@@ -63,6 +64,17 @@ render(){
               return (
                 <> 
                   <SignUp {...props} />
+                </>
+              )}}
+        />
+        <Route
+          exact path="/profile" 
+          render = {
+            props => {
+              return (
+                <> 
+                  <Nav {...props} />
+                  <UserProfile {...props} />
                 </>
               )}}
         />

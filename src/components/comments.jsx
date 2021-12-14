@@ -18,13 +18,12 @@ class Comments extends React.Component {
 
     handleSubmit(e){
         e.preventDefault()
-        console.log(this.state.comment)
     }
 
    
 
     render(){
-        console.log('comments', this.state.comment)
+        
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
