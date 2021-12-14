@@ -1,1 +1,1 @@
-# Makers
+A [community](https://makers-community.netlify.app/) for people from all walks of life to do projects together. 

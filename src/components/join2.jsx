@@ -151,7 +151,8 @@ class Join2 extends React.Component {
         const { showIdeaAsImage } = this.state;
 
         //Things to do:
-        //User should be able to create a profile/update avatar
+        //User should be able to create a profile/update avatar (done)
+        //but avatar is not showing properly
 
         //bannerColor
         const bannerColor = localStorage.getItem('bannerColor')

@@ -51,7 +51,7 @@ class SignUp extends React.Component {
              .then(res => {
                  localStorage.setItem('userId', res.data.id)
                  localStorage.setItem('token', res.data.token)
-                 this.props.history.goBack()
+                 this.props.history.push('/profile')
              })
              .catch(err => {
                  console.log(err.message)
